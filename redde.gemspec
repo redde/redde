@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+
 require File.expand_path('../lib/redde/version', __FILE__)
 
 Gem::Specification.new do |gem|
@@ -15,4 +16,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Redde::VERSION
   gem.add_development_dependency 'rails', '>= 3.1'
+  gem.add_development_dependency 'rspec-rails', '>= 2.7'
+  gem.add_development_dependency 'generator_spec'
 end
