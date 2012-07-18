@@ -9,10 +9,7 @@ module Redde
       attr_reader :app_name
 
       def generate_layout
-        app = ::Rails.application
-        @app_name = app.class.to_s.split("::").first
-        ext = ".html.haml"
-
+        
         # copy layouts
         %w{ admin login }.each do |layout|
           template "layouts/#{layout}#{ext}", "app/views/layouts/#{layout}#{ext}"
@@ -36,6 +33,17 @@ module Redde
         # copy images
         directory "assets/images/admin", "app/assets/images/admin"
       end
+
+      private
+
+      def ext
+        ".html.haml"
+      end
+
+      def app_name
+        Rails.application.class.to_s.split("::").first
+      end
     end
+
   end
 end
