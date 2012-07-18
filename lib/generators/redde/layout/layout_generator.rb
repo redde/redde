@@ -19,7 +19,9 @@ module Redde
         end
 
         # copy shared
-        directory "shared", "app/views/admin/shared"
+        %w{ header launchbar sidebar }.each do |shared|
+          template "shared/_#{shared}#{ext}", "app/views/admin/shared/_#{shared}#{ext}"
+        end
 
         # copy js
         %w{ admin.js }.each do |js|
