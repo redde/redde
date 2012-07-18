@@ -1,0 +1,246 @@
+/**
+ * jQuery lightBox plugin
+ * This jQuery plugin was inspired and based on Lightbox 2 by Lokesh Dhakar (http://www.huddletogether.com/projects/lightbox2/)
+ * and adapted to me for use like a plugin from jQuery.
+ * @name jquery-lightbox-0.5.js
+ * @author Leandro Vieira Pinho - http://leandrovieira.com
+ * @version 0.5
+ * @date April 11, 2008
+ * @category jQuery plugin
+ * @copyright (c) 2008 Leandro Vieira Pinho (leandrovieira.com)
+ * @license CC Attribution-No Derivative Works 2.5 Brazil - http://creativecommons.org/licenses/by-nd/2.5/br/deed.en_US
+ * @example Visit http://leandrovieira.com/projects/jquery/lightbox/ for more informations about this jQuery plugin
+ */
+
+// Offering a Custom Alias suport - More info: http://docs.jquery.com/Plugins/Authoring#Custom_Alias
+(function($) {
+	/**
+	 * $ is an alias to jQuery object
+	 *
+	 */
+	$.fn.reddeBox = function(settings) {
+		// Settings to configure the jQuery lightBox plugin how you like
+		var settings = jQuery.extend({
+			// Configuration related to overlay
+			overlayOpacity:			0.8,		// (integer) Opacity value to overlay; inform: 0.X. Where X are number from 0 to 9
+			// Configuration related to navigation
+			//fixedNavigation:		true,		// (boolean) Boolean that informs if the navigation (next and prev button) will be fixed or not in the interface.
+			// Configuration related to images
+			classWrapper:           "",
+			//imageLoading:			'<%= asset_path("reddebox/103.gif") %>',		// (string) Path and the name of the loading icon
+			//imageBtnPrev:			'<%= asset_path("reddebox/previous.png") %>',			// (string) Path and the name of the prev button image
+			//imageBtnNext:			'<%= asset_path("reddebox/next.png") %>',			// (string) Path and the name of the next button image
+			//imageBtnClose:			'<%= asset_path("reddebox/close.png") %>',		// (string) Path and the name of the close btn
+			// Configuration related to container image box
+			//containerBorderSize:	0,			// (integer) If you adjust the padding in the CSS for the container, #lightbox-container-image-box, you will need to update this value
+			//containerResizeSpeed:	0,		// (integer) Specify the resize duration of container image. These number are miliseconds. 400 is default.
+			// Configuration related to texts in caption. For example: Image 2 of 8. You can alter either "Image" and "of" texts.
+			//txtImage:				'Изображение',	// (string) Specify text "Image"
+			//txtOf:					'из',		// (string) Specify text "of"
+			// Configuration related to keyboard navigation
+			//keyToClose:				'c',		// (string) (c = close) Letter to close the jQuery lightBox interface. Beyond this letter, the letter X and the SCAPE key is used to.
+			//keyToPrev:				'p',		// (string) (p = previous) Letter to show the previous image
+			//keyToNext:				'n',		// (string) (n = next) Letter to show the next image.
+			// Don�t alter these variables in any way
+			usedThisLink:           true,  // включить в набор текущий линк или линки
+			imageArray:				[],
+			activeImage:			0
+		},settings);
+		
+			
+
+		
+
+		
+
+		var elems = this;
+					
+		return this.unbind('click.reddebox').bind("click.reddebox",function(e){
+			new Bilder(this,elems,settings);
+			e.preventDefault();
+		});
+	};
+	
+	function Bilder(el,elems,settings) {
+		var arr = $.map(settings.imageArray,function(n){
+			return $("<a />").attr("href",n)[0];
+		});
+		if (settings.usedThisLink) {
+			this.jQueryMatchedObj = $.merge($.merge([],elems), arr);
+		} else {
+			this.jQueryMatchedObj = arr;
+		};
+		
+		this.activeIndex = $.map(elems,function(n,i){
+			if (n == el) {
+				return i;
+			};
+		})[0] || 0;
+		this.setInterface(el,settings);
+	};
+	
+	Bilder.prototype = {
+		removeReddeBox: function() {
+			$("#redde-overlay, #redde-box").remove();
+		},
+		
+		setActiveIndex: function(linkActiveHref) {
+			for(var i = this.jQueryMatchedObj.length; i--;) {
+				if (this.jQueryMatchedObj[i].href == linkActiveHref) {
+					activeIndex = i;
+					break;
+				}
+			};
+		},	
+			
+		updateNavi: function(linkActive) {
+			var maxLength = this.jQueryMatchedObj.length;
+			this.setActiveIndex(linkActive.attr("href"));
+			this.container.find("a.redde-next, a.redde-prev").css("visibility","visible");	
+			if (this.activeIndex == 0) {
+				$("a.redde-prev").css("visibility","hidden");	
+			};
+			if (this.activeIndex == maxLength-1) {
+				$("a.redde-next").css("visibility","hidden");
+			};
+			if (linkActive.attr("title")) {
+				this.container.find("div.redde-desc").html(linkActive.attr("title")).css("visibility","visible");
+			} else {
+				this.container.find("div.redde-desc").empty().css("visibility","hidden");
+			};
+		},
+				
+		showImage: function(me) {
+			var self = this;
+			this.updateNavi(me);
+			if (/\.(jpg|jpeg|gif|png)$/i.test($(me).attr("href"))) {
+				$("<img />").attr("src",me.attr("href")).fadeTo(0,0).load(function(){
+					//alert("test")
+					$("#redde-container #wrap-redde-container").html(this);
+					self.setCenter.call(self,$(this));
+				});
+			} else {
+				this.container.find("#wrap-redde-container").html('<iframe src="'+ me.attr("href") +'" frameborder="0" width="600" height="600" />');
+				self.setCenter.call(self,this.container.find("iframe"));
+			}
+
+		},
+
+		setCenter: function(el) {
+			var w = el.width(),
+				h = el.height();
+			this.container.addClass("resize-show-photo").stop(false,false).animate({
+				width: w,
+				height: h,
+				"margin-left": -w/2-1, // -1 - поправка на border
+				"margin-top": -h/2-1,
+				top: "50%",
+				left: "50%"
+			},400,function(){
+				$(this).removeClass("resize-show-photo");
+				if ($.isFunction($.fn.draggable)) {
+					$(this).draggable({
+						stop: function(){							
+							var obj = {}, 
+								x1 = parseInt($(this).css("left")), 
+								y1 = parseInt($(this).css("top")),
+								xy2 = $(this).offsetParent(),
+								x2 = parseInt(xy2.width()),
+								y2 = parseInt(xy2.height());
+
+							if (x2 > w) {
+								if (x1 < 0) {
+									obj.left = 0;
+								} else if (x1 > x2) {
+									obj.left = x2;
+								};
+							} else {
+								if (x2/2-x1 > w/2) {
+									obj.left = (x2-w)/2;
+								} else if (x1-x2/2 > w/2) {
+									obj.left = (x2+w)/2;
+								};								
+							};
+							
+							if (y2 > h) {
+								if (y1 < 0) {
+									obj.top = 0
+								} else if (y1 > y2) {
+									obj.top = y2
+								};								
+							} else {
+								if (y2/2-y1 > h/2) {
+									obj.top = (y2-h)/2;
+								} else if (y1-y2/2 > h/2) {
+									obj.top = (y2+h)/2;
+								};										
+							}
+							
+							$(this).animate(obj);
+						}
+					});
+				};
+			}).find("img").fadeTo(0,1.0);
+		},
+	
+		setInterface: function(linkActive,settings) {
+			if (settings.classWrapper) {
+				settings.classWrapper = ' class="' + settings.classWrapper + '"';
+			};			 
+			var navigation = 
+				'<a href="#" class="redde-prev"></a>' + 
+				'<a href="#" class="redde-close"></a>' +
+				'<a href="#" class="redde-next"></a>' + 
+				'<div class="redde-desc"></div>';
+			var cont = 
+				'<div id="redde-overlay"></div>' +
+				'<div id="redde-box"' + settings.classWrapper + '>' + 
+					'<div id="redde-container"><div id="wrap-redde-container"></div>' + navigation + '</div>' +
+				'</div>';
+			$("body").append(cont);
+			this.container = $("#redde-container"); // обертка
+			$("#redde-overlay").fadeTo(400,settings.overlayOpacity);
+			var self = this;
+			
+			$("#redde-box").fadeTo(400,1.0/*,
+				//закрываем лайтбокс при клике на подложку
+				function(){
+				$(this).bind("click",function(e){
+					if (e.target == this) {
+						self.removeReddeBox();
+					};
+				});
+			}*/);
+			
+			if (!settings.imageArray.length) {
+				this.showImage($(linkActive));
+			} else {
+				if (settings.activeImage) {
+					this.activeIndex = settings.activeImage;
+				};
+				this.showImage($(this.jQueryMatchedObj[this.activeIndex]));	
+			}
+
+			this.container.find("a").click(function(e){
+				switch (this.className) {
+					case "redde-next": 
+					case "redde-prev": 
+					{
+						self.container.stop(true,true);
+						var delta = this.className == "redde-prev" ? -1 : 1;
+						if (self.jQueryMatchedObj[self.activeIndex+delta] != undefined) {
+							self.activeIndex = self.activeIndex+delta;
+							self.showImage($(self.jQueryMatchedObj[self.activeIndex]));
+						};
+						break;						
+					};
+					case "redde-close": {
+						self.removeReddeBox();
+						break;						
+					};										
+				}
+				e.preventDefault();
+			});				
+		}		
+	};
+})(jQuery); // Call and execute the function immediately passing the jQuery object

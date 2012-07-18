@@ -1,0 +1,19 @@
+UploadiFive Change Log
+
+v1.0.4
+* Added compatibility with Safari
+
+v1.0.3
+* Using new and faster FormData object if available
+* Added extra security and image only uploadifive.php file
+* formData is sent to the check script along with the filename
+* Removed index from Filedata object
+
+v1.0.2
+* Changed $data.uploadFile method to use boundary for uploads
+
+v1.0.1
+* Fixed bug with onQueueComplete event
+
+v1.0
+* Initial creation of UploadiFive plugin
