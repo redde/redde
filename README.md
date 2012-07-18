@@ -1,6 +1,6 @@
 # Redde
 
-TODO: Write a gem description
+Redde admin generator
 
 ## Installation
 
@@ -16,9 +16,15 @@ Or install it yourself as:
 
     $ gem install redde
 
+## Requirements
+
+Layout requires 'devise' gem with generated user model. If You use another auth solution, feel free to modify partial with user info and logout link.
+
 ## Usage
 
-TODO: Write usage instructions here
+To generate admin layout type:
+
+    rails g redde:layout
 
 ## Contributing
 
