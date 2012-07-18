@@ -32,6 +32,8 @@ describe Redde::Generators::LayoutGenerator do
 
       #check images
       assert_directory "app/assets/images/admin"
+      assert_directory "app/assets/javascripts/admin"
+      assert_directory "app/assets/stylesheets/admin"
     end
 
   end

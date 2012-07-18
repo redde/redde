@@ -24,11 +24,13 @@ module Redde
         %w{ admin.js }.each do |js|
           template "assets/javascripts/#{js}", "app/assets/javascripts/#{js}"
         end
+        directory "assets/javascripts/admin", "app/assets/javascripts/admin"
 
         # copy css
         %w{ admin.scss }.each do |css|
           template "assets/stylesheets/#{css}", "app/assets/stylesheets/#{css}"
         end        
+        directory "assets/stylesheets/admin", "app/assets/stylesheets/admin"
 
         # copy images
         directory "assets/images/admin", "app/assets/images/admin"
