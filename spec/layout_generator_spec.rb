@@ -4,6 +4,7 @@ describe Redde::Generators::LayoutGenerator do
   include GeneratorSpec::TestCase
   destination File.expand_path("../../tmp", __FILE__)
   arguments %w(something)
+
   before(:all) do
     prepare_destination
     run_generator
@@ -17,6 +18,12 @@ describe Redde::Generators::LayoutGenerator do
 
     it "creates a test initializer" do
       assert_file "app/views/layouts/admin.html.haml"
+      assert_file "app/views/layouts/login.html.haml"
+      assert_file "app/views/admin/shared/_launchbar.html.haml"
+      assert_file "app/views/admin/shared/_sidebar.html.haml"
+      assert_file "app/views/admin/shared/_header.html.haml"
+      assert_file "app/assets/javascripts/admin.js"
+      assert_file "app/assets/stylesheets/admin.scss"
     end
 
   end
