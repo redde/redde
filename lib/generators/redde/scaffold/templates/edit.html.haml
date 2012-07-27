@@ -8,7 +8,7 @@
 = form_for [:admin, @<%= resource_name %>] do |f|
   - if @<%= resource_name %>.errors.any?
     #error_explanation
-      %h2=# "#{pluralize(@dish.errors.count, "error")} prohibited this dish from being saved:"
+      %h2= "Ошибки при сохранении: #{@<%= resource_name %>.errors.count}"
       %ul
         - @<%= resource_name %>.errors.full_messages.each do |msg|
           %li= msg
