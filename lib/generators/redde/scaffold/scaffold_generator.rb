@@ -65,7 +65,7 @@ module Redde
       def columns
         begin
           excluded_column_names = %w[id created_at updated_at]
-          @model_name.constantize.columns.reject{|c| excluded_column_names.include?(c.name) || c.name.index("_id") }.collect{|c| ::Rails::Generators::GeneratedAttribute.new(c.name, c.type)}.sort{|a, b| sort_priority(a) <=> sort_priority(b)}
+          @model_name.constantize.columns.reject{|c| excluded_column_names.include?(c.name) || c.name.index("_id") }.collect{|c| ::Rails::Generators::GeneratedAttribute.new(c.name, c.type)}.sort{|a, b| sort_priority(b) <=> sort_priority(a)}
         rescue NoMethodError
           @model_name.constantize.fields.collect{|c| c[1]}.reject{|c| excluded_column_names.include?(c.name) || c.name.index("_id") }.collect{|c| ::Rails::Generators::GeneratedAttribute.new(c.name, c.type.to_s)}
         end
