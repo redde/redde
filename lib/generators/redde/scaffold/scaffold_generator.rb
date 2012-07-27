@@ -52,10 +52,20 @@ module Redde
         resource_name.pluralize
       end
 
+      def sort_priority(column_name)
+        case column_name
+        when "position" then 1
+        when "show" then 2
+        when "name" then 3
+        when "title" then 3
+        else 5
+        end
+      end
+
       def columns
         begin
           excluded_column_names = %w[id created_at updated_at]
-          @model_name.constantize.columns.reject{|c| excluded_column_names.include?(c.name) || c.name.index("_id") }.collect{|c| ::Rails::Generators::GeneratedAttribute.new(c.name, c.type)}
+          @model_name.constantize.columns.reject{|c| excluded_column_names.include?(c.name) || c.name.index("_id") }.collect{|c| ::Rails::Generators::GeneratedAttribute.new(c.name, c.type)}.sort{|a, b| sort_priority(a) <=> sort_priority(b)}
         rescue NoMethodError
           @model_name.constantize.fields.collect{|c| c[1]}.reject{|c| excluded_column_names.include?(c.name) || c.name.index("_id") }.collect{|c| ::Rails::Generators::GeneratedAttribute.new(c.name, c.type.to_s)}
         end
