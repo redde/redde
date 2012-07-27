@@ -2,7 +2,6 @@
   %h1  <%= resource_name %>
   %p= link_to "Добавить <%= resource_name %>", new_admin_<%= singular_controller_routing_path %>_path
   
-
 - unless @<%= plural_resource_name %>.empty?
   %table.list
     %thead
