@@ -7,7 +7,7 @@
   %table.list
     %thead
       %tr
-      <%- columns.size.times do |column| %>
+      <%- columns.each do |column| %>
         %th <%= column.name%>
       <% end %>
         %th
