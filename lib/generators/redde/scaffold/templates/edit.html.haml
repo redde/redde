@@ -16,7 +16,7 @@
   <%- columns.each do |column| -%>
     %tr
       %th= f.label :<%= column.name %>
-      %td= f.text_field ::<%= column.name %>
+      %td= f.text_field :<%= column.name %>
   <% end %>
   .actions
     = f.submit "Сохранить"
