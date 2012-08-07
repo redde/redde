@@ -14,7 +14,7 @@
           %li= msg
   %table
     <%- columns.each do |column| -%>
-    <%- if column.field_type == "text_area" -%>
+    <%- if column.field_type.to_s == "text_area" -%>
     %tr
       %th{colspan: 2}
         = f.label :<%= column.name %>
@@ -23,7 +23,7 @@
     <%- else -%>
     %tr
       %th
-        <%= "111#{column.field_type}222" -%>
+        <%= "111#{column.field_type.to_s == "text_area"}222" -%>
         = f.label :<%= column.name %>
       %td= f.<%= column.field_type -%> :<%= column.name %>    
     <%- end -%>
