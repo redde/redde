@@ -6,16 +6,16 @@ class Admin<%= model_name -%>Controller < Admin::ApplicationController
   end
   
   def new
-    @<%= resource_name %> = @<%= model_name %>.new
+    @<%= resource_name %> = <%= resource_name.capitalize -%>.new
     render 'edit'
   end
   
   def edit
-    @<%= resource_name %> = @<%= model_name %>.find(params[:id])
+    @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
   end
   
   def create
-    @<%= resource_name %> = @<%= model_name %>.new(params[:<%= resource_name %>])
+    @<%= resource_name %> = <%= resource_name.capitalize -%>.new(params[:<%= resource_name %>])
     if @<%= resource_name %>.save
       redirect_to admin_<%= plural_resource_name %>_path, :notice => "<%= resource_name %> добавлен."
     else
@@ -24,7 +24,7 @@ class Admin<%= model_name -%>Controller < Admin::ApplicationController
   end
 
   def update
-    @<%= resource_name %> = @<%= model_name %>.find(params[:id])
+    @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
     if @<%= model_name %>.update_attributes(params[:<%= resource_name %>])
       redirect_to admin_<%= plural_resource_name %>_path, :notice => "<%= resource_name %> отредактирован."
     else
@@ -33,7 +33,7 @@ class Admin<%= model_name -%>Controller < Admin::ApplicationController
   end
   
   def destroy
-    @<%= resource_name %> = @<%= model_name %>.find(params[:id])
+    @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
     @<%= resource_name %>.destroy
     redirect_to admin_<%= plural_resource_name %>_path, :alert => "<%= resource_name %> удален."
   end
