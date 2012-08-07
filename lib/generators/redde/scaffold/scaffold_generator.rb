@@ -70,6 +70,10 @@ module Redde
           @model_name.constantize.fields.collect{|c| c[1]}.reject{|c| excluded_column_names.include?(c.name) || c.name.index("_id") }.collect{|c| ::Rails::Generators::GeneratedAttribute.new(c.name, c.type.to_s)}
         end
       end
+      
+      def column_names
+        @model_name.column_names
+      end
 
       def extract_modules(name)
         modules = name.include?('/') ? name.split('/') : name.split('::')

@@ -3,7 +3,7 @@
   %p= link_to "Добавить <%= resource_name %>", new_admin_<%= singular_controller_routing_path %>_path
   
 - unless @<%= plural_resource_name %>.empty?
-  %table.list<%= ".sortable" if columns.column_names.include?(:position) -%>
+  %table.list<%= ".sortable" if column_names.include?(:position) -%>
     %thead
       %tr
         <%- columns.each do |column| -%>
@@ -11,7 +11,7 @@
         <%- end -%>
         %th
     - @<%= plural_resource_name %>.each do |<%= resource_name %>|
-      <%= if columns.column_names.include?(:position) -%>
+      <%= if column_names.include?(:position) -%>
       %tr{id: "pos_#{<%= resource_name %>.id}"}
       <%- else -%>
       %tr
@@ -27,6 +27,6 @@
         <%- end -%>
         %td= link_to "Удалить", [:admin, <%= resource_name %>], :method => :delete, :confirm => "Удалить?", class: :del
         
-  <%- if columns.column_names.include?(:position) -%>
+  <%- if column_names.include?(:position) -%>
   = sortable sort_admin_@<%= plural_resource_name %>_path
   <%- end -%>
