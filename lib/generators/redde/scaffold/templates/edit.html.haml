@@ -14,9 +14,16 @@
           %li= msg
   %table
     <%- columns.each do |column| -%>
+    <%- if column.field_type == "text_area" -%>
+    %tr
+      %th{colspan: 2}
+        = f.label :<%= column.name %>
+        %br
+        = f.<%= column.field_type -%> :<%= column.name %>
+    <%- else -%>
     %tr
       %th= f.label :<%= column.name %>
-      %td= f.<%= column.field_type -%> :<%= column.name %>
+      %td= f.<%= column.field_type -%> :<%= column.name %>    
     <%- end -%>
   .actions
     = f.submit "Сохранить"
