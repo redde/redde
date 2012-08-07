@@ -2,7 +2,7 @@
 class Admin<%= model_name -%>Controller < Admin::ApplicationController
   
   def index
-    @<%= plural_resource_name %> = <%= resource_name.constantize.to_s -%>.all
+    @<%= plural_resource_name %> = <%= resource_name.capitalize -%>.all
   end
   
   def new
