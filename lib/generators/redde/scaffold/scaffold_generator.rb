@@ -55,7 +55,7 @@ module Redde
       def sort_priority(column_name)
         case column_name
         when "position" then 1
-        when "show" then 2
+        when "visible" then 2
         when "name" then 3
         when "title" then 3
         else 5
