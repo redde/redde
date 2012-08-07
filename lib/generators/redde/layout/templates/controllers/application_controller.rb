@@ -1,6 +1,6 @@
 #coding: utf-8
 
-class Admin::ApplicationController < ActiveController::Base
+class Admin::ApplicationController < ActionController::Base
   layout 'admin'
   #before_filter :authenticate_user!
 end
