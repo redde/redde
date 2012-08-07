@@ -86,27 +86,26 @@ module Redde
 
       def generate_views
         views = {
-          "views/index.html.#{ext}"                 => "app/views/admin/#{@controller_file_path}/index.html.#{ext}",
-          "views/edit.html.#{ext}"                  => "app/views/admin/#{@controller_file_path}/edit.html.#{ext}"
+          "index.html.#{ext}"                 => "app/views/admin/#{@controller_file_path}/index.html.#{ext}",
+          "edit.html.#{ext}"                  => "app/views/admin/#{@controller_file_path}/edit.html.#{ext}"
         }
         selected_views = views
         options.engine == generate_erb(selected_views)
       end
-      
-      def generate_controller
-        template "controllers/controller.rb", "app/controllers/admin/#{plural_resource_name}_controller.rb"
-      end
+     
 
       def generate_erb(views)
-        template "index.html.#{ext}", "app/views/admin/#{@controller_file_path}/index.html.#{ext}"
-        template "edit.html.#{ext}", "app/views/admin/#{@controller_file_path}/edit.html.#{ext}"
-        #views.each do |template_name, output_path|
-        #  template template_name, output_path
-        #end
+        views.each do |template_name, output_path|
+          template template_name, output_path
+        end
       end
 
       def ext
         :haml
+      end
+
+      def generate_controller
+        template "controllers/controller.rb", "app/controllers/admin/#{plural_resource_name}_controller.rb"
       end
 
     end
