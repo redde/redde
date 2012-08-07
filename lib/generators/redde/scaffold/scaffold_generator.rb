@@ -98,6 +98,7 @@ module Redde
         views.each do |template_name, output_path|
           template template_name, output_path
         end
+        generate_controller
       end
 
       def ext
