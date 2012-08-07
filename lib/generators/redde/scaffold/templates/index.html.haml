@@ -24,6 +24,7 @@
         <%- else -%>
         %td= link_to <%= resource_name %>.<%= column.name %>, [:edit, :admin, <%= resource_name %>]
         <%- end -%>
+        <%- end -%>
         %td= link_to "Удалить", [:admin, <%= resource_name %>], :method => :delete, :confirm => "Удалить?", class: :del
         
   <%- if columns.column_names.include?(:position) -%>
