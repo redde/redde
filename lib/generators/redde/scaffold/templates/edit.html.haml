@@ -13,11 +13,11 @@
         - @<%= resource_name %>.errors.full_messages.each do |msg|
           %li= msg
   %table
-  <%- columns.each do |column| -%>
+    <%- columns.each do |column| -%>
     %tr
       %th= f.label :<%= column.name %>
       %td= f.text_field :<%= column.name %>
-  <% end %>
+    <% end %>
   .actions
     = f.submit "Сохранить"
     = f.submit "Применить"
