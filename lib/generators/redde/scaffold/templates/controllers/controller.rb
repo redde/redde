@@ -1,5 +1,5 @@
 #coding: utf-8
-class Admin<%= model_name -%>Controller < Admin::ApplicationController
+class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::ApplicationController
   
   def index
     @<%= plural_resource_name %> = <%= resource_name.capitalize -%>.all
@@ -25,7 +25,7 @@ class Admin<%= model_name -%>Controller < Admin::ApplicationController
 
   def update
     @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
-    if @<%= model_name %>.update_attributes(params[:<%= resource_name %>])
+    if @<%= resource_name %>.update_attributes(params[:<%= resource_name %>])
       redirect_to admin_<%= plural_resource_name %>_path, :notice => "<%= resource_name %> отредактирован."
     else
       render 'edit'
