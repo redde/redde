@@ -22,7 +22,9 @@
         = f.<%= column.field_type -%> :<%= column.name %>
     <%- else -%>
     %tr
-      %th= f.label :<%= column.name %>
+      %th
+        <%= column.field_type -%>
+        = f.label :<%= column.name %>
       %td= f.<%= column.field_type -%> :<%= column.name %>    
     <%- end -%>
     <%- end -%>
