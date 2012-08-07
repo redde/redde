@@ -104,9 +104,9 @@ module Redde
         :haml
       end
 
-      def generate_controller
-        template "controllers/controller.rb", "app/controllers/admin/#{plural_resource_name}_controller.rb"
-      end
+      #def generate_controller
+      #  template "controllers/controller.rb", "app/controllers/admin/#{plural_resource_name}_controller.rb"
+      #end
 
     end
   end
