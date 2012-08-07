@@ -1,8 +1,8 @@
 #coding: utf-8
-class Admin::<%= model_name -%>Controller < Admin::ApplicationController
+class Admin<%= model_name -%>Controller < Admin::ApplicationController
   
   def index
-    @<%= plural_resource_name %> = <%= model_name -%>.all
+    @<%= plural_resource_name %> = <%= resource_name.constantize -%>.all
   end
   
   def new
