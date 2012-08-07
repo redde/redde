@@ -86,8 +86,8 @@ module Redde
 
       def generate_views
         views = {
-          "views/index.html.#{ext}"                 => File.join('app/views/admin', @controller_file_path, "index.html.#{ext}"),
-          "views/edit.html.#{ext}"                  => File.join('app/views/admin', @controller_file_path, "edit.html.#{ext}"),
+          "views/index.html.#{ext}"                 => "app/views/admin/#{@controller_file_path}/index.html.#{ext}",
+          "views/edit.html.#{ext}"                  => "app/views/admin/#{@controller_file_path}/edit.html.#{ext}"
         }
         selected_views = views
         options.engine == generate_erb(selected_views)
