@@ -20,7 +20,7 @@
         = f.label :<%= column.name %>
         %br
         = f.<%= column.field_type -%> :<%= column.name %>
-    <%- if column.field_type.to_s == "text_area" -%>
+    <%- elsif column.field_type.to_s == "check_box" -%>
     %tr
       %th{colspan: 2}
         = f.<%= column.field_type -%> :<%= column.name %>
