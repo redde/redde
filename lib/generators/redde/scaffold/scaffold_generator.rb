@@ -98,9 +98,11 @@ module Redde
       end
 
       def generate_erb(views)
-        views.each do |template_name, output_path|
-          template template_name, output_path
-        end
+        template "views/index.html.#{ext}", "app/views/admin/#{@controller_file_path}/index.html.#{ext}"
+        template "views/edit.html.#{ext}", "app/views/admin/#{@controller_file_path}/edit.html.#{ext}"
+        #views.each do |template_name, output_path|
+        #  template template_name, output_path
+        #end
       end
 
       def ext
