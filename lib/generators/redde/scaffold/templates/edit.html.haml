@@ -16,15 +16,18 @@
     <%- columns.each do |column| -%>
     <%- if column.field_type.to_s == "text_area" -%>
     %tr
-      %th{colspan: 2}
+      %td{colspan: 2}
         = f.label :<%= column.name %>
         %br
         = f.<%= column.field_type -%> :<%= column.name %>
+    <%- if column.field_type.to_s == "text_area" -%>
+    %tr
+      %th{colspan: 2}
+        = f.<%= column.field_type -%> :<%= column.name %>
+        = f.label :<%= column.name %>
     <%- else -%>
     %tr
-      %th
-        <%= "111#{column.field_type.to_s == "text_area"}222" -%>
-        = f.label :<%= column.name %>
+      %th= f.label :<%= column.name %>
       %td= f.<%= column.field_type -%> :<%= column.name %>    
     <%- end -%>
     <%- end -%>
