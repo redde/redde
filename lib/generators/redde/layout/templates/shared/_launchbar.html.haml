@@ -3,7 +3,7 @@
 - @active = :system if ["users"].include? controller.controller_name
 #launchbar
   %ul.menus
-    %li{:class => "#{'active' if  @active == :materials}"}= link_to "Материалы", admin_articles_path
-    %li{:class => "#{'active' if @active == :shop}"}= link_to "Обратная связь", "#"
-    %li{:class => "#{'active' if  @active == :system}"}= link_to "Система", admin_users_path
+    %li{:class => "#{'active' if  @active == :materials}"}= link_to "Материалы"
+    %li{:class => "#{'active' if @active == :shop}"}= link_to "Обратная связь"
+    %li{:class => "#{'active' if  @active == :system}"}= link_to "Система"
     %li.fr= Russian.strftime(Time.now,"%d %b, %Y %H:%M ")
