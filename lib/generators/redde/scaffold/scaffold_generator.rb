@@ -72,7 +72,7 @@ module Redde
       end
       
       def column_names
-        @model_name.column_names
+        @model_name.constantize.column_names
       end
 
       def extract_modules(name)
