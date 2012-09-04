@@ -1,4 +1,4 @@
-check process <%= application %> with pidfile <%= unicorn_pid %>
+check process <%= application %>_unicorn with pidfile <%= unicorn_pid %>
   start program = "/etc/init.d/<%= application %> start"
   stop program = "/etc/init.d/<%= application %> stop"
 
