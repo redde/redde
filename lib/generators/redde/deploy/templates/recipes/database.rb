@@ -47,7 +47,7 @@ namespace :database do
 
   desc "Create a database for this application."
   task :create_database, roles: :db, only: {primary: true} do
-    run "sudo mysql -u #{database_user} -h #{database_host} -e 'create database #{database_database} IF NOT EXISTS'"
+    run "sudo mysql -u #{database_user} -h #{database_host} -e 'CREATE DATABASE IF NOT EXISTS #{database_database} '"
   end
   after "deploy:setup", "database:create_database"
 
