@@ -11,7 +11,7 @@ namespace :monit do
     nginx
     unicorn
     syntax
-    reload
+    restart
   end
   after "deploy:setup", "monit:setup"
   
