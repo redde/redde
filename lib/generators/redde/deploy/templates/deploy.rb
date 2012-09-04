@@ -8,7 +8,7 @@ load "config/recipes/imagemagick"
 load "config/recipes/nodejs"
 load "config/recipes/rbenv"
 load "config/recipes/check"
-#load "config/recipes/monit"
+load "config/recipes/monit"
 
 server "<%= ip %>", :web, :app, :db, primary: true
 
