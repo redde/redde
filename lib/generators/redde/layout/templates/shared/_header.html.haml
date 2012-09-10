@@ -1,12 +1,13 @@
 #header
   #header_wrapper
     #links
-      = link_to current_user.email, "#"
-      = link_to "Выход", destroy_user_session_path, :method => :delete
+      - if current_user
+        = link_to current_user.email, "#"
+        = link_to "Выход", destroy_user_session_path, :method => :delete
     #center
       = link_to "<%= app_name %>", root_path, :target => :_blank
     #app_logo
-      = link_to admin_root_path do
+      = link_to admin_root_path || "/admin" do
         REDDESHOP
         %br
         %span e-commerce platform
