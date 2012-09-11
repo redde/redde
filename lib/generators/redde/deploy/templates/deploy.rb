@@ -9,6 +9,7 @@ load "config/recipes/nodejs"
 load "config/recipes/rbenv"
 load "config/recipes/check"
 load "config/recipes/monit"
+load "config/recipes/memcached"
 
 server "<%= ip %>", :web, :app, :db, primary: true
 
