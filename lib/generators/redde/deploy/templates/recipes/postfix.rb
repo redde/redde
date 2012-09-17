@@ -1,4 +1,8 @@
 namespace :postfix do
+  def template_sudo(from, to)
+    erb = File.read(File.expand_path("../templates/#{from}", __FILE__))
+    put_sudo ERB.new(erb).result(binding), to
+  end
   desc "Install latest stable release of postfix"
   task :install, roles: :web do
     run "#{sudo} DEBIAN_FRONTEND=noninteractive apt-get -y install postfix"
