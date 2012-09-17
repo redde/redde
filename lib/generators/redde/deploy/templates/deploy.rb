@@ -10,6 +10,10 @@ load "config/recipes/rbenv"
 load "config/recipes/check"
 load "config/recipes/monit"
 load "config/recipes/memcached"
+<% if domain.present? %>
+load "config/recipes/postfix"
+set :fqdn, "<%= domain %>"
+<% end %>
 
 server "<%= ip %>", :web, :app, :db, primary: true
 

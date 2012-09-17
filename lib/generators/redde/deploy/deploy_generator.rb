@@ -6,9 +6,11 @@ module Redde
       source_root File.expand_path("../templates", __FILE__)
       desc "Redde deploy recipes generator"
 
-      attr_reader :app_name, :ip
+      attr_reader :app_name, :ip, :domain
 
       argument :ip, :type => :string, :required => true, :banner => "Enter ip addres of the host"
+
+      argument :domain, :type => :string, :required => false, :banner => "Enter domain name for postfix config"
 
       def generate_layout
         # copy Capfile

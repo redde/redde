@@ -11,7 +11,7 @@ describe Redde::Generators::LayoutGenerator do
   end
 
   after(:all) do
-    #FileUtils.rm_rf 'tmp'
+    FileUtils.rm_rf 'tmp'
   end
 
   describe "layout" do

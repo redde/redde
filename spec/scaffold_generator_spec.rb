@@ -11,13 +11,13 @@ describe Redde::Generators::ScaffoldGenerator do
   end
 
   after(:all) do
-    #FileUtils.rm_rf 'tmp'
+    FileUtils.rm_rf 'tmp'
   end
 
   describe "scaffold" do
 
     it "Test scaffold generator" do
-     
+
     end
 
   end
