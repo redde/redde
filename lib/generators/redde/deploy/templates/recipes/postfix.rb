@@ -2,7 +2,7 @@ namespace :postfix do
   desc "Install latest stable release of postfix"
   task :install, roles: :web do
     run "#{sudo} DEBIAN_FRONTEND=noninteractive apt-get -y install postfix"
-    run "#{sudo} apt-get install dkim-filter"
+    run "#{sudo} apt-get install -y dkim-filter"
     run "#{sudo} mkdir /etc/postfix/dkim"
     run "#{sudo} dkim-genkey -d #{fqdn} -s mail -r -D /etc/postfix/dkim/"
     run "#{sudo} mv /etc/postfix/dkim/mail.private /etc/postfix/dkim/mail"
