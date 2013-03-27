@@ -4,6 +4,26 @@ class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::Applicat
   def index
     @<%= plural_resource_name %> = <%= resource_name.capitalize -%>.all
   end
+
+  <%- if column_names.include?("visible") -%>
+  def toggleshow
+    @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
+    @<%= resource_name %>.toggle(:visible)
+    @<%= resource_name %>.save
+    redirect_to :back, notice: '<%= resource_name %> обновлен.'
+  end
+  <%- end -%>
+
+  <%- if column_names.include?("position") -%>
+  def sort
+    params[:pos].each_with_index do |id, idx|
+      p = <%= resource_name.capitalize -%>.find(id)
+      p.position = idx
+      p.save
+    end
+    render :nothing => true
+  end 
+  <%- end -%>
   
   def new
     @<%= resource_name %> = <%= resource_name.capitalize -%>.new

@@ -25,7 +25,7 @@
       %th{colspan: 2}
         = f.<%= column.field_type -%> :<%= column.name %>
         = f.label :<%= column.name %>
-    <%- else -%>
+    <%- elsif column.name != "position" -%>
     %tr
       %th= f.label :<%= column.name %>
       %td= f.<%= column.field_type -%> :<%= column.name %>    

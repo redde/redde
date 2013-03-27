@@ -4,15 +4,20 @@
   
 - unless @<%= plural_resource_name %>.empty?
   %table.list<%= ".sortable" if column_names.include?("position") %>
+    %colgroup 
+      <%- columns.each do |column| -%>
+      %col<%= ".w1" if ["position", "visible"].include? column.name %>
+      <%- end -%>
+      %col.w1
     %thead
       %tr
         <%- columns.each do |column| -%>
-        %th <%= column.name %>
+        %th <%= column.name unless ["position", "visible"].include? column.name %>
         <%- end -%>
         %th
     - @<%= plural_resource_name %>.each do |<%= resource_name %>|
       <%- if column_names.include?("position") -%>
-      %tr
+      %tr{id: "pos_#{<%= resource_name %>.id}"}
       <%- else -%>
       %tr
       <%- end -%>
