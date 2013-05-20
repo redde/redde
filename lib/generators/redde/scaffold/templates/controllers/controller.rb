@@ -37,7 +37,7 @@ class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::Applicat
   def create
     @<%= resource_name %> = <%= resource_name.capitalize -%>.new(params[:<%= resource_name %>])
     if @<%= resource_name %>.save
-      redirect_to params[:commit] == "Сохранить" ? [:admin, :<%= plural_resource_name %>] : [:edit, :admin, @<%= resource_name %>], :notice => "#{<%= resource_name.capitalize -%>.model_name.human} добавлен."
+      redirect_to params[:commit] == "Применить" ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], :notice => "#{<%= resource_name.capitalize -%>.model_name.human} добавлен."
     else
       render 'edit'
     end
@@ -46,7 +46,7 @@ class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::Applicat
   def update
     @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
     if @<%= resource_name %>.update_attributes(params[:<%= resource_name %>])
-      redirect_to params[:commit] == "Сохранить" ? [:admin, :<%= plural_resource_name %>] : [:edit, :admin, @<%= resource_name %>], :notice => "#{<%= resource_name.capitalize -%>.model_name.human} отредактирован."
+      redirect_to params[:commit] == "Применить" ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], :notice => "#{<%= resource_name.capitalize -%>.model_name.human} отредактирован."
     else
       render 'edit'
     end

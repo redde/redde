@@ -12,7 +12,7 @@
     %thead
       %tr
         <%- columns.each do |column| -%>
-        %th <%= column.name unless ["position", "visible"].include? column.name %>
+        %th<%- unless ["position", "visible"].include? column.name %>= <%= resource_name.capitalize %>.human_attribute_name("<%= column %>")<%- end -%>
         <%- end -%>
         %th
     - @<%= plural_resource_name %>.each do |<%= resource_name %>|
