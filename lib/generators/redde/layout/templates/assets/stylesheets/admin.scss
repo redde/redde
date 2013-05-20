@@ -1,8 +1,12 @@
-//= require "admin/redactor/css/redactor"
-//= require "admin/uploadify/uploadify"
-//= require "admin/uploadifive/uploadifive"
-//= require "admin/lightbox/css/jquery.lightbox-0.5"
-//= require "admin/default"
+@charset "UTF-8";
+
+@import 
+"compass",
+"admin/redactor/css/redactor",
+"admin/uploadify/uploadify",
+"admin/uploadifive/uploadifive",
+"admin/lightbox/css/jquery.lightbox-0.5",
+"admin/default";
 
 * {
 	margin: 0;
