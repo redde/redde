@@ -1,9 +1,9 @@
 #header
   #header_wrapper
     #links
-      - if current_user
-        = link_to current_user.email, "#"
-        = link_to "Выход", destroy_user_session_path, :method => :delete
+      - if current_manager
+        = link_to current_manager.email, "#"
+        = link_to "Выход", destroy_manager_session_path, :method => :delete
     #center
       = link_to "<%= app_name %>", root_path, :target => :_blank
     #app_logo
