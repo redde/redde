@@ -55,7 +55,7 @@ class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::Applicat
   def destroy
     @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
     @<%= resource_name %>.destroy
-    redirect_to admin_<%= plural_resource_name %>_path, :alert => "<%= resource_name %> удален."
+    redirect_to admin_<%= plural_resource_name %>_path, :notice => "#{<%= resource_name.capitalize -%>.model_name.human} удален."
   end
   
 end
