@@ -26,6 +26,22 @@ To generate admin layout type:
 
     rails g redde:layout
 
+For set admin login layout you need add to application controller:
+
+    layout :layout_by_resource
+
+    def layout_by_resource
+      if devise_controller? && controller_name == "sessions"
+        'login'
+      else
+        "application"
+      end
+    end
+
+To generate admin views and controller for model type:
+  
+    rails g redde:scaffold ModelName
+
 ## Contributing
 
 1. Fork it
