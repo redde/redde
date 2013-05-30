@@ -6,15 +6,11 @@ Redde admin generator
 
 Add this line to your application's Gemfile:
 
-    gem 'redde'
+    gem 'redde', :group => :development
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install redde
 
 ## Requirements
 
@@ -26,7 +22,7 @@ To generate admin layout type:
 
     rails g redde:layout
 
-For set admin login layout you need add to application controller:
+To set admin login layout you need to modify application controller:
 
     layout :layout_by_resource
 
@@ -40,7 +36,13 @@ For set admin login layout you need add to application controller:
 
 To generate admin views and controller for model type:
   
-    rails g redde:scaffold ModelName
+    rails g redde:scaffold ModelNames
+    
+## Options
+If you have these fields in your model:
+
+* `visible:boolean` for toggle option
+* `position:integer` for sortable option
 
 ## Contributing
 
