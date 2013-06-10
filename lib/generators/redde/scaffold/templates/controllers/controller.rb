@@ -1,6 +1,6 @@
 # coding: utf-8
-class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::ApplicationController
-  
+class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::BaseController
+
   def index
     @<%= plural_resource_name %> = <%= resource_name.capitalize -%>.all
   end
@@ -22,18 +22,18 @@ class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::Applicat
       p.save
     end
     render :nothing => true
-  end 
+  end
   <%- end -%>
-  
+
   def new
     @<%= resource_name %> = <%= resource_name.capitalize -%>.new
     render 'edit'
   end
-  
+
   def edit
     @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
   end
-  
+
   def create
     @<%= resource_name %> = <%= resource_name.capitalize -%>.new(params[:<%= resource_name %>])
     if @<%= resource_name %>.save
@@ -51,11 +51,11 @@ class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::Applicat
       render 'edit'
     end
   end
-  
+
   def destroy
     @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
     @<%= resource_name %>.destroy
     redirect_to admin_<%= plural_resource_name %>_path, :notice => "#{<%= resource_name.capitalize -%>.model_name.human} удален."
   end
-  
+
 end
