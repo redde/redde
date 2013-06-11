@@ -9,9 +9,9 @@ module Redde
       attr_reader :app_name
 
       def generate_layout
-        
 
-        
+
+
         # copy layouts
         %w{ admin login }.each do |layout|
           template "layouts/#{layout}#{ext}", "app/views/layouts/#{layout}#{ext}"
@@ -31,15 +31,15 @@ module Redde
         # copy css
         %w{ admin.scss }.each do |css|
           template "assets/stylesheets/#{css}", "app/assets/stylesheets/#{css}"
-        end        
+        end
         directory "assets/stylesheets/admin", "app/assets/stylesheets/admin"
 
         # copy images
         directory "assets/images/admin", "app/assets/images/admin"
 
         # copy application controller
-        template "controllers/application_controller.rb", "app/controllers/admin/application_controller.rb"      
-      
+        template "controllers/base_controller.rb", "app/controllers/admin/base_controller.rb"
+
       end
 
       private
