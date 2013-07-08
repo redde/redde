@@ -37,6 +37,10 @@ To set admin login layout you need to modify application controller:
 To generate admin views and controller for model type:
   
     rails g redde:scaffold ModelNames
+
+Add to your config/prodcution.rb these files: admin.scss and admin.js
+
+    config.assets.precompile += %w( admin.js admin.css )
     
 ## Options
 If you have these fields in your model:
