@@ -1,0 +1,43 @@
+table.pe {
+  width:auto; border-collapse:collapse;
+  .col-a, .col-b, .col-c {width:1%;}
+  .col-h { width:1%;}
+  a:hover {color:#737300;}
+  tr.selected td {background:#CCFFCC;}
+  tr:hover td {background:#ffc;}
+  td {vertical-align:middle; width:auto; padding:0 5px 0 0;}
+  th {font-size:13px; padding:0; font-weight:normal; background:#ededed; padding-left:5px;}
+  th.handle {background:none;}
+  .handle {border-bottom-color:#fff;}
+  td * {vertical-align:middle;}
+  td.ch-box {padding-left:5px; padding-right:12px;}
+  td.show {
+    a {border-radius:10px; border:1px solid transparent; display:inline-block; width:20px; height:20px; background:image-url("admin/icon_eye.gif") no-repeat 1px 1px;}
+    a.not-show {opacity:0.4; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=40);}
+  }
+  a.new, a.sale {
+    display:inline-block; width:50px;
+    -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; text-align:center; color:#fff;
+  }
+  a.new:hover, a.sale:hover {opacity:0.8;}
+  a.new.active { 
+    background-color: #005782;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#1A719C), to(#005782));
+    background-image: -moz-linear-gradient(center top, #1A719C 0%, #005782 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1A719C', endColorstr='#005782'); 
+   }
+   a.sale.active {
+    background-color: #730707;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f00), to(#730707));
+    background-image: -moz-linear-gradient(center top, #f00 0%, #730707 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f00', endColorstr='#730707');    
+   }
+   a.sale, a.new {background:#ccc;}
+   .wr_img {
+    width:41px; height:41px; position:relative;
+    img {width:41px; height:41px; position:absolute; display:block;}
+    img:hover {width:72px; height:72px; z-index:10; border:1px solid #D7D7D7; top:-15px; left:-15px;}
+   }
+  .green {color:green; font-weight:bold; text-shadow:0 0 10px green; }
+  .red {color:red; font-weight:bold; text-shadow:0 0 10px red; }
+}

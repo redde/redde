@@ -1,0 +1,15 @@
+table.partners {
+  border-collapse:collapse; line-height:normal; width:100%;
+  th, td {border-top:1px solid #ededed; vertical-align:baseline; padding-top:10px; padding-bottom:10px;}
+  .txt {
+    font-size:16px;
+    p {font-size:11px; line-height:16px;}
+  }
+  th:first-child {
+    padding:10px 15px 10px 5px; vertical-align:top;
+    img {padding:1px; border:1px solid #E6E6E6; display:block;}
+  }
+  td.last {text-align:right;}
+  .lnk {color:#0047B3; font-size:16px; line-height:100%; text-decoration:none; font-weight:700;}
+  .lnk:hover { text-decoration:underline; }
+}
