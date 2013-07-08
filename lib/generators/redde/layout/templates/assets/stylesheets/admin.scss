@@ -6,7 +6,8 @@
 "admin/uploadify/uploadify",
 "admin/uploadifive/uploadifive",
 "admin/lightbox/css/jquery.lightbox-0.5",
-"admin/default";
+"admin/default",
+"admin/layouts/*";
 
 * {
 	margin: 0;
@@ -27,23 +28,6 @@ body { min-width:1000px; overflow-y:scroll; background-color: #F3F1EC; text-alig
 	li.fr {float:right; color:#fff; padding: 5px 2px 6px 4px; font-size:14px;}
 	li a {position: relative;display: block;padding: 5px 7px 6px 4px;font-size: 14px;color: #999;border-right: 1px solid #222;text-decoration: none;}
 	li.active a {color: #DDD;font-weight: bold;}
-}
-
-#header {
-	padding:1 30px;color: white;font-size: 14px;line-height:23px;text-decoration: none;overflow: hidden;margin-bottom: 20px;box-shadow: #666 0 0 3px;background-color: #005782;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#1A719C), to(#005782));
-	background-image: -moz-linear-gradient(center top, #1A719C 0%, #005782 100% );
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1A719C', endColorstr='#005782');
-	#header_wrapper {max-width: 980px;min-width:580px;padding:0 29px 0 249px;margin: 10px auto;overflow:hidden;position:relative;}
-	#app_logo {
-		width: 220px;	right: 220px;	position:absolute; top:0; left:29px; overflow:hidden;
-    a {margin-top:8px ;background:url(admin/logo.png) no-repeat 0 0; width:148px; height:32px; overflow:hidden; text-indent:-9999px; display:block;}
-	}
-	#center {overflow: hidden;float:left;font-size: 14px;a {color:#fff}}
-	#links{
-    float: right;margin-right:4px;
-    a {padding-bottom: 2px;margin-left: 8px;color: white;font-size: 10px;text-decoration: none;white-space: nowrap;line-height: 46px;}
-	}
 }
 
 #wrapper {
