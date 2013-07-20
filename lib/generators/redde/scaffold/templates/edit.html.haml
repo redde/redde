@@ -1,9 +1,9 @@
 - content_for :page_header do
   %h1
     - if @<%= resource_name %>.new_record?
-      Добавить <%= resource_name %>
+      Добавить #{tgenetive(:<%= resource_name %>)}
     - else
-      Редактировать <%= resource_name %>
+      Редактировать #{tgenetive(:<%= resource_name %>)}
 
 = form_for [:admin, @<%= resource_name %>] do |f|
   - if @<%= resource_name %>.errors.any?
