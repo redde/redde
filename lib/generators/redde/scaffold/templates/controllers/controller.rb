@@ -2,12 +2,12 @@
 class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::BaseController
 
   def index
-    @<%= plural_resource_name %> = <%= resource_name.capitalize -%>.all
+    @<%= plural_resource_name %> = <%= model_name.demodulize -%>.all
   end
   <%- if column_names.include?("position") -%>
   def sort
     params[:pos].each_with_index do |id, idx|
-      p = <%= resource_name.capitalize -%>.find(id)
+      p = <%= model_name.demodulize -%>.find(id)
       p.position = idx
       p.save
     end
@@ -15,36 +15,36 @@ class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::BaseCont
   end
   <%- end -%>
   def new
-    @<%= resource_name %> = <%= resource_name.capitalize -%>.new
+    @<%= resource_name %> = <%= model_name.demodulize -%>.new
     render 'edit'
   end
 
   def edit
-    @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
+    @<%= resource_name %> = <%= model_name.demodulize -%>.find(params[:id])
   end
 
   def create
-    @<%= resource_name %> = <%= resource_name.capitalize -%>.new(<%= resource_name %>_params)
+    @<%= resource_name %> = <%= model_name.demodulize -%>.new(<%= resource_name %>_params)
     if @<%= resource_name %>.save
-      redirect_to params[:commit] == "Применить" ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], :notice => "#{<%= resource_name.capitalize -%>.model_name.human} добавлен."
+      redirect_to params[:commit] == "Применить" ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], :notice => "#{<%= model_name.demodulize -%>.model_name.human} добавлен."
     else
       render 'edit'
     end
   end
 
   def update
-    @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
+    @<%= resource_name %> = <%= model_name.demodulize -%>.find(params[:id])
     if @<%= resource_name %>.update_attributes(<%= resource_name %>_params)
-      redirect_to params[:commit] == "Применить" ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], :notice => "#{<%= resource_name.capitalize -%>.model_name.human} отредактирован."
+      redirect_to params[:commit] == "Применить" ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], :notice => "#{<%= model_name.demodulize -%>.model_name.human} отредактирован."
     else
       render 'edit'
     end
   end
 
   def destroy
-    @<%= resource_name %> = <%= resource_name.capitalize -%>.find(params[:id])
+    @<%= resource_name %> = <%= model_name.demodulize -%>.find(params[:id])
     @<%= resource_name %>.destroy
-    redirect_to admin_<%= plural_resource_name %>_path, :notice => "#{<%= resource_name.capitalize -%>.model_name.human} удален."
+    redirect_to admin_<%= plural_resource_name %>_path, :notice => "#{<%= model_name.demodulize -%>.model_name.human} удален."
   end
 
   private
