@@ -10,8 +10,6 @@ module Redde
 
       def generate_layout
 
-
-
         # copy layouts
         %w{ admin login }.each do |layout|
           template "layouts/#{layout}#{ext}", "app/views/layouts/#{layout}#{ext}"
@@ -33,6 +31,9 @@ module Redde
           template "assets/stylesheets/#{css}", "app/assets/stylesheets/#{css}"
         end
         directory "assets/stylesheets/admin", "app/assets/stylesheets/admin"
+
+        # copy helpers
+        template "helpers/admin_helper.rb", "app/helpers/admin_helper.rb"
 
         # copy images
         directory "assets/images/admin", "app/assets/images/admin"
