@@ -1,5 +1,5 @@
 # coding: utf-8
-class Admin::<%= plural_resource_name.capitalize -%>Controller < Admin::BaseController
+class Admin::<%= model_name.demodulize -%>Controller < Admin::BaseController
 
   def index
     @<%= plural_resource_name %> = <%= model_name.demodulize -%>.all
