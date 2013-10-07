@@ -1,4 +1,5 @@
 # coding: utf-8
+
 class UrlGenerator
 
   def initialize id, name = nil
@@ -7,7 +8,7 @@ class UrlGenerator
   end
 
   def url
-    "#{@id}#{formatted_name}".downcase
+    "#{@id}#-{formatted_name}".downcase
   end
 
   def translitted_name
@@ -15,6 +16,6 @@ class UrlGenerator
   end
 
   def formatted_name
-    @name.nil? ? '' : '-' + translitted_name
+    @name.nil? ? '' : translitted_name
   end
 end
