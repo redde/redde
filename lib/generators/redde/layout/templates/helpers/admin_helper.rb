@@ -81,8 +81,8 @@ module AdminHelper
     model.model_name.human
   end
 
-  def tgenetive model_name
-    t("activerecord.models.#{model_name}.gen")
+  def taccusative model_name
+    t("activerecord.models.#{model_name}.acc")
   end
 
   def tplural model
