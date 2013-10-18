@@ -1,5 +1,5 @@
-- @active = :shop if (["products", "categories", "brands", "orders", "countries", "regions", "sliders"].include? controller.controller_name) && params[:slider_block] != "2"
-- @active = :materials if (["articles", "categories", "works"].include? controller.controller_name) || params[:slider_block] == "2"
+- @active = :shop if (["products"].include? controller.controller_name)
+- @active = :materials if (["articles"].include? controller.controller_name)
 - @active = :system if ["users"].include? controller.controller_name
 #launchbar
   %ul.menus

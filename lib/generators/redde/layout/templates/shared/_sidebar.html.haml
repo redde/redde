@@ -3,21 +3,7 @@
   -case @active
   -when :shop then
     %li{:class => "#{'active' if a == 'products'}"}= link_to "Товары", admin_products_path
-    %li{:class => "#{'active' if a == 'categories'}"}= link_to "Категории", admin_categories_path
-    %li{:class => "#{'active' if a == 'countries'}"}= link_to "Страны", admin_countries_path
-    %li{:class => "#{'active' if a == 'regions'}"}= link_to "Регионы", admin_regions_path
-    %li{:class => "#{'active' if a == 'brands'}"}= link_to "Производители", [:admin, :brands]
-    %li{:class => "#{'active' if a == 'sliders' && params[:slider_block] == "1"}"}= link_to "Слайдер", admin_sliders_path(slider_block: 1)
-    %li{:class => "#{'active' if a == 'sliders' && params[:slider_block] == "3"}"}= link_to "Баннеры (маленькие)", admin_sliders_path(slider_block: 3)
-    %li{:class => "#{'active' if a == 'orders'}"}= link_to "Заказы", [:admin, :orders]
-
-  
   -when :materials then
     %li{:class => "#{'active' if a == 'articles'}"}= link_to "Статьи", [:admin, :articles]
-    %li{:class => "#{'active' if a == 'categories'}"}= link_to "Категории", [:admin, :categories]
-    %li{:class => "#{'active' if a == 'works'}"}= link_to "Портфолио", [:admin, :works]
-
-
-  
   -when :system
     %li{:class => "#{'active' if a == 'users'}"}= link_to "Пользователи", admin_users_path
