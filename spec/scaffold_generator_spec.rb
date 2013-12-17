@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Redde::Generators::ScaffoldGenerator do
   include GeneratorSpec::TestCase
   destination File.expand_path("../../tmp", __FILE__)
-  # arguments 'CategoryValues'
+  # arguments ['CategoryValues']
 
   before(:all) do
     prepare_destination
@@ -11,7 +11,7 @@ describe Redde::Generators::ScaffoldGenerator do
   end
 
   after(:all) do
-    FileUtils.rm_rf 'tmp'
+    # FileUtils.rm_rf 'tmp'
   end
 
   describe "scaffold" do
