@@ -4,6 +4,7 @@
       Добавить #{taccusative(:<%= resource_name %>)}
     - else
       Редактировать #{taccusative(:<%= resource_name %>)}
+  %p= link_to "Назад", [:admin, :<%= plural_resource_name %>]
 
 = form_for [:admin, @<%= resource_name %>] do |f|
   - if @<%= resource_name %>.errors.any?
