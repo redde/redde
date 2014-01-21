@@ -7,12 +7,7 @@
   %p= link_to "Назад", [:admin, :<%= plural_resource_name %>]
 
 = form_for [:admin, @<%= resource_name %>] do |f|
-  - if @<%= resource_name %>.errors.any?
-    #error_explanation
-      %h2= "Ошибки при сохранении: #{@<%= resource_name %>.errors.count}"
-      %ul
-        - @<%= resource_name %>.errors.full_messages.each do |msg|
-          %li= msg
+  = render 'validate', {f: f}
   %table
     <%- columns.each do |column| -%>
     <%- if column.field_type.to_s == "text_area" -%>
