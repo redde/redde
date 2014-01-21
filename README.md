@@ -41,6 +41,14 @@ To generate admin views and controller for model type:
 Add to your config/prodcution.rb these files: admin.scss and admin.js
 
     config.assets.precompile += %w( admin.js admin.css )
+
+## Gemset dependenсies
+
+    gem 'compass-rails'
+    gem 'jquery-ui-rails'
+    gem 'haml-rails'
+    gem 'russian'
+    gem 'devise'
     
 ## Options
 If you have these fields in your model:
