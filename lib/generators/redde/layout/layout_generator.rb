@@ -17,7 +17,7 @@ module Redde
 
         # copy shared
         %w{ header launchbar sidebar }.each do |shared|
-          template "shared/_#{shared}#{ext}", "app/views/admin/shared/_#{shared}#{ext}"
+          template "base/_#{shared}#{ext}", "app/views/admin/base/_#{shared}#{ext}"
         end
 
         # copy js
