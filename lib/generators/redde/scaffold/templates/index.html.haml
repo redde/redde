@@ -30,7 +30,7 @@
         %td= link_to <%= resource_name %>.<%= column.name %>, [:edit, :admin, <%= resource_name %>]
         <%- end -%>
         <%- end -%>
-        %td= link_to "Удалить", [:admin, <%= resource_name %>], :method => :delete, :confirm => "Удалить?", class: :del
+        %td= link_to "Удалить", [:admin, <%= resource_name %>], method: :delete, data: { confirm: "Точно Удалить?" }, class: :del
         
   <%- if column_names.include?("position") -%>
   = sortable sort_admin_<%= plural_resource_name %>_path
