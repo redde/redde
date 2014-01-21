@@ -63,6 +63,11 @@ Add to your config/prodcution.rb these files: admin.scss and admin.js
           product:
             name: Название
             descr: Описание
+
+## WYSIWYG redactor
+Add to production.rb
+
+    config.assets.precompile += %w( redactor/wym.css )
     
 ## Options
 If you have these fields in your model:
