@@ -15,10 +15,8 @@ module Redde
           template "layouts/#{layout}#{ext}", "app/views/layouts/#{layout}#{ext}"
         end
 
-        # copy shared
-        %w{ header launchbar sidebar }.each do |shared|
-          directory "base", "app/views/admin/base"
-        end
+        # copy base
+        directory "base", "app/views/admin/base"
 
         # copy js
         %w{ admin.js }.each do |js|
