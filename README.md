@@ -44,7 +44,7 @@ Add to your config/production.rb these files: admin.scss and admin.js
 
 ## Gemset dependenсies
 
-    gem 'compass-rails'
+    gem 'autoprefixer-rails'
     gem 'jquery-ui-rails'
     gem 'haml-rails'
     gem 'russian'
