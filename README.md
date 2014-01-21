@@ -38,7 +38,7 @@ To generate admin views and controller for model type:
   
     rails g redde:scaffold ModelNames
 
-Add to your config/prodcution.rb these files: admin.scss and admin.js
+Add to your config/production.rb these files: admin.scss and admin.js
 
     config.assets.precompile += %w( admin.js admin.css )
 
@@ -65,7 +65,7 @@ Add to your config/prodcution.rb these files: admin.scss and admin.js
             descr: Описание
 
 ## WYSIWYG redactor
-Add to production.rb
+Add to your config/production.rb
 
     config.assets.precompile += %w( redactor/wym.css )
     
