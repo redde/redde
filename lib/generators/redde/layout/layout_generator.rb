@@ -30,6 +30,11 @@ module Redde
         end
         directory "assets/stylesheets/admin", "app/assets/stylesheets/admin"
 
+        # copy redactor
+
+        directory "assets/redactor", "app/assets"
+
+
         # copy helpers
         template "helpers/admin_helper.rb", "app/helpers/admin_helper.rb"
 
