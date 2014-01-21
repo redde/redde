@@ -1,9 +1,9 @@
-- @active = :shop if (["products"].include? controller.controller_name)
-- @active = :materials if (["articles"].include? controller.controller_name)
-- @active = :system if ["users"].include? controller.controller_name
-#launchbar
-  %ul.menus
-    %li{:class => "#{'active' if  @active == :materials}"}= link_to "Материалы"
-    %li{:class => "#{'active' if @active == :shop}"}= link_to "Обратная связь"
-    %li{:class => "#{'active' if  @active == :system}"}= link_to "Система"
-    %li.fr= Russian.strftime(Time.now,"%d %b, %Y %H:%M ")
+- @active = :shop if (["products"].include? controller_name)
+- @active = :materials if (["articles"].include? controller_name)
+- @active = :system if ["users"].include? controller_name
+.launchbar
+  %nav.launchbar__menu
+    = link_to "Материалы", nil, class: ['launchbar__link', ('_active' if @active == :shop)]
+    = link_to "Обратная связь", nil, class: ['launchbar__link', ('_active' if @active == :materials)]
+    = link_to "Система", nil, class: ['launchbar__link', ('_active' if @active == :system)]
+    %span.launchbar__time= Russian.strftime(Time.now,"%d %b, %Y %H:%M ")

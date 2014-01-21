@@ -1,9 +1,13 @@
-- a = controller.controller_name
-%ul#nav
-  -case @active
-  -when :shop then
-    %li{:class => "#{'active' if a == 'products'}"}= link_to "Товары", admin_products_path
-  -when :materials then
-    %li{:class => "#{'active' if a == 'articles'}"}= link_to "Статьи", [:admin, :articles]
-  -when :system
-    %li{:class => "#{'active' if a == 'users'}"}= link_to "Пользователи", admin_users_path
+%nav.sidebar
+  - case @active
+  - when :shop then
+    = link_to "Товары", admin_products_path, class: 'sidebar__link'
+  - when :materials then
+    = link_to "Статьи", [:admin, :articles], class: 'sidebar__link'
+  - when :system
+    = link_to "Пользователи", admin_users_path, class: 'sidebar__link'
+  - else
+    = link_to 'Демо active', nil, class: ['sidebar__link', '_active']
+    = link_to nil, class: ['sidebar__link'] do
+      Демо
+      %span.sidebar__badge 2
