@@ -49,6 +49,20 @@ Add to your config/prodcution.rb these files: admin.scss and admin.js
     gem 'haml-rails'
     gem 'russian'
     gem 'devise'
+
+## Localization's example
+
+    ru:
+      activerecord:
+        models:
+          product:
+            one: Продукт
+            acc: продукт (винительный падеж)
+            other: Продукты
+        attributes:
+          product:
+            name: Название
+            descr: Описание
     
 ## Options
 If you have these fields in your model:
