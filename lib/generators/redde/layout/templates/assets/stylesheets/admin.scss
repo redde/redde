@@ -4,11 +4,9 @@
 //= require_tree ./admin/defaults/
 //= require_tree ./admin/layouts/
 //= require_tree ./admin/blocks/
+//= require redactor/redactor
 
 @charset "UTF-8";
 
 @import
-"admin/redactor/css/redactor",
-"admin/uploadify/uploadify",
-"admin/uploadifive/uploadifive",
 "admin/lightbox/css/jquery.lightbox-0.5";
