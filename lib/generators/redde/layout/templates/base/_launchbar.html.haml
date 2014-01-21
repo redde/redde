@@ -1,6 +1,8 @@
-- @active = :shop if (["products"].include? controller_name)
-- @active = :materials if (["articles"].include? controller_name)
-- @active = :system if ["users"].include? controller_name
+- case controller_name
+  - when 'products' then @active = :shop
+  - when 'articles' then @active = :materials
+  - when 'users' then @active = :system
+
 .launchbar
   %nav.launchbar__menu
     = link_to "Материалы", nil, class: ['launchbar__link', ('_active' if @active == :shop)]
