@@ -50,6 +50,11 @@ Add to your config/production.rb these files: admin.scss and admin.js
     gem 'russian'
     gem 'devise'
 
+# для работа autoprefixer
+необходимо чтобы asset-файлы были схлопнуты, иначе просто не будет дописывать
+для этого нуждно добавить в config/environments/development.rb
+    config.assets.debug = false
+
 ## Localization's example
 
     ru:
