@@ -1,11 +1,13 @@
+//= require_self
+//= require admin/reset
+//= require admin/default
+//= require_tree ./admin/defaults/
+//= require_tree ./admin/layouts/
+//= require_tree ./admin/blocks/
+
 @charset "UTF-8";
 
-@import 
-"compass",
-"admin/reset",
-"admin/default",
-"admin/layouts/*",
-"admin/blocks/*",
+@import
 "admin/redactor/css/redactor",
 "admin/uploadify/uploadify",
 "admin/uploadifive/uploadifive",

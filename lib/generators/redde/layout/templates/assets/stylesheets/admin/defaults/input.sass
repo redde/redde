@@ -1,0 +1,35 @@
+input[type=submit]
+  cursor: pointer
+  padding: 3px 17px
+  font-family: Helvetica, Arial, sans-serif
+  font-weight: bold
+  color: #444
+  background: image-url("admin/submit.png") repeat-x 0 50%
+  background: linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 51%, #cfcfcf 100%)
+  border: 1px solid #707070
+  border-radius: 2px
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85)
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 1px 1px 0 #fff inset, -1px -1px 0 #fff inset
+
+  &[value=Сохранить],
+  &[value=Применить]
+    padding-left: 37px
+  &[value=Сохранить]
+    background: image-url("admin/arrow_enter.png") 4px -102px no-repeat, linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 51%, #cfcfcf 100%) 0 0
+    &:hover
+      background: image-url("admin/arrow_enter.png") 4px -1px no-repeat, linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 50%, #bee6fd 51%, #a7d9f5 100%) 0 0
+  &[value=Применить]
+    background: image-url("admin/arrow_down.png") 4px -102px no-repeat, linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 51%, #cfcfcf 100%) 0 0
+    &:hover
+      background: image-url("admin/arrow_down.png") 4px -1px no-repeat, linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 50%, #bee6fd 51%, #a7d9f5 100%) 0 0
+  &[value=Далее]
+    padding-right: 37px
+    background: image-url("admin/arrow_right.png") right -100px no-repeat, linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 51%, #cfcfcf 100%) 0 0
+    &:hover
+      background: image-url("admin/arrow_right.png") right 2px no-repeat, linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 50%, #bee6fd 51%, #a7d9f5 100%) 0 0
+  &:hover
+    background-image:image-url("admin/submit_hover.png")
+    background: linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 50%, #bee6fd 51%, #a7d9f5 100%)
+    border-color: #3c7fb1
+    box-shadow: 0 1px 6px rgb(44, 146, 193)
+    color: #025984
