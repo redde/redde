@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Redde::Generators::LayoutGenerator do
   include GeneratorSpec::TestCase
-  destination File.expand_path("../../tmp", __FILE__)
+  destination File.expand_path("../../../tmp", __FILE__)
   arguments %w(something)
 
   before(:all) do
@@ -16,7 +16,7 @@ describe Redde::Generators::LayoutGenerator do
 
   describe "layout" do
 
-    it "creates a test initializer" do
+    it "Generates admin and login layouts with js and css" do
       # check layouts
       assert_file "app/views/layouts/admin.html.haml"
       assert_file "app/views/layouts/login.html.haml"

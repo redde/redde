@@ -18,3 +18,7 @@ tmp
 *.DS_Store
 .rvmrc
 .powrc
+
+/spec/dummy/public/uploads
+/spec/dummy/log
+/spec/dummy/db/*sqlite3

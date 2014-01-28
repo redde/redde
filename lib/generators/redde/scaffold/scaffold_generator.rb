@@ -50,6 +50,14 @@ module Redde
         resource_name.pluralize
       end
 
+      def capital_resource_name
+        resource_name.capitalize
+      end
+
+      def index_header
+        model_name.constantize.model_name.human(:count => 'other')
+      end
+
       def sort_priority(column_name)
         case column_name
         when "position" then 1

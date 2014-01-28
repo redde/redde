@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Redde::Generators::DeployGenerator do
   include GeneratorSpec::TestCase
-  destination File.expand_path("../../tmp", __FILE__)
+  destination File.expand_path("../../../tmp", __FILE__)
   arguments %w(127.0.0.1 redde.ru)
 
   before(:all) do
