@@ -1,10 +1,10 @@
-# -*- encoding: utf-8 -*-
+# coding: utf-8
 
 require File.expand_path('../lib/redde/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Oleg Bovykin"]
-  gem.email         = ["oleg.bovykin@gmail.com"]
+  gem.authors       = ["Oleg Bovykin", "Konstantin Gorozhankin"]
+  gem.email         = ["oleg.bovykin@gmail.com", "konstantin.gorozhankin@gmail.com", "info@redde.ru"]
   gem.description   = %q{Simple admin scaffold generator}
   gem.summary       = %q{Admin scaffold generator for redde shop engine}
   gem.homepage      = "http://github.com/redde/redde"
@@ -16,13 +16,13 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Redde::VERSION
 
-  gem.add_runtime_dependency 'russian', '>= 0.6.0'
-  gem.add_runtime_dependency 'haml-rails'
-  gem.add_runtime_dependency 'compass-rails'
-  gem.add_development_dependency 'jquery-ui-rails'
-  gem.add_development_dependency 'jquery-rails'
+  gem.add_runtime_dependency "jquery-rails"
+  gem.add_runtime_dependency "jquery-ui-rails"
+
   gem.add_development_dependency 'rails', '>= 3.1'
   gem.add_development_dependency 'rspec-rails', '>= 2.7'
+  gem.add_development_dependency 'factory_girl_rails', '>= 2.7'
   gem.add_development_dependency 'guard-rspec'
+  gem.add_development_dependency "sqlite3"
   gem.add_development_dependency 'generator_spec'
 end
