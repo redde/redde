@@ -7,4 +7,4 @@ rvm:
   - 2.0.0
   - 2.1.0
 before_script:
-  - "rake db:setup RAILS_ENV=test"
+  - "cd spec/dummy; rake db:setup RAILS_ENV=test"
