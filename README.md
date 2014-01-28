@@ -1,12 +1,14 @@
 # Redde
+[![Build Status](https://secure.travis-ci.org/redde/redde.png)](http://travis-ci.org/redde/redde)
+[![Code Climate](https://codeclimate.com/github/redde/redde.png)](https://codeclimate.com/github/redde/redde)
 
-Redde admin generator
+Admin generator for redde projects
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'redde', :group => :development
+    gem 'redde'
 
 And then execute:
 
@@ -34,25 +36,30 @@ To set admin login layout you need to modify application controller:
       end
     end
 
-To generate admin views and controller for model type:
+To generate admin views and controller for a model, enter:
   
     rails g redde:scaffold ModelNames
 
-Add to your config/production.rb these files: admin.scss and admin.js
+Add `admin.scss` and `admin.js` to assets precompilation in config/production.rb:
 
     config.assets.precompile += %w( admin.js admin.css )
 
 ## Gemset dependenсies
+
+Somehow, some dependencies are not initialized inside rails apps. If you get error about missing gems, add these gems to your Gemfile:
 
     gem 'autoprefixer-rails'
     gem 'jquery-ui-rails'
     gem 'haml-rails'
     gem 'russian'
     gem 'devise'
+    
+Its highly possible, that you will not have any problems with gems
 
-# для работа autoprefixer
-необходимо чтобы asset-файлы были схлопнуты, иначе просто не будет дописывать
-для этого нуждно добавить в config/environments/development.rb
+## Autoprefixer note for development mode
+
+Its neccessary to have joined asset files, change assets debug to false in `config/environments/development.rb`:
+
     config.assets.debug = false
 
 ## Localization's example
@@ -69,21 +76,21 @@ Add to your config/production.rb these files: admin.scss and admin.js
             name: Название
             descr: Описание
 
-## WYSIWYG redactor
-Add to your config/production.rb
+## WYSIWYG editor note
+
+To use styles for the WYSIWYG editor, add its styles to precompile in `config/production.rb`:
 
     config.assets.precompile += %w( redactor/wym.css )
     
-## Options
-If you have these fields in your model:
+## Sortable
 
-* `visible:boolean` for toggle option
-* `position:integer` for sortable option
+If you have field `position` of integer type in your model, generator will add special column as a hook for sort.
+You should add POST `sort` action to you routes:
 
-## Contributing
+	resources :article_categories do
+      post 'sort', on: :collection
+    end
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+## Visible
+
+If you have field `visible` of boolean type in your model, generator will add small eye column for toggling visiblity
