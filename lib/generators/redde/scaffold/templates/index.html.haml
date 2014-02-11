@@ -1,5 +1,5 @@
 - content_for(:page_header) do
-  %h1= index_header
+  %h1= tplural <%= model_name.demodulize %>
   %p= link_to "Добавить #{taccusative('<%= resource_name %>')}", [:new, :admin, :<%= resource_name %>]
   
 - unless @<%= plural_resource_name %>.empty?
