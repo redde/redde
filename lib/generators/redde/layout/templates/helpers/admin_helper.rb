@@ -35,18 +35,15 @@ module AdminHelper
   end
 
   def show_tree(c)
-    html = ""
-    html << "<li id=\"list_#{c.id}\"><div>#{link_to c.name, edit_admin_category_path(c)}<p>"
-    html << " #{link_to "Удал",[:admin, c], data: { confirm: 'Точно удалить?' }, :method => :delete, class: "del"}</p></div>"
-    unless c.children.empty?
-      html << "<ol#{" class='sortable'" if c.id == 1}>"
-      c.children.order('position').each do |ch|
-        html << show_tree(ch)
+    link = link_to c.name, [:edit, :admin, c]
+    edit = link_to "Удал",[:admin, c], data: { confirm: 'Точно удалить?' }, :method => :delete, class: "del"
+    html = content_tag(:div, link + content_tag(:p, edit))
+    if c.children.any?
+      html << content_tag(:ol) do
+        raw c.children.map{|ch| show_tree(ch)}.join()
       end
-      html << "</ol>"
     end
-    html << "</li>"
-    return raw(html)
+    content_tag :li, raw(html), id: "list_#{c.id}"
   end
 
   def sort_tree(url, maxLevels = 2)
@@ -64,12 +61,17 @@ module AdminHelper
             opacity: .6,
             placeholder: 'placeholder',
             revert: 250,
+            rootID: 'root',
             tabSize: 25,
             tolerance: 'pointer',
             toleranceElement: '> div',
             update: function(){
               var serialized = $(this).nestedSortable('serialize');
-              $.ajax({url: '#{url}', data: serialized});
+              $.ajax({
+                method: 'POST',
+                url: '#{url}',
+                data: serialized
+              });
             }
           });
         });
