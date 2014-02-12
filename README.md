@@ -43,6 +43,12 @@ To generate admin views and controller for a model, enter:
 Add `admin.scss` and `admin.js` to assets precompilation in config/production.rb:
 
     config.assets.precompile += %w( admin.js admin.css )
+    
+## Добавление фотографий
+
+	rails g redde:photo
+	
+создаст scaffold для модели Photo с полиморфной связью
 
 ## Gemset dependenсies
 
