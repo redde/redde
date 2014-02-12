@@ -18,7 +18,7 @@ describe Redde::Generators::PhotoGenerator do
   end
 
   it "Generates views" do
-    assert_file "app/views/admin/photos/index.html.haml"
+    assert_directory "app/views/admin/photos"
   end
 
   it "Generates model" do
