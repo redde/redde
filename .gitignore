@@ -21,4 +21,5 @@ tmp
 
 /spec/dummy/public/uploads
 /spec/dummy/log
+/spec/dummy/log/test.log
 /spec/dummy/db/*sqlite3
