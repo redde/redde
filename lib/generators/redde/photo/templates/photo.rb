@@ -1,5 +1,5 @@
 class Photo < ActiveRecord::Base
-  # belongs_to :product
+  belongs_to :imageable, polymorphic: true
 
   default_scope { order(:position) }
 
