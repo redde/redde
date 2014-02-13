@@ -25,15 +25,10 @@ module Redde
         directory "assets/javascripts/admin", "app/assets/javascripts/admin"
 
         # copy css
-        %w{ admin.scss }.each do |css|
-          template "assets/stylesheets/#{css}", "app/assets/stylesheets/#{css}"
-        end
         directory "assets/stylesheets/admin", "app/assets/stylesheets/admin"
 
         # copy redactor
-
         directory "assets/redactor", "app/assets"
-
 
         # copy helpers
         template "helpers/admin_helper.rb", "app/helpers/admin_helper.rb"

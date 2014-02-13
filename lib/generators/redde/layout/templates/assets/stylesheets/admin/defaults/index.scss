@@ -1,0 +1,131 @@
+//= require admin/defaults/reset
+//= require_self
+//= require_directory .
+
+a.del {
+  background:image-url("admin/del.png") no-repeat 100% 0; display:inline-block; height:20px; line-height:20px; padding:0 22px 0 0;
+  &:hover {background-position:100% -80px;}
+}
+
+.actions {margin:10px 0;}
+
+.ac_results {
+  padding: 0px;
+  border: 1px solid black;
+  background-color: white;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+.ac_results ul {width: 100%;list-style-position: outside;list-style: none;padding: 0;margin: 0;}
+
+.ac_results li {
+  margin: 0px;
+  padding: 2px 5px;
+  cursor: default;
+  display: block;
+  /* 
+  if width will be 100% horizontal scrollbar will apear 
+  when scroll mode will be used
+  */
+  /*width: 100%;*/
+  font: menu;
+  font-size: 12px;
+  /* 
+  it is very important, if line-height not setted or setted 
+  in relative units scroll will be broken in firefox
+  */
+  line-height: 16px;
+  overflow: hidden;
+  color:#004D83;
+}
+
+/*.ac_results li strong {color:#4490BC;}
+*/
+.ac_loading {
+  background: white image-url('admin/ajaxloader2.gif') right center no-repeat;
+}
+
+.ac_odd {
+  background-color: #eee;
+}
+
+.ac_over {
+  background-color: #4490BC;
+  color: #fff !important;
+}
+
+.ac_results2 {min-width:333px; max-width:600px; width:auto !important;}
+
+table.lang {
+  td {text-align:right;}
+  a.selected {color:#000;}
+}
+
+#main #page-header {
+  h1.partner {font-size:22px; line-height:22px; font-weight:normal; float:none;}
+  p.partner {color:#777; float:none; }
+  a.partner-lnk { font-size:12px; color:#0047B3; line-height:12px; }
+}
+
+.edit-box {
+  float:right; margin-left:-100%;
+  a.red {color:#f00;}
+}
+
+.full #page_sidebar {display:none;}
+
+.order-list {list-style-position: inside}
+
+.tbl {
+  border-collapse:collapse; width:100%;
+  .for_img {width:1px; text-align:left; padding-right:5px; border-bottom:3px solid #EDEDED; vertical-align:bottom; }
+  tr.bot {
+    th, td {border-bottom-width:3px;}
+    th {vertical-align:top;}
+  }
+  th, td {vertical-align:middle;}
+  th {padding:5px 10px 5px 5px; width:1%;}
+  td {width:auto; padding-top:4px; }
+  td.handle { width:25px; text-align:left; vertical-align:middle;}
+  th.handle {width:auto;}
+  td.handle img {display:block;}
+  th {width:auto;}
+  td.last {text-align:right; width:1px;}
+}
+
+.tusers {
+  tr:hover td {background:#ffc; cursor:pointer;}
+  .plast { width:1px; text-align:left; padding-left:10px; padding-right:10px; border-left:1px solid #ededed;}
+}
+
+.tmenu {
+  .i2 {width:40%;}
+}
+
+.article {
+  clear:both; overflow:hidden; margin-bottom:10px;
+  p.delete-link {clear:both;}
+}
+
+#showcases {
+  .red {color:#f00;}
+  .green {color:green;}
+}
+
+#sales_sortable {
+  td,th {vertical-align:middle;}
+}
+#sale_product_ids {  
+  optgroup option {
+    margin-left:17px;
+    &.red {
+      background:red !important; color:#fff !important;
+      &:after {content:"*"};
+    }
+  }
+}
+
+.vam {vertical-align:middle !important;}
+.vab {vertical-align:bottom !important;}
+
