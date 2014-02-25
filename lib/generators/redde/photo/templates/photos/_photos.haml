@@ -1,12 +1,12 @@
 - unless parent.new_record?
-  =content_for(:page_sidebar) do
+  = content_for(:page_sidebar) do
     %h5 
       Фотографии
       - if editable ||= false
-        = link_to "ред.", [:admin,parent]
+        = link_to "ред.", [:admin, parent]
     .product-photos
       %ul.photos#photo-list
-        = render :partial => "admin/photos/photo", :collection => eval("parent.#{photos.to_s}"), :as => :photo, :locals => {:parent => parent}
+        = render parent.photos
 
       #preview
       #drag-n-drop{:style => "display: none; margin-top: 5px;"}
@@ -19,4 +19,4 @@
         .b-button.js-fileapi-wrapper
           .b-button__text Загрузить файлы
           %input.b-button__input.js-fileapi{:name => "files", :type => "file",  :multiple => true, data: {"upload-url" => url_for([:admin, parent, :photos])}}
-      = photo_sortable url_for([:sort,:admin,parent,photos])
+      = photo_sortable url_for([:sort, :admin, parent, :photos])
