@@ -9,4 +9,4 @@
         = mail_to current_manager.email
         = link_to "Выход", destroy_manager_session_path, :method => :delete
     .header__center
-      = link_to "AppName", root_path, :target => :_blank
+      = link_to "AppName", root_path ||= '/', :target => :_blank
