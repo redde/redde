@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+!!!
 %html.login{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en"}
   %head
     %meta{"http-equiv" => "Content-Type", :content => "text/html;charset=UTF-8"}
@@ -7,26 +7,26 @@
     = javascript_include_tag "admin"
     = csrf_meta_tag
   %body
-    %table.login
-      %tr.login
-        %td.login
-          #main
-            #page-header
+    %table.login__table
+      %tr
+        %td.login__cell
+          .main._login
+            .page-header
               %h1 Административная панель
-            #page
-              #content
+            .page
+              .content
                 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-                  .fields
+                  .login__fields
                     = f.label :email, "E-mail"
                     %br
-                    = f.text_field :email
-                  .fields
+                    = f.text_field :email, class: 'login__inp'
+                  .login__fields
                     = f.label :password, "Пароль"
                     %br
-                    = f.password_field :password, :size => 35
-                  .actions
-                    - if devise_mapping.rememberable?
+                    = f.password_field :password, :size => 35, class: 'login__inp'
+                  - if devise_mapping.rememberable?
+                    .login__fields
                       = f.check_box :remember_me
                       = f.label :remember_me, "Оставаться в системе"
-                      %br
-                      = f.submit "Войти"
+                  .login__actions
+                    = f.submit "Войти"
