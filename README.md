@@ -47,6 +47,26 @@ Add `admin.scss` and `admin.js` to assets precompilation in config/production.rb
 ## Добавление фотографий
 
 	rails g redde:photo
+
+Добавьте в routes.rb единожды
+
+    concern :imageable do
+      resources :photos, only: [:show, :create, :destroy] do
+        post 'sort', :on => :collection
+      end
+    end
+
+и для каждой модели роуты `concerns :imageable` к которой необходимо добавить фотографии, например для Product
+
+    namespace :admin do
+      resources :products do
+        concerns :imageable
+      end
+    end
+
+Не забудьте добавить полиморфную связь
+
+    has_many :photos, dependent: :destroy, as: :imageable
 	
 создаст scaffold для модели Photo с полиморфной связью
 

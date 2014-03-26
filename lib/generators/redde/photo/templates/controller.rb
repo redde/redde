@@ -11,20 +11,19 @@ class Admin::PhotosController < ActionController::Base
 
   def create
     if params[:product_id].present?
-      @product = Product.find(params[:product_id])
-      @photo = @product.photos.build(src: params[:file])
+      parent = Product.find(params[:product_id])
     end       
-    if @photo.save
-      render layout: false
-    else
+    @photo = parent.photos.build(src: params[:file])
+    unless @photo.save
       render js: 'alert("Ошибка! Фото не загружено")'
     end
   end
 
   def destroy
     @photo = Photo.find(params[:id])
-    @photo.destroy
-    render 'admin/photos/destroy'
+    if @photo.destroy
+      render 'admin/photos/destroy'
+    end
   end
 
 end
