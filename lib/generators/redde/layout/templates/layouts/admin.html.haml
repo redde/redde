@@ -1,5 +1,5 @@
 !!!
-%html{:lang => "en"}
+%html{lang: "en"}
   %head
     %meta{:charset => "UTF-8"}/ 
     %title= @page_title || "ReddeCMS"
@@ -20,7 +20,7 @@
           .notice= notice
         - if alert
           .alert= alert          
-        .page{:class => "#{yield(:page_sidebar).empty? ? '_full' : '_sidebar'}"}
+        .page{class: "#{yield(:page_sidebar).empty? ? '_full' : '_sidebar'}"}
           #filter
             = yield(:filter)
           .page-sidebar

@@ -2,7 +2,7 @@
 %html.login{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en"}
   %head
     %meta{"http-equiv" => "Content-Type", :content => "text/html;charset=UTF-8"}
-    %title= ("Вход на сайт")+" | Административная панель"
+    %title= ("Вход на сайт") + " | Административная панель"
     = stylesheet_link_tag 'admin'
     = javascript_include_tag "admin"
     = csrf_meta_tag
@@ -15,7 +15,7 @@
               %h1 Административная панель
             #page
               #content
-                = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+                = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
                   .fields
                     = f.label :email, "E-mail"
                     %br
@@ -23,7 +23,7 @@
                   .fields
                     = f.label :password, "Пароль"
                     %br
-                    = f.password_field :password, :size => 35
+                    = f.password_field :password, size: 35
                   .actions
                     - if devise_mapping.rememberable?
                       = f.check_box :remember_me
