@@ -31,12 +31,12 @@ module AdminHelper
         });
       </script>
     }.gsub(/[\n ]+/, ' ').strip.html_safe
-    return content_for(:js,html)
+    content_for(:js, html)
   end
 
   def show_tree(c)
     link = link_to c.name, [:edit, :admin, c]
-    edit = link_to "Удал",[:admin, c], data: { confirm: 'Точно удалить?' }, :method => :delete, class: "del"
+    edit = link_to 'Удал', [:admin, c], data: { confirm: 'Точно удалить?' }, method: :delete, class: "del"
     html = content_tag(:div, link + content_tag(:p, edit))
     if c.children.any?
       html << content_tag(:ol) do
@@ -79,16 +79,16 @@ module AdminHelper
     }.gsub(/[\n ]+/, ' ').strip.html_safe
   end
 
-  def tsingular model
+  def tsingular(model)
     model.model_name.human
   end
 
-  def taccusative model_name
+  def taccusative(model_name)
     t("activerecord.models.#{model_name}.acc")
   end
 
-  def tplural model
-    model.model_name.human(:count => 'other')
+  def tplural(model)
+    model.model_name.human(count: 'other')
   end
 
 end

@@ -3,10 +3,9 @@ class Admin::PhotosController < ActionController::Base
   def sort
     params[:photo].each_with_index do |id, idx|
       p = Photo.find(id)
-      p.position = idx
-      p.save
+      p.update(position: idx)
     end
-    render :nothing => true
+    render nothing: true
   end
 
   def create

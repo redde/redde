@@ -1,19 +1,17 @@
-# coding: utf-8
 class Admin::<%= model_name.demodulize.pluralize -%>Controller < Admin::BaseController
-
   def index
     @<%= plural_resource_name %> = <%= model_name.demodulize -%>.all
   end
-  <%- if column_names.include?("position") -%>
+  <%- if column_names.include?('position') -%>
   def sort
     params[:pos].each_with_index do |id, idx|
       p = <%= model_name.demodulize -%>.find(id)
-      p.position = idx
-      p.save
+      p.update(position: idx)
     end
-    render :nothing => true
+    render nothing: true
   end
   <%- end -%>
+
   def new
     @<%= resource_name %> = <%= model_name.demodulize -%>.new
     render 'edit'
@@ -26,7 +24,7 @@ class Admin::<%= model_name.demodulize.pluralize -%>Controller < Admin::BaseCont
   def create
     @<%= resource_name %> = <%= model_name.demodulize -%>.new(<%= resource_name %>_params)
     if @<%= resource_name %>.save
-      redirect_to params[:commit] == "Применить" ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], :notice => "#{<%= model_name.demodulize -%>.model_name.human} добавлен."
+      redirect_to params[:commit] == 'Применить' ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], notice: "#{<%= model_name.demodulize -%>.model_name.human} добавлен."
     else
       render 'edit'
     end
@@ -35,7 +33,7 @@ class Admin::<%= model_name.demodulize.pluralize -%>Controller < Admin::BaseCont
   def update
     @<%= resource_name %> = <%= model_name.demodulize -%>.find(params[:id])
     if @<%= resource_name %>.update_attributes(<%= resource_name %>_params)
-      redirect_to params[:commit] == "Применить" ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], :notice => "#{<%= model_name.demodulize -%>.model_name.human} отредактирован."
+      redirect_to params[:commit] == 'Применить' ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], notice: "#{<%= model_name.demodulize -%>.model_name.human} отредактирован."
     else
       render 'edit'
     end
@@ -44,7 +42,7 @@ class Admin::<%= model_name.demodulize.pluralize -%>Controller < Admin::BaseCont
   def destroy
     @<%= resource_name %> = <%= model_name.demodulize -%>.find(params[:id])
     @<%= resource_name %>.destroy
-    redirect_to admin_<%= plural_resource_name %>_path, :notice => "#{<%= model_name.demodulize -%>.model_name.human} удален."
+    redirect_to admin_<%= plural_resource_name %>_path, notice: "#{<%= model_name.demodulize -%>.model_name.human} удален."
   end
 
   private

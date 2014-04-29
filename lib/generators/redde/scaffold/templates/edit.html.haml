@@ -4,13 +4,13 @@
       Добавить #{taccusative(:<%= resource_name %>)}
     - else
       Редактировать #{taccusative(:<%= resource_name %>)}
-  %p= link_to "Назад", [:admin, :<%= plural_resource_name %>]
+  %p= link_to 'Назад', [:admin, :<%= plural_resource_name %>]
 
 = form_for [:admin, @<%= resource_name %>] do |f|
-  = render 'validate', {f: f}
+  = render 'validate', { f: f }
   %table
     <%- columns.each do |column| -%>
-    <%- if column.field_type.to_s == "text_area" -%>
+    <%- if column.field_type.to_s == 'text_area' -%>
     %tr
       %td{colspan: 2}
         = f.label :<%= column.name %>
@@ -21,12 +21,12 @@
       %th{colspan: 2}
         = f.<%= column.field_type -%> :<%= column.name %>
         = f.label :<%= column.name %>
-    <%- elsif column.name != "position" -%>
+    <%- elsif column.name != 'position' -%>
     %tr
       %th= f.label :<%= column.name %>
       %td= f.<%= column.field_type -%> :<%= column.name %>
     <%- end -%>
     <%- end -%>
   .actions
-    = f.submit "Сохранить"
-    = f.submit "Применить"
+    = f.submit 'Сохранить'
+    = f.submit 'Применить'
