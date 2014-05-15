@@ -48,7 +48,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # end
 
   version :admin do
-    process :resize_and_pad => [119, 119, :transparent, ::Magick::CenterGravity]    
+    process resize_and_pad: [119, 119, :transparent, ::Magick::CenterGravity]
   end
 
   # Override the filename of the uploaded files:
@@ -56,5 +56,4 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
 end

@@ -7,5 +7,4 @@ class Admin::BaseController < ActionController::Base
 
   def welcome
   end
-  
 end

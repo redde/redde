@@ -36,11 +36,12 @@ module AdminHelper
 
   def show_tree(c)
     link = link_to c.name, [:edit, :admin, c]
-    edit = link_to 'Удал', [:admin, c], data: { confirm: 'Точно удалить?' }, method: :delete, class: "del"
+    edit = link_to 'Удал', [:admin, c], data: { confirm: 'Точно удалить?' },
+                                        method: :delete, class: 'del'
     html = content_tag(:div, link + content_tag(:p, edit))
     if c.children.any?
       html << content_tag(:ol) do
-        raw c.children.map{|ch| show_tree(ch)}.join()
+        raw c.children.map { |ch| show_tree(ch) }.join('')
       end
     end
     content_tag :li, raw(html), id: "list_#{c.id}"
@@ -90,5 +91,4 @@ module AdminHelper
   def tplural(model)
     model.model_name.human(count: 'other')
   end
-
 end

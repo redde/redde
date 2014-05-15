@@ -1,12 +1,12 @@
 %header.header
   .header__init
-    = link_to admin_root_path || "/admin", class: 'header__logo' do
+    = link_to admin_root_path || '/admin', class: 'header__logo' do
       ReddeCMS
       %br
       %span custom system
     .header__links
       - if current_manager
         = mail_to current_manager.email
-        = link_to "Выход", destroy_manager_session_path, method: :delete
+        = link_to 'Выход', destroy_manager_session_path, method: :delete
     .header__center
-      = link_to "AppName", root_path ||= '/', target: :_blank
+      = link_to 'AppName', root_path ||= '/', target: :_blank
