@@ -37,13 +37,50 @@ To set admin login layout you need to modify application controller:
     end
 
 To generate admin views and controller for a model, enter:
-  
+
     rails g redde:scaffold ModelNames
 
 Add `admin.scss` and `admin.js` to assets precompilation in config/production.rb:
 
     config.assets.precompile += %w( admin.js admin.css )
-    
+
+## UrlGenerator
+
+`Redde::UrlGenerator` - is a small lib to convert title and id to combine url, used in `to_param` method.
+
+Usage example:
+
+	generator = Redde::UrlGenerator.new(1, 'тестовый заголовок $%##@$@#$')
+	generator.url
+	=> '1-testovyy-zagolovok'
+
+## Sluggable
+
+`Sluggable` is used to include into model with permanent slugs (similar to permalink).
+
+Your ActiveRecord model should have `slug` field and title field.
+
+You can set title field by setting `TITLE_FIELD` to symbol of method. This method will be used to generate `slug`.
+If `TITLE_FIELD` constant is not set, `:title` symbol will be used insted.
+
+Usage example:
+
+Book should have title and slug fields.
+
+	class Book < ActiveRecord::Base
+	  TITLE_SYMBOL = :name
+	  include Redde::Sluggable
+	  validates :name, presence: true
+	end
+
+	b = Book.new(name: 'Тестовая книга')
+    b.save
+    b.slug
+    => 'testovaya-kniga'
+
+    b.to_param
+    => '1-testovaya-kniga'
+
 ## Добавление фотографий
 
 	rails g redde:photo
@@ -67,7 +104,7 @@ Add `admin.scss` and `admin.js` to assets precompilation in config/production.rb
 Не забудьте добавить полиморфную связь
 
     has_many :photos, dependent: :destroy, as: :imageable
-	
+
 создаст scaffold для модели Photo с полиморфной связью
 
 ## Gemset dependenсies
@@ -79,7 +116,7 @@ Somehow, some dependencies are not initialized inside rails apps. If you get err
     gem 'haml-rails'
     gem 'russian'
     gem 'devise'
-    
+
 Its highly possible, that you will not have any problems with gems
 
 ## Autoprefixer note for development mode
@@ -107,7 +144,7 @@ Its neccessary to have joined asset files, change assets debug to false in `conf
 To use styles for the WYSIWYG editor, add its styles to precompile in `config/production.rb`:
 
     config.assets.precompile += %w( redactor/wym.css )
-    
+
 ## Sortable
 
 If you have field `position` of integer type in your model, generator will add special column as a hook for sort.
