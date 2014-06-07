@@ -16,45 +16,66 @@ And then execute:
 
 ## Requirements
 
+### Gems
+
 Layout requires 'devise' gem with generated user model. If You use another auth solution, feel free to modify partial with user info and logout link.
 
+### Assets
+
+Add this line to assets precompilation in `config/production.rb`:
+
+    config.assets.precompile += %w( admin.js admin.css redactor/wym.css )
+
 ## Usage
+
+### Layout
 
 To generate admin layout type:
 
     rails g redde:layout
 
-To set admin login layout you need to modify application controller:
+To set admin login layout you need to include `Redde::Layout` concern:
+
+    class ApplicationController < ActionController::Base
+      include Redde::Layout
+      # Prevent CSRF attacks by raising an exception.
+      # For APIs, you may want to use :null_session instead.
+      protect_from_forgery with: :exception
+    end
+
+This concern adds layout switch with:
 
     layout :layout_by_resource
 
+with method `layout_by_resource`:
+
     def layout_by_resource
-      if devise_controller? && controller_name == "sessions"
+      if devise_controller? && controller_name == 'sessions'
         'login'
       else
-        "application"
+        'application'
       end
     end
+
+Feel free to change this methos as you need.
+
+### Scaffold
 
 To generate admin views and controller for a model, enter:
 
     rails g redde:scaffold ModelNames
 
-Add `admin.scss` and `admin.js` to assets precompilation in config/production.rb:
-
-    config.assets.precompile += %w( admin.js admin.css )
-
-## UrlGenerator
+### UrlGenerator
 
 `Redde::UrlGenerator` - is a small lib to convert title and id to combine url, used in `to_param` method.
 
 Usage example:
 
-	generator = Redde::UrlGenerator.new(1, 'тестовый заголовок $%##@$@#$')
-	generator.url
-	=> '1-testovyy-zagolovok'
+    generator = Redde::UrlGenerator.new(1, 'тестовый заголовок $%##@$@#$')
+    generator.url
+    => '1-testovyy-zagolovok'
 
-## Sluggable
+### Sluggable
 
 `Sluggable` is used to include into model with permanent slugs (similar to permalink).
 
@@ -67,13 +88,13 @@ Usage example:
 
 Book should have title and slug fields.
 
-	class Book < ActiveRecord::Base
-	  TITLE_SYMBOL = :name
-	  include Redde::Sluggable
-	  validates :name, presence: true
-	end
+    class Book < ActiveRecord::Base
+      TITLE_SYMBOL = :name
+      include Redde::Sluggable
+      validates :name, presence: true
+    end
 
-	b = Book.new(name: 'Тестовая книга')
+    b = Book.new(name: 'Тестовая книга')
     b.save
     b.slug
     => 'testovaya-kniga'
@@ -83,13 +104,13 @@ Book should have title and slug fields.
 
 ## Добавление фотографий
 
-	rails g redde:photo
+    rails g redde:photo
 
 Добавьте в routes.rb единожды
 
     concern :imageable do
       resources :photos, only: [:show, :create, :destroy] do
-        post 'sort', :on => :collection
+        post 'sort', on: :collection
       end
     end
 
@@ -139,18 +160,12 @@ Its neccessary to have joined asset files, change assets debug to false in `conf
             name: Название
             descr: Описание
 
-## WYSIWYG editor note
-
-To use styles for the WYSIWYG editor, add its styles to precompile in `config/production.rb`:
-
-    config.assets.precompile += %w( redactor/wym.css )
-
 ## Sortable
 
 If you have field `position` of integer type in your model, generator will add special column as a hook for sort.
 You should add POST `sort` action to you routes:
 
-	resources :article_categories do
+    resources :article_categories do
       post 'sort', on: :collection
     end
 
