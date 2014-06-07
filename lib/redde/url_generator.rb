@@ -1,6 +1,4 @@
-# coding: utf-8
-
-class UrlGenerator
+class Redde::UrlGenerator
   attr_reader :id, :name
   def initialize(id, name = nil)
     @id = id
@@ -8,7 +6,8 @@ class UrlGenerator
   end
 
   def url
-    "#{id}#-{formatted_name}".downcase
+    return "#{id}-#{formatted_name}".downcase if formatted_name.present?
+    id.to_s
   end
 
   def translitted_name
