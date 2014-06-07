@@ -1,28 +1,21 @@
-ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../dummy/config/environment", __FILE__)
-
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../dummy/config/environment', __FILE__)
 require 'bundler/setup'
 require 'rails/all'
 require 'active_record'
-
 require 'rspec/rails'
 require 'rspec/autorun'
-
 require 'factory_girl'
-
-
 require 'generator_spec/test_case'
 require 'redde'
-Dir[Pathname.new(File.expand_path('../', __FILE__)).join('support/**/*.rb')].each {|f| require f}
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
-
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -34,9 +27,9 @@ RSpec.configure do |config|
   # config.mock_with :rr
 
   # config.after(:all) do
-  #   if Rails.env.test? 
-  #     FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads"])
-  #   end 
+  #   if Rails.env.test?
+  #     FileUtils.rm_rf(Dir['#{Rails.root}/public/uploads'])
+  #   end
   # end
 
   config.include FactoryGirl::Syntax::Methods
@@ -55,5 +48,5 @@ RSpec.configure do |config|
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
-  config.order = "random"
+  config.order = 'random'
 end

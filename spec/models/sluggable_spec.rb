@@ -17,7 +17,6 @@ class DummyClass
   end
 end
 
-
 class DummyClassWithTitle < DummyClass
   include Redde::Sluggable
   TITLE_SYMBOL = :name
