@@ -46,8 +46,8 @@ class Admin::<%= model_name.demodulize.pluralize -%>Controller < Admin::BaseCont
   end
 
   private
-    def <%= resource_name %>_params
-      params.require(:<%= resource_name %>).permit(<%= column_names.select {|c| !(['id', 'updated_at', 'created_at'].include? c) }.map {|c| ":#{c}"}.join(', ') %>)
-    end
 
+  def <%= resource_name %>_params
+    params.require(:<%= resource_name %>).permit(<%= column_names.select {|c| !(['id', 'updated_at', 'created_at'].include? c) }.map {|c| ":#{c}"}.join(', ') %>)
+  end
 end
