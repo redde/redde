@@ -1,0 +1,20 @@
+- content_for :page_header do
+  %h1
+    - if @manager.new_record?
+      Добавить #{taccusative(:manager)}
+    - else
+      Редактировать #{taccusative(:manager)}
+  %p= link_to 'Назад', [:admin, :managers]
+
+= form_for [:admin, @manager] do |f|
+  = render 'validate', { f: f }
+  %table
+    %tr
+      %th= f.label :email
+      %td= f.text_field :email
+    %tr
+      %th= f.label :password
+      %td= f.text_field :password
+  .actions
+    = f.submit 'Сохранить'
+    = f.submit 'Применить'

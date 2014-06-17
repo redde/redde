@@ -27,4 +27,10 @@ class Admin::ManagersController < Admin::BaseController
     @manager.destroy if current_manager.id != @manager.id
     redirect_to [:admin, :managers], alert: 'Администратор удален'
   end
+
+  private
+
+  def manager_params
+    params[:manager].permit!
+  end
 end
