@@ -8,16 +8,17 @@ class Admin::BaseController < ActionController::Base
 
   private
 
-  def redirect_or_edit(obj, saved)
+  def redirect_or_edit(obj, saved, notice = nil)
     if saved
-      redirect_to url_for_obj(obj), notice: notice_for(obj)
+      redirect_to url_for_obj(obj), notice: notice_for(obj, notice)
     else
       render 'edit'
     end
   end
 
-  def notice_for(obj)
-    "#{obj.class.model_name.human} сохранен."
+  def notice_for(obj, notice = nil)
+    notice ||= 'сохранен'
+    "#{obj.class.model_name.human} #{notice}."
   end
 
   def url_for_obj(obj)
