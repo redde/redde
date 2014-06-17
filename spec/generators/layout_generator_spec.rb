@@ -7,6 +7,7 @@ describe Redde::Generators::LayoutGenerator do
 
   before(:all) do
     prepare_destination
+    `mkdir tmp/config; touch tmp/config/routes.rb; echo "Rails.application.routes.draw do\nend" > tmp/config/routes.rb`
     run_generator
   end
 

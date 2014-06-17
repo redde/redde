@@ -1,11 +1,11 @@
 - case controller_name
   - when 'products' then @active = :shop
   - when 'articles' then @active = :materials
-  - when 'users' then @active = :system
+  - when 'users', 'managers' then @active = :system
 
 .launchbar
   %nav.launchbar__menu
     = link_to 'Материалы', nil, class: ['launchbar__link', ('_active' if @active == :shop)]
     = link_to 'Обратная связь', nil, class: ['launchbar__link', ('_active' if @active == :materials)]
-    = link_to 'Система', nil, class: ['launchbar__link', ('_active' if @active == :system)]
+    = link_to 'Система', [:admin, :managers], class: ['launchbar__link', ('_active' if @active == :system)]
     %span.launchbar__time= Russian.strftime(Time.now, '%d %b, %Y %H:%M ')

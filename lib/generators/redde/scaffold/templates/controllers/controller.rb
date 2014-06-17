@@ -23,20 +23,12 @@ class Admin::<%= model_name.demodulize.pluralize -%>Controller < Admin::BaseCont
 
   def create
     @<%= resource_name %> = <%= model_name.demodulize -%>.new(<%= resource_name %>_params)
-    if @<%= resource_name %>.save
-      redirect_to params[:commit] == 'Применить' ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], notice: "#{<%= model_name.demodulize -%>.model_name.human} добавлен."
-    else
-      render 'edit'
-    end
+    redirect_or_edit(@<%= resource_name %>, @<%= resource_name %>.save)
   end
 
   def update
     @<%= resource_name %> = <%= model_name.demodulize -%>.find(params[:id])
-    if @<%= resource_name %>.update_attributes(<%= resource_name %>_params)
-      redirect_to params[:commit] == 'Применить' ? [:edit, :admin, @<%= resource_name %>] : [:admin, :<%= plural_resource_name %>], notice: "#{<%= model_name.demodulize -%>.model_name.human} отредактирован."
-    else
-      render 'edit'
-    end
+    redirect_or_edit(@<%= resource_name %>, @<%= resource_name %>.update(<%= resource_name %>_params))
   end
 
   def destroy
@@ -48,6 +40,6 @@ class Admin::<%= model_name.demodulize.pluralize -%>Controller < Admin::BaseCont
   private
 
   def <%= resource_name %>_params
-    params.require(:<%= resource_name %>).permit(<%= column_names.select {|c| !(['id', 'updated_at', 'created_at'].include? c) }.map {|c| ":#{c}"}.join(', ') %>)
+    params.require(:<%= resource_name %>).permit(<%= column_names.select {|c| !(['id', 'updated_at', 'created_at'].include? c) }.map { |c| ":#{c}" }.join(', ') %>)
   end
 end
