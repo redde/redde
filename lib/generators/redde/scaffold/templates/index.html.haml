@@ -1,10 +1,10 @@
 - content_for(:page_header) do
   %h1= tplural <%= model_name.demodulize %>
   %p= link_to "Добавить #{taccusative('<%= resource_name %>')}", [:new, :admin, :<%= resource_name %>]
-  
+
 - unless @<%= plural_resource_name %>.empty?
   %table.list<%= ".sortable" if column_names.include?('position') %>
-    %colgroup 
+    %colgroup
       <%- columns.each do |column| -%>
       %col<%= '.w1' if ['position', 'visible'].include? column.name %>
       <%- end -%>
@@ -30,8 +30,8 @@
         %td= link_to <%= resource_name %>.<%= column.name %>, [:edit, :admin, <%= resource_name %>]
         <%- end -%>
         <%- end -%>
-        %td= link_to 'Удалить', [:admin, <%= resource_name %>], method: :delete, data: { confirm: 'Точно Удалить?'' }, class: :del
-        
+        %td= link_to 'Удалить', [:admin, <%= resource_name %>], method: :delete, data: { confirm: 'Точно Удалить?' }, class: :del
+
   <%- if column_names.include?('position') -%>
   = sortable sort_admin_<%= plural_resource_name %>_path
   <%- end -%>
