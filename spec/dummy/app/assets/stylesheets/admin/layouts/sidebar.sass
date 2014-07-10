@@ -1,0 +1,30 @@
+.sidebar
+  width: 215px
+  float: left
+  margin-top: 12px
+
+.sidebar__badge
+  font-size: 10px
+  color: #999
+  &:before
+    content: '('
+    color: #000
+  &:after
+    content: ')'
+    color: #000
+
+.sidebar__link 
+  display: block
+  overflow: hidden
+  padding: 6px 6px 6px 36px
+  margin-left: -6px
+  text-decoration: none
+  font-size: 13px
+  line-height: (16em/13)
+  color: #555
+  text-shadow: 0px 1px 1px #fff
+  &._active
+    font-weight: bold
+    color: #000
+    background-color: #e5e3de
+    border-radius: 4px 0 0 4px

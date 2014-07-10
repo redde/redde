@@ -1,0 +1,22 @@
+table.list {
+  margin-left:0; width:auto; border-collapse:collapse;
+  td {border:1px solid #ededed; border-width:1px 0;}
+  col.w1 { width:1%;}
+  a:hover {color:#737300;}
+  td, th {vertical-align:middle; width:auto; padding:0 5px 0 0;}
+  th {background:#ededed; letter-spacing:1px;}
+  .handle {border-color:#fff;}
+  td * {vertical-align:middle;}
+  td.show {
+    a {border-radius:10px; border:1px solid transparent; display:inline-block; width:20px; height:20px; background:image-url("admin/icon_eye.gif") no-repeat 1px 1px;}
+    a.not-show {opacity:0.4; filter:progid:DXImageTransform.Microsoft.Alpha(opacity=40);}
+  }
+  tr:hover {
+    td {background:#ffc;}
+  }
+  .green {color:green; font-weight:bold; text-shadow:0 0 10px green;}
+}
+
+table.sortable {
+  margin-left:-18px;
+}

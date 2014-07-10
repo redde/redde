@@ -1,0 +1,44 @@
+.placeholder
+  background-color: #CCFF99
+  outline: 1px dashed green
+
+.mjs-nestedSortable-error
+  background: #fbe3e4
+  outline: 1px dashed red
+
+ol
+  padding-left: 30px
+
+ol.sortable, ol.sortable ol
+  padding: 0
+  margin: 0
+  list-style-type: none
+
+ol.sortable ol
+  margin: 0 0 0 25px
+
+.sortable li div
+  background: image-url("admin/folder.png") no-repeat 0 2px
+  padding-left: 25px
+  cursor: move
+  position: relative
+  &:hover
+    background-color: #ffc
+  a
+    line-height: 20px
+  p
+    position: absolute
+    right: 0
+    margin: 0
+    line-height: 20px
+    z-index: 1
+    top: 0
+    a, img
+      display: inline-block
+      vertical-align: middle
+      line-height: 20px
+    a
+      text-decoration: none
+      color: #999
+    a.not-show
+      opacity: 0.4

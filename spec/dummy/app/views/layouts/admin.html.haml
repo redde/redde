@@ -1,0 +1,29 @@
+!!!
+%html{ lang: 'en' }
+  %head
+    %meta{ charset: 'UTF-8'}/
+    %title= @page_title || 'ReddeCMS'
+    = favicon_link_tag 'admin/favicon.png'
+    = stylesheet_link_tag 'admin'
+    = javascript_include_tag 'admin'
+    = yield :js
+    = csrf_meta_tag
+  %body
+    = render 'launchbar'
+    = render 'header'
+    .wrapper
+      = render 'sidebar'
+      .main
+        .page-header
+          = yield(:page_header)
+        - if notice
+          .notice= notice
+        - if alert
+          .alert= alert
+        .page{ class: "#{yield(:page_sidebar).empty? ? '_full' : '_sidebar'}" }
+          #filter
+            = yield(:filter)
+          .page-sidebar
+            = yield(:page_sidebar)
+          .content
+            = yield

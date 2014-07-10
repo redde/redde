@@ -12,7 +12,7 @@ describe Redde::Generators::LayoutGenerator do
   end
 
   after(:all) do
-    FileUtils.rm_rf 'tmp'
+    # FileUtils.rm_rf 'tmp'
   end
 
   describe 'layout' do
@@ -34,6 +34,9 @@ describe Redde::Generators::LayoutGenerator do
       assert_directory 'app/assets/images/admin'
       assert_directory 'app/assets/javascripts/admin'
       assert_directory 'app/assets/stylesheets/admin'
+
+      # check form_builders
+      assert_file 'app/form_builders/redde_form_builder.rb'
     end
   end
 end
