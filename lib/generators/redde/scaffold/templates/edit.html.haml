@@ -11,11 +11,11 @@
   %table
     <%- columns.each do |column| -%>
     <%- if column.field_type.to_s == 'text_area' -%>
-    = inline_text_area :<%= column.name %>
+    = f.inline_text_area :<%= column.name %>
     <%- elsif column.field_type.to_s == "check_box" -%>
-    = inline_check_box :<%= column.name %>
+    = f.inline_check_box :<%= column.name %>
     <%- elsif column.name != 'position' -%>
-    = inline_text_field :<%= column.name %>
+    = f.inline_text_field :<%= column.name %>
     <%- end -%>
     <%- end -%>
   %div= render 'redditor/admin/page', { f: f } if @<%= resource_name %>.methods.include?(:page)
