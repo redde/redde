@@ -6,27 +6,19 @@
       Редактировать #{taccusative(:<%= resource_name %>)}
   %p= link_to 'Назад', [:admin, :<%= plural_resource_name %>]
 
-= form_for [:admin, @<%= resource_name %>] do |f|
+= form_for [:admin, @<%= resource_name %>], builder: ReddeFormBuilder do |f|
   = render 'validate', { f: f }
   %table
     <%- columns.each do |column| -%>
     <%- if column.field_type.to_s == 'text_area' -%>
-    %tr
-      %td{colspan: 2}
-        = f.label :<%= column.name %>
-        %br
-        = f.<%= column.field_type -%> :<%= column.name %>
+    = f.inline_text_area :<%= column.name %>
     <%- elsif column.field_type.to_s == "check_box" -%>
-    %tr
-      %th{colspan: 2}
-        = f.<%= column.field_type -%> :<%= column.name %>
-        = f.label :<%= column.name %>
+    = f.inline_check_box :<%= column.name %>
     <%- elsif column.name != 'position' -%>
-    %tr
-      %th= f.label :<%= column.name %>
-      %td= f.<%= column.field_type -%> :<%= column.name %>
+    = f.inline_text_field :<%= column.name %>
     <%- end -%>
     <%- end -%>
-  .actions
-    = f.submit 'Сохранить'
-    = f.submit 'Применить'
+  %div= render 'redditor/admin/page', { f: f } if @<%= resource_name %>.methods.include?(:page)
+  = render 'admin/seos/block', { f: f } if @<%= resource_name %>.methods.include?(:seo)
+  = f.inline_submit
+

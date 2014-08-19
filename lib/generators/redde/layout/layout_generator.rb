@@ -42,6 +42,11 @@ module Redde
         route("devise_for :managers, controllers: { registrations: 'managers/registrations' }")
       end
 
+      def make_form_builders
+        directory 'form_builders', 'app/form_builders'
+      end
+
+
       private
 
       def ext

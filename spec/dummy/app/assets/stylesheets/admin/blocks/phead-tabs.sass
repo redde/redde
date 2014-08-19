@@ -1,0 +1,27 @@
+.phead-tabs
+  display: block
+  clear: both
+  font-size: 12px
+  padding-top: 15px
+  margin-bottom: -16px
+
+.phead-tabs__link
+  padding: 0.5em (5em/6)
+  display: inline-block
+  border: 1px solid transparent
+  border-radius: 3px 3px 0 0
+  margin-left: -1px
+  &:link
+    text-decoration: underline // по дефолту прописано a:hover, в дальнейшем убрать
+  &:first-child
+    margin-left: -(5em/6)
+  &:hover
+    background: #ddd
+    background-clip: padding-box
+  &._active
+    text-decoration: none
+    color: #000
+    font-weight: bold
+    background: #fff
+    border-color: #ddd
+    border-bottom-color: #fff
