@@ -49,7 +49,6 @@ module Redde
         directory 'form_builders', 'app/form_builders'
       end
 
-
       private
 
       def ext

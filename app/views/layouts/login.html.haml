@@ -1,0 +1,32 @@
+!!!
+%html.login{ 'xmlns' => 'http://www.w3.org/1999/xhtml', 'xml:lang' => 'en' }
+  %head
+    %meta{ 'http-equiv' => 'Content-Type', 'content' => 'text/html;charset=UTF-8' }
+    %title Вход на сайт | Административная панель
+    = stylesheet_link_tag 'admin'
+    = javascript_include_tag "admin"
+    = csrf_meta_tag
+  %body
+    %table.login__table
+      %tr
+        %td.login__cell
+          .main._login
+            .page-header
+              %h1 Административная панель
+            .page
+              .content
+                = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+                  .login__fields
+                    = f.label :email, 'E-mail'
+                    %br
+                    = f.text_field :email, class: 'login__inp'
+                  .login__fields
+                    = f.label :password, 'Пароль'
+                    %br
+                    = f.password_field :password, size: 35, class: 'login__inp'
+                  - if devise_mapping.rememberable?
+                    .login__fields
+                      = f.check_box :remember_me
+                      = f.label :remember_me, 'Оставаться в системе'
+                  .login__actions
+                    = f.submit 'Войти'

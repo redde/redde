@@ -12,7 +12,7 @@
     <%- columns.each do |column| -%>
     <%- if column.field_type.to_s == 'text_area' -%>
     = f.inline_text_area :<%= column.name %>
-    <%- elsif column.field_type.to_s == "check_box" -%>
+    <%- elsif column.field_type.to_s == 'check_box' -%>
     = f.inline_check_box :<%= column.name %>
     <%- elsif column.name != 'position' -%>
     = f.inline_text_field :<%= column.name %>

@@ -1,6 +1,9 @@
 # coding: utf-8
 
-require File.expand_path('../lib/redde/version', __FILE__)
+$:.push File.expand_path("../lib", __FILE__)
+
+# Maintain your gem's version:
+require "redde/version"
 
 Gem::Specification.new do |gem|
   gem.authors       = ['Oleg Bovykin', 'Konstantin Gorozhankin']
@@ -19,6 +22,9 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'jquery-rails'
   gem.add_runtime_dependency 'jquery-ui-rails'
+  gem.add_dependency 'russian', '>= 0.6.0'
+  gem.add_dependency 'haml'
+  gem.add_dependency 'compass-rails'
 
   gem.add_development_dependency 'rails', '>= 3.1'
   gem.add_development_dependency 'rspec-rails', '>= 2.7'

@@ -1,3 +1,4 @@
+require "redde/engine"
 require 'redde/version'
 require 'redde/concerns/sluggable'
 require 'redde/concerns/with_photo'
