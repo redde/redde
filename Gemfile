@@ -17,5 +17,6 @@ gem "sprockets-rails"
 gem "autoprefixer-rails"
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'quiet_assets'
 # To use debugger
 # gem 'debugger'

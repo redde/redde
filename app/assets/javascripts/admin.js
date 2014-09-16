@@ -7,15 +7,15 @@
 //= require redactor/langs/ru
 //= require redactor/toolbars/default
 
-//= require jquery.ui.sortable
+//= require jquery-ui/sortable
 //=# require admin/jquery.mjs.nestedSortable.js
 
 var lightBox;
 
 $(function(){
-  
+
   lightBox = $("ul.photos:not(.no-lb) a:not(.del)").lightBox();
-  
+
   $('textarea:not(.nowred)').redactor();
- 
+
 });
