@@ -32,4 +32,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'guard-rspec'
   gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'generator_spec'
+  gem.add_development_dependency 'devise'
 end

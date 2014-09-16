@@ -1,0 +1,16 @@
+- content_for :page_header do
+  %h1
+    - if @article.new_record?
+      Добавить #{taccusative(:article)}
+    - else
+      Редактировать #{taccusative(:article)}
+  %p= link_to 'Назад', [:admin, :articles]
+
+= form_for [:admin, @article], builder: ReddeFormBuilder do |f|
+  = render 'validate', { f: f }
+  %table
+    = f.inline_text_field :title
+  %div= render 'redditor/admin/page', { f: f } if @article.methods.include?(:page)
+  = render 'admin/seos/block', { f: f } if @article.methods.include?(:seo)
+  = f.inline_submit
+

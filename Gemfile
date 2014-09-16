@@ -12,5 +12,10 @@ gemspec
 gem 'russian', '>= 0.6.0'
 gem 'haml'
 gem 'compass-rails'
+gem 'sass-rails'
+gem "sprockets-rails"
+gem "autoprefixer-rails"
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # To use debugger
 # gem 'debugger'
