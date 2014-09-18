@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :managers, controllers: { registrations: 'managers/registrations' }
+  devise_for :managers, controllers: { registrations: 'managers/registrations' } if defined?(Devise)
   mount Redde::Engine, at: '/redde'
   root to: "articles#index"
 
