@@ -22,9 +22,9 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'jquery-rails'
   gem.add_runtime_dependency 'jquery-ui-rails'
-  gem.add_dependency 'russian', '>= 0.6.0'
-  gem.add_dependency 'haml'
-  gem.add_dependency 'compass-rails'
+  gem.add_runtime_dependency 'russian', '>= 0.6.0'
+  gem.add_runtime_dependency 'haml'
+  gem.add_runtime_dependency 'compass-rails'
 
   gem.add_development_dependency 'rails', '>= 3.1'
   gem.add_development_dependency 'rspec-rails', '>= 2.7'
@@ -33,4 +33,9 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'generator_spec'
   gem.add_development_dependency 'devise'
+  gem.add_development_dependency 'sass-rails'
+  gem.add_development_dependency 'coffee-rails'
+  gem.add_development_dependency 'sprockets-rails'
+  gem.add_development_dependency 'autoprefixer-rails'
+  gem.add_development_dependency 'quiet_assets'
 end
