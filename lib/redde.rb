@@ -10,6 +10,7 @@ require 'jquery-rails'
 require 'jquery-ui-rails'
 require 'coffee-rails'
 require 'devise'
+require 'rails'
 
 module Redde
   require 'generators/redde/layout/layout_generator'
