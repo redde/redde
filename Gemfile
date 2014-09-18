@@ -13,6 +13,7 @@ gem 'russian', '>= 0.6.0'
 gem 'haml'
 gem 'compass-rails'
 gem 'sass-rails'
+gem 'coffee-rails'
 gem "sprockets-rails"
 gem "autoprefixer-rails"
 gem 'jquery-rails'

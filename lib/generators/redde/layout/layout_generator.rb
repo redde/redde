@@ -16,9 +16,6 @@ module Redde
       end
 
       def make_js
-        %w(admin.js).each do |js|
-          template "assets/javascripts/#{js}", "app/assets/javascripts/#{js}"
-        end
         directory 'assets/javascripts/admin', 'app/assets/javascripts/admin'
       end
 

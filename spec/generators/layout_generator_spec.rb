@@ -27,7 +27,7 @@ describe Redde::Generators::LayoutGenerator do
       assert_file 'app/views/admin/base/_header.html.haml'
 
       # check js and css
-      assert_file 'app/assets/javascripts/admin.js'
+      assert_file 'app/assets/javascripts/admin/index.js'
       assert_file 'app/assets/stylesheets/admin/index.scss'
 
       # check images
