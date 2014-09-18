@@ -8,6 +8,7 @@ require 'haml'
 require 'jquery-rails'
 require 'jquery-ui-rails'
 require 'coffee-rails'
+require 'devise'
 
 module Redde
   require 'generators/redde/layout/layout_generator'
