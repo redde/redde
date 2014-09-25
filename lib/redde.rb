@@ -1,3 +1,9 @@
+Gem.loaded_specs['redde'].dependencies.select do |i|
+  i.type == :runtime
+end.each do |d|
+ require d.name
+end
+
 require "redde/engine"
 require 'redde/version'
 require 'redde/concerns/sluggable'
