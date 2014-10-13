@@ -1,37 +1,22 @@
 # coding: utf-8
 module Redde::AdminHelper
-  def act_menu(cond)
-    cond ? 'active' : nil
-  end
 
-  def sortable(url)
-    html = %Q{
-      <script type="text/javascript">
-        $(document).ready(function() {
-          $("table.sortable").each(function(){
-            var self = $(this);
-            self.sortable({
-              dropOnEmpty: false,
-              cursor: 'crosshair',
-              opacity: 0.75,
-              handle: '.handle',
-              axis: 'y',
-              items: 'tr',
-              scroll: true,
-              update: function() {
-                $.ajax({
-                  type: 'post',
-                  data: self.sortable('serialize') + '&authenticity_token=#{u(form_authenticity_token)}',
-                  dataType: 'script',
-                  url: '#{url}'
-                })
-              }
-            });
-          });
-        });
-      </script>
-    }.gsub(/[\n ]+/, ' ').strip.html_safe
-    content_for(:js, html)
+  def redde_form_for(object, options = {}, &block)
+    if options.key?(:html)
+      if options[:html].key?(:class)
+        if options[:html][:class].is_a? String
+          options[:html][:class] += ' redde-form'
+        elsif options[:html][:class].is_a? Array
+          options[:html][:class] << 'redde-form'
+        end
+      else
+        options[:html][:class] = 'redde-form'
+      end
+    else
+      options[:html] = { class: 'redde-form' }
+    end
+    options[:builder] = ReddeFormBuilder
+    form_for(object, options, &block)
   end
 
   def show_tree(c)
