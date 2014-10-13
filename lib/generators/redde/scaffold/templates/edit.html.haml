@@ -7,18 +7,14 @@
   %p= link_to 'Назад', [:admin, :<%= plural_resource_name %>]
 
 = form_for [:admin, @<%= resource_name %>], builder: ReddeFormBuilder do |f|
-  = render 'validate', { f: f }
+  = f.error_messages
   %table
     <%- columns.each do |column| -%>
-    <%- if column.field_type.to_s == 'text_area' -%>
-    = f.inline_text_area :<%= column.name %>
-    <%- elsif column.field_type.to_s == 'check_box' -%>
-    = f.inline_check_box :<%= column.name %>
-    <%- elsif column.name != 'position' -%>
-    = f.inline_text_field :<%= column.name %>
+    <%- if column.name != 'position' -%>
+    = f.redde_field :<%= column.name %>
     <%- end -%>
     <%- end -%>
   %div= render 'redditor/admin/page', { f: f } if @<%= resource_name %>.methods.include?(:page)
   = render 'admin/seos/block', { f: f } if @<%= resource_name %>.methods.include?(:seo)
-  = f.inline_submit
+  = f.redde_submit
 
