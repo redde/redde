@@ -23,6 +23,6 @@
     = form_for [:admin, parent.photos.build], html: {id: 'fileapi', class: 'fileapi'} do |f|
       = f.hidden_field :imageable_type
       = f.hidden_field :imageable_id
-      %span.sbm.fileapi__btn
-        Загрузить фотографии
+      %span.sbm.fileapi__btn.icon-upload
+        Загрузить
         = f.file_field :src, class: 'fileapi__inp'
