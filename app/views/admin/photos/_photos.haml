@@ -8,13 +8,21 @@
     %ul.photos{ "data-sortable" => { items: :li, handle: nil, axis: nil, url: url_for([:sort, :admin, parent, :photos])}.to_json }
       = render parent.photos
 
-    #preview
-    #drag-n-drop{:style => "display: none; margin-top: 5px;"}
-      #drop-zone.b-dropzone{style: 'height: 100px;', data: {"upload-url" => url_for([:admin, parent, :photos])}}
-        .b-dropzone__bg
-        .b-dropzone__txt Перетащите файлы сюда
-    
-    #buttons-panel{style: 'margin-bottom: 10px;'}
-      .b-button.js-fileapi-wrapper
-        .b-button__text Загрузить файлы
-        %input.b-button__input.js-fileapi{:name => "files", :type => "file",  :multiple => true, data: {"upload-url" => url_for([:admin, parent, :photos])}}
+    -#
+      #preview
+      #drag-n-drop{:style => "display: none; margin-top: 5px;"}
+        #drop-zone.b-dropzone{style: 'height: 100px;', data: {"upload-url" => url_for([:admin, parent, :photos])}}
+          .b-dropzone__bg
+          .b-dropzone__txt Перетащите файлы сюда
+      
+      #buttons-panel{style: 'margin-bottom: 10px;'}
+        .b-button.js-fileapi-wrapper
+          .b-button__text Загрузить файлы
+          %input.b-button__input.js-fileapi{:name => "files", :type => "file",  :multiple => true, data: {"upload-url" => url_for([:admin, parent, :photos])}}
+
+    = form_for [:admin, parent, parent.photos.build], html: {id: 'fileapi', class: 'fileapi'} do |f|
+      = f.hidden_field :imageable_type
+      = f.hidden_field :imageable_id
+      %span.sbm.fileapi__btn
+        Загрузить фотографии
+        = f.file_field :src, class: 'fileapi__inp'
