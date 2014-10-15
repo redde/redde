@@ -3,7 +3,7 @@
     = image_tag photo.src.admin, class: 'photos__img'
     %span.photos__title= photo.src.file.filename
   = link_to("", 
-    url_for([:admin, photo.imageable, photo]),
+    url_for([:admin, photo]),
     method: :delete,
     confirm: "Точно удалить?",
     remote: true,
