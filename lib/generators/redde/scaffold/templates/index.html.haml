@@ -3,7 +3,7 @@
   %p= link_to "Добавить #{taccusative('<%= resource_name %>')}", [:new, :admin, :<%= resource_name %>]
 
 - unless @<%= plural_resource_name %>.empty?
-  %table.list<%= ".sortable.js-sortable{ 'data-sortable' => sort_admin_#{plural_resource_name}_path }" if column_names.include?('position') %>
+  %table.list<%= ".sortable{ 'data-sortable' => true }" if column_names.include?('position') %>
     %colgroup
       <%- columns.each do |column| -%>
       %col<%= '.w1' if ['position', 'visible'].include? column.name %>

@@ -1,4 +1,5 @@
-input[type=submit]
+.sbm
+  font-size: 18px
   cursor: pointer
   padding: 3px 17px
   font-family: Helvetica, Arial, sans-serif
@@ -11,18 +12,18 @@ input[type=submit]
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85)
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 1px 1px 0 #fff inset, -1px -1px 0 #fff inset
 
-  &[value=Сохранить],
-  &[value=Применить]
+  &._save,
+  &._apply
     padding-left: 37px
-  &[value=Сохранить]
+  &._save
     background: image-url("admin/arrow_enter.png") 4px -102px no-repeat, linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 51%, #cfcfcf 100%) 0 0
     &:hover
       background: image-url("admin/arrow_enter.png") 4px -1px no-repeat, linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 50%, #bee6fd 51%, #a7d9f5 100%) 0 0
-  &[value=Применить]
+  &._apply
     background: image-url("admin/arrow_down.png") 4px -102px no-repeat, linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 51%, #cfcfcf 100%) 0 0
     &:hover
       background: image-url("admin/arrow_down.png") 4px -1px no-repeat, linear-gradient(to bottom, #eaf6fd 0%, #d9f0fc 50%, #bee6fd 51%, #a7d9f5 100%) 0 0
-  &[value=Далее]
+  &._more
     padding-right: 37px
     background: image-url("admin/arrow_right.png") right -100px no-repeat, linear-gradient(to bottom, #f2f2f2 0%, #ebebeb 50%, #dddddd 51%, #cfcfcf 100%) 0 0
     &:hover

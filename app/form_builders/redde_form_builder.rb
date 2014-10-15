@@ -45,7 +45,7 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def redde_submit
-    content_tag :div, submit('Сохранить') + " " + submit('Применить'), class: 'actions'
+    content_tag :div, button('Сохранить', class: 'sbm _save', value: 'Сохранить', name: :commit) + " " + button('Применить', class: 'sbm _apply', value: 'Применить', name: :commit), class: 'actions'
   end
 
   def error_messages

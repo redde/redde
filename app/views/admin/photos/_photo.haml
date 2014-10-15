@@ -1,0 +1,11 @@
+%li.photos__item{ :id => "photo_#{photo.id}" }
+  = link_to photo.src_url, class: 'photos__link' do
+    = image_tag photo.src.admin, class: 'photos__img'
+    %span.photos__title= photo.src.file.filename
+  = link_to("", 
+    url_for([:admin, photo.imageable, photo]),
+    method: :delete,
+    confirm: "Точно удалить?",
+    remote: true,
+    title: "Удалить",
+    class: "del photos__del")

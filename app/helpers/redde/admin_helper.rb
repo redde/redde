@@ -1,6 +1,10 @@
 # coding: utf-8
 module Redde::AdminHelper
 
+  def photoable parent
+    render('admin/photos/photos', parent: parent)
+  end
+
   def redde_form_for(object, options = {}, &block)
     if options.key?(:html)
       if options[:html].key?(:class)

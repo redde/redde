@@ -6,8 +6,7 @@
 
 //= require jquery-ui/sortable
 
-//= require_tree .
-//= stub ./jquery.mjs.nestedSortable.js
+//= require_tree ./
 
 var lightBox;
 
