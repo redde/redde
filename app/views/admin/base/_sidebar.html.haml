@@ -1,14 +1,14 @@
 %nav.sidebar
   - case @active
   - when :shop
-    = link_to 'Товары', [:admin, :products], class: 'sidebar__link'
+    = sidebar_link'Товары', [:admin, :products]
   - when :materials
-    = link_to 'Статьи', [:admin, :articles], class: 'sidebar__link'
+    = sidebar_link 'Статьи', [:admin, :articles]
   - when :system
-    = link_to 'Администраторы', [:admin, :managers], class: 'sidebar__link'
-    = link_to 'Пользователи', [:admin, :users], class: 'sidebar__link'
+    = sidebar_link 'Администраторы', [:admin, :managers]
+    = sidebar_link 'Пользователи', [:admin, :users]
   - else
-    = link_to 'Демо active', nil, class: ['sidebar__link', '_active']
+    = sidebar_link 'Демо active', nil
     = link_to nil, class: ['sidebar__link'] do
       Демо
       %span.sidebar__badge 2

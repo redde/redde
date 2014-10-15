@@ -1,5 +1,13 @@
 # coding: utf-8
 module Redde::AdminHelper
+  def sidebar_link(title, path, additional_names = [])
+    additional_names = [additional_names] unless additional_names.is_a?(Array)
+    active_names = additional_names + [path.last]
+    active_names.map!(&:to_s)
+    classes = ['sidebar__link']
+    classes << 'active' if active_names.include?(controller_name)
+    link_to title, path, class: classes
+  end
 
   def photoable parent
     render('admin/photos/photos', parent: parent)
