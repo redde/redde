@@ -1,3 +1,5 @@
+#= require jquery-ui/sortable
+
 ###
 variants:
   data-sortable
@@ -13,15 +15,13 @@ $ ->
     opts = self.data('sortable')
 
     if $.isPlainObject( opts ) && opts.url
-      # console.log('$.isPlainObject( opts )')
       url = opts.url
       delete opts.url
-    else if typeof opts is 'string'
-      # console.log( "if typeof opts is 'string'" )
+    else if (typeof opts is 'string') && opts isnt ""
       url = opts
       opts = {}
 
-    unless url?
+    unless url? || url is ""
       url = location.pathname + "/sort"
 
     defs =

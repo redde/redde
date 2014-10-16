@@ -5,7 +5,7 @@ module Redde::AdminHelper
     active_names = additional_names + [path.last]
     active_names.map!(&:to_s)
     classes = ['sidebar__link']
-    classes << 'active' if active_names.include?(controller_name)
+    classes << '_active' if active_names.include?(controller_name)
     link_to title, path, class: classes
   end
 

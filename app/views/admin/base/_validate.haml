@@ -1,5 +1,5 @@
 - if f.object.errors.any?
-  .error-msg
+  .error-msg{ class: attrs[:class] ||= nil}
     .error-msg__badge Ошибок: #{f.object.errors.count}
     %ul.error-msg__list
       - f.object.errors.each do |attribute, msg|

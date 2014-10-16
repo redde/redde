@@ -44,13 +44,21 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  def redde_submit
-    content_tag :div, button('Сохранить', class: 'sbm _save', value: 'Сохранить', name: :commit) + " " + button('Применить', class: 'sbm _apply', value: 'Применить', name: :commit), class: 'actions'
+  def redde_submit(text)
+    additional_class = case text
+    when 'Сохранить' then ' _save'
+    when 'Применить' then ' _apply'
+    else '' end
+    button(text, class: ['sbm', additional_class], value: text, name: :commit)
   end
 
-  def error_messages
+  def redde_submits
+    content_tag :div, redde_submit('Сохранить') + " " + redde_submit('Применить'), class: 'actions'
+  end
+
+  def error_messages attrs = {}
     if object.errors.full_messages.any?
-      render 'validate', { f: self }
+      render 'validate', { f: self, attrs: attrs }
     end
   end
 

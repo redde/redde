@@ -3,6 +3,8 @@
 
 $ ->
   $box = $('#fileapi')
+  return unless $box.length
+  
   $box.fileapi
     url: $box.attr('action')
     multiple: true
