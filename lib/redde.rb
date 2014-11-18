@@ -6,10 +6,10 @@ end
 
 require "redde/engine"
 require 'redde/version'
-require 'redde/concerns/sluggable'
-require 'redde/concerns/with_photo'
-require 'redde/concerns/photoable'
-require 'redde/concerns/layout'
+# require 'sluggable'
+# require 'with_photo'
+# require 'photoable'
+# require 'layout'
 require 'russian'
 require 'haml'
 require 'jquery-rails'

@@ -1,5 +1,3 @@
-require 'redde/url_generator'
-
 module Redde::Sluggable
   extend ActiveSupport::Concern
 
