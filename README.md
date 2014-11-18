@@ -37,7 +37,7 @@ To generate admin layout type:
 To set admin login layout you need to include `Redde::Layout` concern:
 
     class ApplicationController < ActionController::Base
-      include Redde::Layout
+      include Redde::Layouts
       # Prevent CSRF attacks by raising an exception.
       # For APIs, you may want to use :null_session instead.
       protect_from_forgery with: :exception

@@ -1,4 +1,4 @@
-module Redde::Layout
+module Redde::Layouts
   extend ActiveSupport::Concern
 
   included do
