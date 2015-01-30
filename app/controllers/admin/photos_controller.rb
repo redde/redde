@@ -4,7 +4,7 @@ class Admin::PhotosController < ActionController::Base
       p = Photo.find(id)
       p.update(position: idx)
     end
-    render :nothing => true
+    render nothing: true
   end
 
   def create

@@ -3,9 +3,9 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
 
   def redde_field(name, *args)
     label(name)
-    case object.class.columns.find { |column| column.name == name.to_s }.type
-      when :text then redde_text_area(name, *args)
-      when :boolean then redde_check_box(name, *args)
+    case object.class.columns.detect { |column| column.name == name.to_s }.type
+    when :text then redde_text_area(name, *args)
+    when :boolean then redde_check_box(name, *args)
     else
       redde_text_field(name, *args)
     end
@@ -56,21 +56,20 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
     content_tag :div, redde_submit('Сохранить') + " " + redde_submit('Применить'), class: 'actions'
   end
 
-  def error_messages attrs = {}
+  def error_messages(attrs = {})
     if object.errors.full_messages.any?
       render 'validate', { f: self, attrs: attrs }
     end
   end
 
-private
+  private
 
-  def smart_label name
-    required = object.class.validators_on(name).any? { |v| v.kind_of? ActiveModel::Validations::PresenceValidator }
+  def smart_label(name)
+    required = object.class.validators_on(name).any? { |v| v.is_a? ActiveModel::Validations::PresenceValidator }
     label(name, nil, class: ["redde-form__label",  ("_required" if required)])
   end
 
-  def objectify_options options
+  def objectify_options(options)
     super.except(:wrapper_class)
   end
-
 end
