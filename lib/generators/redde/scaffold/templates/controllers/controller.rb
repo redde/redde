@@ -1,6 +1,6 @@
 class Admin::<%= model_name.demodulize.pluralize -%>Controller < Admin::BaseController
   def index
-    @<%= plural_resource_name %> = <%= model_name.demodulize -%>.all
+    @<%= plural_resource_name %> = <%= model_name.demodulize -%>.<%= column_names.include?('position') ? 'order(:position)' : 'all' %>
   end
   <%- if column_names.include?('position') -%>
   def sort
@@ -11,7 +11,6 @@ class Admin::<%= model_name.demodulize.pluralize -%>Controller < Admin::BaseCont
     render nothing: true
   end
   <%- end -%>
-
   def new
     @<%= resource_name %> = <%= model_name.demodulize -%>.new
     render 'edit'

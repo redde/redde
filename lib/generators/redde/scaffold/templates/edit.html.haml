@@ -16,5 +16,4 @@
     <%- end -%>
   %div= render 'redditor/admin/page', { f: f } if @<%= resource_name %>.methods.include?(:page)
   = render 'admin/seos/block', { f: f } if @<%= resource_name %>.methods.include?(:seo)
-  = f.redde_submit
-
+  = f.redde_submits
