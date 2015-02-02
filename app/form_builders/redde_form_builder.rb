@@ -6,6 +6,7 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
     case object.class.columns.detect { |column| column.name == name.to_s }.type
     when :text then redde_text_area(name, *args)
     when :boolean then redde_check_box(name, *args)
+    when :time then redde_date_time(name, *args)
     else
       redde_text_field(name, *args)
     end
