@@ -19,6 +19,13 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def redde_date_time(name, *args)
+    options = args.extract_options!
+    content_tag :tr, class: options[:wrapper_class] do
+      content_tag(:th, smart_label(name)) + content_tag(:td, datetime_select(name, options))
+    end
+  end
+
   def redde_check_box(name, *args)
     options = args.extract_options!
     content_tag :tr, class: options[:wrapper_class] do
