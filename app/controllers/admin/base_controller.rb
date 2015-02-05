@@ -9,11 +9,8 @@ class Admin::BaseController < ActionController::Base
   private
 
   def redirect_or_edit(obj, saved, notice = nil)
-    if saved
-      redirect_to url_for_obj(obj), notice: notice_for(obj, notice)
-    else
-      render 'edit'
-    end
+    return redirect_to url_for_obj(obj), notice: notice_for(obj, notice) if saved
+    render 'edit'
   end
 
   def notice_for(obj, notice = nil)

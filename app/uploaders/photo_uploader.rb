@@ -3,8 +3,11 @@
 class PhotoUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-  include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  if defined?(MiniMagick)
+    include CarrierWave::MiniMagick
+  elsif defined?(RMagick)
+    include CarrierWave::RMagick
+  end
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -48,7 +51,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # end
 
   version :admin do
-    process :resize_and_pad => [119, 119, :transparent, ::Magick::CenterGravity]    
+    process :resize_and_pad => [119, 119, :transparent, ::Magick::CenterGravity]
   end
 
   # Override the filename of the uploaded files:
