@@ -5,7 +5,7 @@ class Admin::SystemCommandsController < Admin::BaseController
   def create
     return redirect_to [:admin, :system_commands], alert: 'Необходимо указать команду' unless params[:name].present?
     return redirect_to [:admin, :system_commands], notice: 'Недопустимый тип команды' unless allowed_command?
-    SystemCommand.execute(params[:name])
+    Redde::SystemCommand.execute(params[:name])
     redirect_to [:admin, :system_commands], notice: 'Команда отправлена'
   end
 
