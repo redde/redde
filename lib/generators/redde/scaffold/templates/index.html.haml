@@ -23,7 +23,7 @@
       <%- end -%>
         <%- columns.each do |column| -%>
         <%- if column.name == 'position' -%>
-        %td.handle= image_tag asset_path('admin/move_handler.png')
+        %td.handle= image_tag 'admin/move_handler.png'
         <%- elsif column.name == 'visible' -%>
         %td.show= link_to '', admin_<%= singular_controller_routing_path %>_path(<%= resource_name %>, <%= resource_name %>: { visible: !<%= resource_name %>.visible} ), class: <%= resource_name %>.visible ? nil : 'not-show', data: { method: 'put' }
         <%- else -%>
