@@ -28,6 +28,11 @@ Add this line to assets precompilation in `config/production.rb`:
 
 ## Usage
 
+routes
+
+resources :managers
+resources :system_commands, only: [:index, :create]
+
 ### Layout
 
 To generate admin layout type:
@@ -57,7 +62,7 @@ with method `layout_by_resource`:
       end
     end
 
-Feel free to change this methos as you need.
+Feel free to change this method as you need.
 
 ### Scaffold
 

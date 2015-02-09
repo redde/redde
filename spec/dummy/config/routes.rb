@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     root to: 'articles#index'
     resources :articles
     resources :managers
+    resources :system_commands, only: [:index, :create]
   end
 end

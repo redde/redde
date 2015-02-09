@@ -1,8 +1,14 @@
 # coding: utf-8
 module Redde::AdminHelper
-  def sidebar_link(title, path, additional_names = [])
+  def command_link(name, action, confirm = nil)
+    options = { method: :post }
+    options.merge!(data: { confirm: confirm }) if confirm.present?
+    link_to name, admin_system_commands_path(name: action), options
+  end
+
+  def sidebar_link(title, path = [], additional_names = [])
     additional_names = [additional_names] unless additional_names.is_a?(Array)
-    active_names = additional_names + [path.last]
+    active_names = additional_names + [path.last || ""]
     active_names.map!(&:to_s)
     classes = ['sidebar__link']
     classes << '_active' if active_names.include?(controller_name)

@@ -6,9 +6,8 @@
     = sidebar_link 'Статьи', [:admin, :articles]
   - when :system
     = sidebar_link 'Администраторы', [:admin, :managers]
-    = sidebar_link 'Пользователи', [:admin, :users]
   - else
-    = sidebar_link 'Демо active', nil
+    = sidebar_link 'Демо active', [:admin, :articles]
     = link_to nil, class: ['sidebar__link'] do
       Демо
       %span.sidebar__badge 2

@@ -6,7 +6,7 @@
     = sidebar_link 'Статьи', [:admin, :articles]
   - when :system
     = sidebar_link 'Администраторы', [:admin, :managers]
-    = sidebar_link 'Пользователи', [:admin, :users]
+    = sidebar_link 'Системные команды', [:admin, :system_commands]
   - else
     = sidebar_link 'Демо active', nil
     = link_to nil, class: ['sidebar__link'] do
