@@ -1,19 +1,16 @@
 .header 
-  padding: 0 30px
   color: #fff
-  line-height: 23px
-  text-decoration: none
-  margin-bottom: 20px
   box-shadow: #666 0 0 3px
-  background-color: #005782
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1A719C', endColorstr='#005782')
-  background: linear-gradient(to bottom, #1A719C 0%, #005782 100%)
+  background-color: #176d99
+  background-image: linear-gradient(to top, #156d97, #19719b)
+  margin-bottom: 20px
 
 .header__init
   box-sizing: border-box
-  max-width: 1200px
-  min-width: 580px 
-  padding: 6px 0 6px (185px + 31px)
+  max-width: 1260px
+  min-width: 580px
+  padding-left: (185px + 31px)
+  padding-right: 31px
   margin: 0 auto
   overflow: hidden
   position: relative
@@ -30,21 +27,34 @@
   background: image-url('admin/logo.png') no-repeat 0 0 
   text-indent: -9999px
   display: block
-    
-.header__center
-  overflow: hidden
-  float: left
-  font-size: (14em/12)
-  a
-    color: #fff
-  
+
+.header__logo-text
+  display: none
+      
 .header__links
   float: right
-  margin-right: 1px
-  a 
-    margin-left: (8em/12)
-    color: #fff
-    font-size: (10em/12)
-    text-decoration: none
-    line-height: 46px
-    
+  margin: 18px 20px 18px 0
+
+.header__link
+  margin-left: 2.25em
+  color: #fff
+  text-decoration: none
+
+  &:first-child
+    margin-left: 0
+
+  &._user:before
+    content: "\A0"
+    display: inline-block
+    width: 1em
+    height: 1em
+    margin-right: 10px
+    background: image-url('redde-admin/user.svg') no-repeat center bottom
+
+  &._exit
+    color: #bfd8e3
+
+  &._name
+    text-decoration: underline
+    &:hover
+      text-decoration: none

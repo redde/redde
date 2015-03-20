@@ -2,11 +2,11 @@
   .header__init
     = link_to admin_root_path || '/admin', class: 'header__logo' do
       ReddeCMS
-      %br
-      %span custom system
+      %span.header__logo-text custom system
+    = render 'main_menu'
+    = render 'main_menu'
     .header__links
+      = link_to Rails.application.class.parent_name, root_path || '/', target: :_blank, class: 'header__link _name'
       - if current_manager
-        = mail_to current_manager.email
-        = link_to 'Выход', destroy_manager_session_path, method: :delete
-    .header__center
-      = link_to Rails.application.class.parent_name, root_path || '/', target: :_blank
+        = mail_to current_manager.email, current_manager.email, class: 'header__link _user'
+        = link_to 'Выход', destroy_manager_session_path, method: :delete, class: 'header__link _exit'

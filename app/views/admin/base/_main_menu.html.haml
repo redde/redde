@@ -1,0 +1,12 @@
+- case controller_name
+  - when 'products' then @active = :shop
+  - when 'articles' then @active = :materials
+  - when 'users', 'managers' then @active = :system
+
+.main-menu
+  = link_to 'Материалы', nil, class: ['main-menu__link b_folder', ('_active' if @active == :shop)]
+  = link_to 'Обратная связь', nil, class: ['main-menu__link b_home', ('_active' if @active == :materials)]
+  = link_to 'Система', [:admin, :managers], class: ['main-menu__link b_cog', ('_active' if @active == :system)]
+  -# and b_list icon
+  -#
+    %span.main-menu__time= Russian.strftime(Time.now, '%d %b, %Y %H:%M ')
