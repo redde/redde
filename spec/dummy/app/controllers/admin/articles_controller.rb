@@ -3,7 +3,6 @@ class Admin::ArticlesController < Admin::BaseController
     @articles = Article.all
   end
 
-
   def new
     @article = Article.new
     render 'edit'

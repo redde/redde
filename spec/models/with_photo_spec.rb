@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Redde::WithPhoto do
   let(:photo1) { Photo.create(src: '/uploads/1.txt', token: rand(1000)) }

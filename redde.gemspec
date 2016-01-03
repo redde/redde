@@ -24,7 +24,8 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'jquery-ui-rails'
   gem.add_runtime_dependency 'russian', '>= 0.6.0'
   gem.add_runtime_dependency 'haml'
-  gem.add_runtime_dependency 'compass-rails'
+  gem.add_runtime_dependency 'compass-rails', '>= 2.0.5'
+  gem.add_runtime_dependency 'autoprefixer-rails'
   gem.add_dependency 'rails', '>= 3.1'
 
   gem.add_development_dependency 'rspec-rails', '>= 2.7'
@@ -36,6 +37,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'sass-rails'
   gem.add_development_dependency 'coffee-rails'
   gem.add_development_dependency 'sprockets-rails'
-  gem.add_development_dependency 'autoprefixer-rails'
   gem.add_development_dependency 'quiet_assets'
+  gem.add_development_dependency 'capybara'
 end
