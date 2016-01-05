@@ -33,10 +33,12 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'haml'
   spec.add_runtime_dependency 'compass-rails', '>= 2.0.5'
   spec.add_runtime_dependency 'autoprefixer-rails'
+  spec.add_runtime_dependency 'carrierwave'
+  spec.add_runtime_dependency 'mini_magick'
   spec.add_dependency 'rails', '>= 3.1'
 
   spec.add_development_dependency "bundler", "~> 1.11"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake", "~> 10"
   spec.add_development_dependency 'rspec-rails', '>= 2.7'
   spec.add_development_dependency 'factory_girl_rails', '>= 2.7'
   spec.add_development_dependency 'guard-rspec'
@@ -48,4 +50,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'sprockets-rails'
   spec.add_development_dependency 'quiet_assets'
   spec.add_development_dependency 'capybara'
+  spec.add_development_dependency 'ffaker'
 end

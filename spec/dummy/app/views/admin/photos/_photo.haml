@@ -1,0 +1,5 @@
+%li{ class: 'handle', id: "photo_#{photo.id}" }
+  = link_to photo.src.url do
+    = image_tag photo.src.admin
+    %em= photo.src.to_s.gsub(/.*\/(.*)\z/, '\1')
+  = link_to 'удалить', [:admin, photo.imageable, photo], method: :delete, data: { confirm: 'Точно удалить?'}, remote: true, title: 'Удалить', class: 'del'

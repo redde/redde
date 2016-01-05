@@ -20,17 +20,4 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  activerecord:
-    models:
-      article:
-        one: Article
-        acc: Article
-        other: Articles
-      article_category:
-        one: Article category
-        acc: Article category
-        other: Article categories
-    attributes:
-      article:
-        name: Название
-        descr: Описание
+  hello: "Hello world"

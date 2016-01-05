@@ -42,10 +42,6 @@ describe Redde::Generators::ScaffoldGenerator do
     it 'gets plural_resource_name' do
       expect(generator.send(:plural_resource_name)).to eq 'article_categories'
     end
-
-    it 'gets index header' do
-      expect(generator.send(:index_header)).to eq 'Article categories'
-    end
   end # end context 'METHODS'
 
   context 'INTEGRATION' do

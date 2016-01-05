@@ -31,7 +31,7 @@ class DeviseCreateManagers < ActiveRecord::Migration
       # t.datetime :locked_at
 
 
-      t.timestamps
+      t.timestamps null: false
     end
 
     add_index :managers, :email,                unique: true
