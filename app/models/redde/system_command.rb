@@ -1,5 +1,8 @@
 class Redde::SystemCommand
   attr_accessor :action
+
+  ALLOWED_ACTIONS = %W(cache unicorn sidekiq reboot)
+
   def self.execute(action)
     new(action).process
   end
@@ -7,17 +10,11 @@ class Redde::SystemCommand
   def initialize(action)
     @action = action
     Logger.new("log/commands.log").info "Received #{action} command"
+    raise "Unsopported command #{action}. Allowed commands: #{ALLOWED_ACTIONS.join(', ')}" unless ALLOWED_ACTIONS.include?(action.to_s)
   end
 
   def process
-    case action.to_s
-    when 'cache' then cache
-    when 'unicorn' then unicorn
-    when 'sidekiq' then sidekiq
-    when 'reboot' then reboot
-    else
-      nil
-    end
+    send(action)
   end
 
   private
