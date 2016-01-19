@@ -11,7 +11,7 @@ class Admin::PhotosController < ActionController::Base
     parent = photo_params[:imageable_type].constantize.find(photo_params[:imageable_id])
     @photo = parent.photos.build(photo_params)
     if @photo.save
-      render(partial: "photo", object: @photo)
+      render(partial: 'photo', object: @photo)
     else
       render nothing: true, status: 422
     end

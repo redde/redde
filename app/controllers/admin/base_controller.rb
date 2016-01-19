@@ -1,6 +1,6 @@
 class Admin::BaseController < ActionController::Base
   layout 'admin'
-  before_filter :authenticate_manager!
+  before_action :authenticate_manager!
   include Redde::AdminHelper
   include Redde::IndexHelper
 
@@ -51,7 +51,7 @@ class Admin::BaseController < ActionController::Base
   def redirect_or_edit(obj, saved, notice = nil, custom_url = nil)
     return render 'edit' unless saved
     yield if block_given?
-    return redirect_to url_for_obj(obj, custom_url), notice: notice_for(obj, notice)
+    redirect_to url_for_obj(obj, custom_url), notice: notice_for(obj, notice)
   end
 
   def notice_for(obj, notice = nil)

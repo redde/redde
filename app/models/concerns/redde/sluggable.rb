@@ -2,7 +2,12 @@ module Redde::Sluggable
   extend ActiveSupport::Concern
 
   included do
-    validates :slug, format: { with: /\A[A-z0-9_-]*\z/i, message: 'имеет неверный формат, разрешены английские символы, знак подчеркивания "_" и дефис "-"'}, presence: true
+    validates :slug,
+              format: {
+                with: /\A[A-z0-9_-]*\z/i,
+                message: 'имеет неверный формат, разрешены английские символы, знак подчеркивания "_" и дефис "-"'
+              },
+              presence: true
     before_validation :set_slug
   end
 

@@ -11,9 +11,13 @@ class Redde::UrlGenerator
   end
 
   def translitted_name
-    Russian.translit(name).gsub(' ', '-')
-      .gsub(/[^\x00-\x7F]+/, '').gsub(/[^\w_ \-]+/i, '')
-      .gsub(/[ \-]+/i, '-').gsub(/^\-|\-$/i, '')
+    Russian
+      .translit(name)
+      .tr(' ', '-')
+      .gsub(/[^\x00-\x7F]+/, '')
+      .gsub(/[^\w_ \-]+/i, '')
+      .gsub(/[ \-]+/i, '-')
+      .gsub(/^\-|\-$/i, '')
   end
 
   def formatted_name

@@ -48,6 +48,5 @@ describe Redde::Generators::ScaffoldGenerator do
     it 'Generates admin views' do
       assert_file 'app/views/admin/articles/edit.html.haml'
     end
-
   end # end describe 'VIEWS'
 end

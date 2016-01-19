@@ -2,7 +2,7 @@
 module Redde::AdminHelper
   def command_link(name, action, confirm = nil)
     options = { method: :put }
-    options.merge!(data: { confirm: confirm }) if confirm.present?
+    options[:data] = { confirm: confirm } if confirm.present?
     link_to name, admin_system_command_path(action), options
   end
 
@@ -15,26 +15,28 @@ module Redde::AdminHelper
     link_to title, path, class: classes
   end
 
-  def photoable parent
+  def photoable(parent)
     render('admin/photos/photos', parent: parent)
   end
 
   def redde_form_for(object, options = {}, &block)
-    if options.key?(:html)
-      if options[:html].key?(:class)
-        if options[:html][:class].is_a? String
-          options[:html][:class] += ' redde-form'
-        elsif options[:html][:class].is_a? Array
-          options[:html][:class] << 'redde-form'
-        end
-      else
-        options[:html][:class] = 'redde-form'
-      end
-    else
-      options[:html] = { class: 'redde-form' }
-    end
+    options = make_options(options)
     options[:builder] = ReddeFormBuilder
     form_for(object, options, &block)
+  end
+
+  def make_options(options)
+    return options.merge(html: { class: 'redde-form' }) unless options.key?(:html)
+    unless options[:html].key?(:class)
+      options[:html][:class] = 'redde-form'
+      return options
+    end
+    if options[:html][:class].is_a? String
+      options[:html][:class] += ' redde-form'
+    elsif options[:html][:class].is_a? Array
+      options[:html][:class] << 'redde-form'
+    end
+    options
   end
 
   def show_tree(c)
@@ -51,7 +53,7 @@ module Redde::AdminHelper
   end
 
   def sort_tree(url, maxLevels = 2)
-    %Q{
+    %{
       <script type="text/javascript">
         $(document).ready(function(){
 

@@ -29,14 +29,6 @@ describe Redde::Generators::LayoutGenerator do
       # check js and css
       assert_file 'app/assets/javascripts/admin/index.js'
       assert_file 'app/assets/stylesheets/admin/index.scss'
-
-      # check images
-      assert_directory 'app/assets/images/admin'
-      assert_directory 'app/assets/javascripts/admin'
-      assert_directory 'app/assets/stylesheets/admin'
-
-      # check form_builders
-      assert_file 'app/form_builders/redde_form_builder.rb'
     end
   end
 end

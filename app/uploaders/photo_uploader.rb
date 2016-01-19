@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class PhotoUploader < CarrierWave::Uploader::Base
-
   # Include RMagick or MiniMagick support:
   include CarrierWave::MiniMagick
   # Choose what kind of storage to use for this uploader:
@@ -25,7 +24,6 @@ class PhotoUploader < CarrierWave::Uploader::Base
   def default_url
     ActionController::Base.helpers.asset_path "missing/#{model.class.to_s.tableize}/#{version_name}.png"
   end
-
 
   # Process files as they are uploaded:
   # process :scale => [200, 300]
@@ -54,5 +52,4 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
 end

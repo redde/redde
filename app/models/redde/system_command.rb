@@ -1,7 +1,7 @@
 class Redde::SystemCommand
   attr_accessor :action
 
-  ALLOWED_ACTIONS = %W(cache unicorn sidekiq reboot)
+  ALLOWED_ACTIONS = %w(cache unicorn sidekiq reboot).freeze
 
   def self.execute(action)
     new(action).process
@@ -9,8 +9,8 @@ class Redde::SystemCommand
 
   def initialize(action)
     @action = action
-    Logger.new("log/commands.log").info "Received #{action} command"
-    raise "Unsopported command #{action}. Allowed commands: #{ALLOWED_ACTIONS.join(', ')}" unless ALLOWED_ACTIONS.include?(action.to_s)
+    Logger.new('log/commands.log').info "Received #{action} command"
+    fail "Unsopported command #{action}. Allowed commands: #{ALLOWED_ACTIONS.join(', ')}" unless ALLOWED_ACTIONS.include?(action.to_s)
   end
 
   def process
@@ -28,7 +28,9 @@ class Redde::SystemCommand
   end
 
   def sidekiq
-    system("sudo kill `cat #{Rails.root.to_s}/tmp/pids/sidekiq.pid` && cd #{Rails.root} && RAILS_ENV=#{Rails.env} bundle exec sidekiq -C config/sidekiq.yml -L log/sidekiq.log -d")
+    system("sudo kill `cat #{Rails.root}/tmp/pids/sidekiq.pid` &&
+      cd #{Rails.root} &&
+      RAILS_ENV=#{Rails.env} bundle exec sidekiq -C config/sidekiq.yml -L log/sidekiq.log -d")
   end
 
   def reboot

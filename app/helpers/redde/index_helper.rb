@@ -13,7 +13,9 @@ module Redde::IndexHelper
   end
 
   def column_names
-    model_name.column_names.reject { |c| excluded_column_names.include?(c) }
+    model_name
+      .column_names
+      .reject { |c| excluded_column_names.include?(c) }
       .sort { |a, b| sort_priority(a) <=> sort_priority(b) }
   end
 

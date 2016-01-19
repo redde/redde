@@ -24,26 +24,8 @@ module Redde
         directory 'assets/redactor', 'app/assets'
       end
 
-      def make_helpers
-        template 'helpers/admin_helper.rb', 'app/helpers/admin_helper.rb'
-      end
-
-      def make_images
-        directory 'assets/images/admin', 'app/assets/images/admin'
-      end
-
-      def make_controllers
-        template 'controllers/base_controller.rb', 'app/controllers/admin/base_controller.rb'
-        template 'controllers/managers_controller.rb', 'app/controllers/admin/managers_controller.rb'
-        directory 'controllers/managers', 'app/controllers/managers'
-      end
-
       def fix_routes
         route("devise_for :managers, controllers: { registrations: 'managers/registrations' }")
-      end
-
-      def make_form_builders
-        directory 'form_builders', 'app/form_builders'
       end
 
       private

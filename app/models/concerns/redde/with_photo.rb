@@ -1,7 +1,7 @@
 module Redde::WithPhoto
   extend ActiveSupport::Concern
 
-  QUERY = 'imageable_id = :id AND imageable_type = :type OR token in (:tokens)'
+  QUERY = 'imageable_id = :id AND imageable_type = :type OR token in (:tokens)'.freeze
 
   included do
     attr_accessor :photo_tokens
@@ -10,7 +10,7 @@ module Redde::WithPhoto
   end
 
   def all_photos
-    Photo.where(QUERY, id: self.id, type: self.class.name, tokens: tokens)
+    Photo.where(QUERY, id: id, type: self.class.name, tokens: tokens)
   end
 
   def assign_photos
@@ -18,7 +18,7 @@ module Redde::WithPhoto
   end
 
   def imageable_attributes
-    { imageable_id: self.id, imageable_type: self.class.name, token: nil }
+    { imageable_id: id, imageable_type: self.class.name, token: nil }
   end
 
   def tokens

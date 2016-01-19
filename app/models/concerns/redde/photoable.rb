@@ -8,7 +8,7 @@ module Redde::Photoable
   end
 
   def set_token
-    token = SecureRandom.uuid unless token.present?
+    self.token = SecureRandom.uuid unless token.present?
   end
 
   def persisted_link?

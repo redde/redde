@@ -65,12 +65,11 @@ module Redde
       end
 
       def columns
-        model_name.constantize.columns.reject { |c| exclude_column?(c.name) }
-          .sort { |a, b| sort_priority(a.name) <=> sort_priority(b.name) }
-          .map { |c| convert_column(c) }
-      rescue NoMethodError
-        model_name.constantize.fields.map { |c| c[1] }
+        model_name
+          .constantize
+          .columns
           .reject { |c| exclude_column?(c.name) }
+          .sort { |a, b| sort_priority(a.name) <=> sort_priority(b.name) }
           .map { |c| convert_column(c) }
       end
 
@@ -93,9 +92,9 @@ module Redde
       def extract_modules(name)
         modules = name.include?('/') ? name.split('/') : name.split('::')
         name    = modules.pop
-        path    = modules.map { |m| m.underscore }
+        path    = modules.map(&:underscore)
         file_path = (path + [name.underscore]).join('/')
-        nesting = modules.map { |m| m.camelize }.join('::')
+        nesting = modules.map(&:camelize).join('::')
         [name, path, file_path, nesting, modules.size]
       end
 
