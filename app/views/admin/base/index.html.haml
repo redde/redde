@@ -4,7 +4,7 @@
 
 - res_collection = instance_variable_get("@#{collection}")
 - if res_collection.any?
-  %table.list{table_options}
+  %table.list{list_table_options}
     %colgroup
       - column_names.each do |column|
         %col{class: "#{'w1' if ['position', 'visible'].include? column}"}
@@ -15,7 +15,7 @@
           %th= model_name.human_attribute_name(column) unless ['position', 'visible'].include? column
         %th
     - res_collection.each do |item|
-      %tr
+      %tr{sort_table_options(item)}
         - column_names.each do |column|
           - case column
           - when 'position'

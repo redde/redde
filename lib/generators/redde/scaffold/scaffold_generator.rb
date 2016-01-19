@@ -101,7 +101,7 @@ module Redde
 
       def generate_views
         views = {
-          "index.html.#{ext}" => contr_path('index'),
+          # "index.html.#{ext}" => contr_path('index'),
           "edit.html.#{ext}" => contr_path('edit')
         }
         selected_views = views

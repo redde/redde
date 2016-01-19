@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'articles#index'
     resources :articles
-    resources :article_categories
+    resources :article_categories do
+      post :sort, on: :collection
+    end
     resources :managers
   end
 end

@@ -31,12 +31,18 @@ module Redde::IndexHelper
     %w(id created_at updated_at)
   end
 
-  def table_options
+  def list_table_options
     {}.tap do |options|
       if column_names.include? 'position'
         options['class'] = 'sortable'
         options['data-sortable'] = true
       end
+    end
+  end
+
+  def sort_table_options(item)
+    {}.tap do |options|
+      options[:id] = "pos_#{item.id}" if column_names.include?('position')
     end
   end
 end
