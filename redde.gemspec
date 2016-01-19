@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'jquery-ui-rails'
   spec.add_runtime_dependency 'russian', '>= 0.6.0'
   spec.add_runtime_dependency 'haml'
+  spec.add_runtime_dependency 'sass-rails'
   spec.add_runtime_dependency 'compass-rails', '>= 2.0.5'
   spec.add_runtime_dependency 'autoprefixer-rails'
   spec.add_runtime_dependency 'carrierwave'
