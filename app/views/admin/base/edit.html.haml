@@ -7,7 +7,7 @@
       Редактировать #{taccusative(record)}
   %p= link_to 'Назад', action: :index
 
-= photoable(item)
+= photoable(item) if item.class.reflect_on_association(:photos)
 
 = redde_form_for [:admin, item] do |f|
   - column_names.each do |column|
