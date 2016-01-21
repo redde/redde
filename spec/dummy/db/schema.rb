@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105094658) do
+ActiveRecord::Schema.define(version: 20160121153225) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string   "title"
@@ -58,5 +58,19 @@ ActiveRecord::Schema.define(version: 20160105094658) do
   add_index "photos", ["imageable_id"], name: "index_photos_on_imageable_id"
   add_index "photos", ["imageable_type"], name: "index_photos_on_imageable_type"
   add_index "photos", ["token"], name: "index_photos_on_token"
+
+  create_table "redde_photos", force: :cascade do |t|
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.integer  "position"
+    t.string   "src"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "redde_photos", ["imageable_id"], name: "index_redde_photos_on_imageable_id"
+  add_index "redde_photos", ["imageable_type"], name: "index_redde_photos_on_imageable_type"
+  add_index "redde_photos", ["token"], name: "index_redde_photos_on_token"
 
 end
