@@ -1,7 +1,7 @@
 %nav.sidebar
   - case @active
   - when :shop
-    = sidebar_link'Товары', [:admin, :products]
+    = sidebar_link 'Товары', [:admin, :products]
   - when :materials
     = sidebar_link 'Статьи', [:admin, :articles]
   - when :system

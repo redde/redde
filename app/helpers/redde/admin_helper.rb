@@ -22,7 +22,11 @@ module Redde::AdminHelper
   def redde_form_for(object, options = {}, &block)
     options = make_options(options)
     options[:builder] = ReddeFormBuilder
-    form_for(object, options, &block)
+    form_for(object, options) do |f|
+      concat f.error_messages
+      concat content_tag(:table, capture(f, &block))
+      concat f.redde_submits
+    end
   end
 
   def make_options(options)

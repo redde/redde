@@ -1,0 +1,17 @@
+- item = instance_variable_get("@#{record}")
+- content_for :page_header do
+  %h1
+    - if item.new_record?
+      Добавить #{taccusative(record)}
+    - else
+      Редактировать #{taccusative(record)}
+  %p= link_to 'Назад', action: :index
+
+= redde_form_for [:admin, item] do |f|
+  - column_names.each do |column|
+    = f.redde_field column.to_sym
+  -# %div= render 'redditor/admin/page', { f: f } if @article.methods.include?(:page)
+
+  -# проверить и написать правильное условие
+  -# f.object.class.reflect_on_association(:seo)
+  =# render 'admin/seos/block', { f: f } if f.object.methods.include?(:seo)
