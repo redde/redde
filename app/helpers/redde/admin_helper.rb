@@ -16,7 +16,7 @@ module Redde::AdminHelper
   end
 
   def photoable(parent)
-    render('admin/photos/photos', parent: parent)
+    render('admin/redde_photos/photos', parent: parent)
   end
 
   def redde_form_for(object, options = {}, &block)

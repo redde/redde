@@ -1,7 +1,7 @@
-class Admin::PhotosController < ActionController::Base
+class Admin::ReddePhotosController < ActionController::Base
   def sort
     params[:photo].each_with_index do |id, idx|
-      p = Photo.find(id)
+      p = Redde::Photo.find(id)
       p.update(position: idx)
     end
     render nothing: true
@@ -18,14 +18,14 @@ class Admin::PhotosController < ActionController::Base
   end
 
   def destroy
-    @photo = Photo.find(params[:id])
+    @photo = Redde::Photo.find(params[:id])
     @photo.destroy
-    render 'admin/photos/destroy'
+    render 'admin/redde_photos/destroy'
   end
 
   private
 
   def photo_params
-    params.require(:photo).permit!
+    params.require(:redde_photo).permit!
   end
 end

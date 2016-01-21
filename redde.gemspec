@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'jquery-rails'
   spec.add_runtime_dependency 'jquery-ui-rails'
+  spec.add_runtime_dependency 'fileapi'
   spec.add_runtime_dependency 'russian', '>= 0.6.0'
   spec.add_runtime_dependency 'haml'
   spec.add_runtime_dependency 'sass-rails'

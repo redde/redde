@@ -5,16 +5,16 @@ module Redde::WithPhoto
 
   included do
     attr_accessor :photo_tokens
-    has_many :photos, dependent: :destroy, as: :imageable
+    has_many :photos, class_name: 'Redde::Photo', dependent: :destroy, as: :imageable
     after_create :assign_photos
   end
 
   def all_photos
-    Photo.where(QUERY, id: id, type: self.class.name, tokens: tokens)
+    Redde::Photo.where(QUERY, id: id, type: self.class.name, tokens: tokens)
   end
 
   def assign_photos
-    Photo.where(token: tokens).update_all(imageable_attributes)
+    Redde::Photo.where(token: tokens).update_all(imageable_attributes)
   end
 
   def imageable_attributes
