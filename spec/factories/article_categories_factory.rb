@@ -1,8 +1,8 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :article do
+  factory :article_category do
     title { FFaker::Internet.email }
-    body { FFaker::Lorem.words(10).join(' ') }
+    visible { [true, false].sample }
   end
 end
