@@ -19,30 +19,6 @@ module Redde::AdminHelper
     render('admin/redde_photos/photos', parent: parent)
   end
 
-  def redde_form_for(object, options = {}, &block)
-    options = make_options(options)
-    options[:builder] = ReddeFormBuilder
-    form_for(object, options) do |f|
-      concat f.error_messages
-      concat content_tag(:table, capture(f, &block))
-      concat f.redde_submits
-    end
-  end
-
-  def make_options(options)
-    return options.merge(html: { class: 'redde-form' }) unless options.key?(:html)
-    unless options[:html].key?(:class)
-      options[:html][:class] = 'redde-form'
-      return options
-    end
-    if options[:html][:class].is_a? String
-      options[:html][:class] += ' redde-form'
-    elsif options[:html][:class].is_a? Array
-      options[:html][:class] << 'redde-form'
-    end
-    options
-  end
-
   def show_tree(c)
     link = link_to c.name, [:edit, :admin, c]
     edit = link_to 'Удал', [:admin, c], data: { confirm: 'Точно удалить?' },

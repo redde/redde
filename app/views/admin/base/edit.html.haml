@@ -9,6 +9,7 @@
 
 = photoable(item) if item.class.reflect_on_association(:photos)
 
+=# redde_form_for [:admin, item] do |f|
 = redde_form_for [:admin, item] do |f|
   - column_names.each do |column|
     = f.redde_field column.to_sym
