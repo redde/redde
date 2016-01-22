@@ -17,6 +17,7 @@ ru:
         title: 'Заголовок'
         slug: 'URL'
         text: 'Статья'
+        body: Текст
       article_category:
         title: 'Заголовок'
         position: Позиция

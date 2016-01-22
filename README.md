@@ -6,69 +6,80 @@ Admin generator for redde projects
 
 ## Installation
 
-Add this line to your application's Gemfile:
+* Add this line to your application's Gemfile and run `bundle` command:
 
-    gem 'redde'
+```
+  gem 'redde'
+```
 
-And then execute:
+* For the first time installation run
 
-    $ bundle
+```
+rails g redde:layout
+```
 
-## Requirements
+This command will generate basic structure for your admin interface.
 
-### Gems
+* Mound engine in your routes.rb
 
-Layout requires 'devise' gem with generated user model. If You use another auth solution, feel free to modify partial with user info and logout link.
+```
+devise_for :managers, controllers: { registrations: 'managers/registrations' } if defined?(Devise)
+mount Redde::Engine, at: '/redde'
+```
 
-### Assets
+It will disable Manager model registration with `devise` and mount engine.
 
-Add this line to assets precompilation in `config/production.rb`:
+* Include layout concern in your ApplicationController
 
-    config.assets.precompile += %w( admin.js admin.css redactor/wym.css )
+```
+class ApplicationController < ActionController::Base
+  include Redde::Layouts
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+end
+```
 
-## Usage
+* Install and run migrations
 
-routes
+```
+rake redde:install:migrations
+rake db:migrate
+```
 
-resources :managers
-resources :system_commands, only: [:index, :create]
+* Include assets in your `admin.js` and `admin.css`
 
-### Layout
+`admin.js`
 
-To generate admin layout type:
+```
+//= require redde-admin
+//= require redde-admin/fileapi
+```
 
-    rails g redde:layout
+`admin.css`
 
-To set admin login layout you need to include `Redde::Layout` concern:
-
-    class ApplicationController < ActionController::Base
-      include Redde::Layouts
-      # Prevent CSRF attacks by raising an exception.
-      # For APIs, you may want to use :null_session instead.
-      protect_from_forgery with: :exception
-    end
-
-This concern adds layout switch with:
-
-    layout :layout_by_resource
-
-with method `layout_by_resource`:
-
-    def layout_by_resource
-      if devise_controller? && controller_name == 'sessions'
-        'login'
-      else
-        'application'
-      end
-    end
-
-Feel free to change this method as you need.
+```
+ *= require redde-admin
+```
 
 ### Scaffold
 
 To generate admin views and controller for a model, enter:
 
-    rails g redde:scaffold ModelNames
+```
+rails g redde:scaffold ModelNames
+```
+It will generate empty controller with all needed stuff. If you want to customize it - feel free to override views and controller actions.
+
+If you have `position` field of integer type in your model, generator will add special column as a hook for sort.
+You should add POST `sort` action to you routes:
+
+```
+resources :article_categories do
+  post 'sort', on: :collection
+end
+```
+If you have `visible` field of boolean type in your model, generator will add small eye column for toggling visiblity
 
 ### UrlGenerator
 
@@ -107,73 +118,41 @@ Book should have title and slug fields.
     b.to_param
     => '1-testovaya-kniga'
 
-## Добавление фотографий
+## Photos
 
-    rails g redde:photo
+You can attach photos to any ActiveRecord model by including
 
-Добавьте в routes.rb единожды
+```
+include Redde::WithPhoto
+```
 
-    concern :imageable do
-      resources :photos, only: [:show, :create, :destroy] do
-        post 'sort', on: :collection
-      end
-    end
+## Localization
 
-и для каждой модели роуты `concerns :imageable` к которой необходимо добавить фотографии, например для Product
+By default, views in admin interface use I18n for field names and titles.
+Example:
 
-    namespace :admin do
-      resources :products do
-        concerns :imageable
-      end
-    end
+```
+ru:
+  activerecord:
+    models:
+      article:
+        acc: статью
+        many: Статьи
+        one: Статья
+        other: Статьи
+      article_category:
+        acc: категорию
+        many: Категории
+        one: Категория
+        other: Категории
 
-Не забудьте добавить полиморфную связь
-
-    has_many :photos, dependent: :destroy, as: :imageable
-
-создаст scaffold для модели Photo с полиморфной связью
-
-## Gemset dependenсies
-
-Somehow, some dependencies are not initialized inside rails apps. If you get error about missing gems, add these gems to your Gemfile:
-
-    gem 'autoprefixer-rails'
-    gem 'jquery-ui-rails'
-    gem 'haml-rails'
-    gem 'russian'
-    gem 'devise'
-
-Its highly possible, that you will not have any problems with gems
-
-## Autoprefixer note for development mode
-
-Its neccessary to have joined asset files, change assets debug to false in `config/environments/development.rb`:
-
-    config.assets.debug = false
-
-## Localization's example
-
-    ru:
-      activerecord:
-        models:
-          product:
-            one: Продукт
-            acc: продукт (винительный падеж)
-            other: Продукты
-        attributes:
-          product:
-            name: Название
-            descr: Описание
-
-## Sortable
-
-If you have field `position` of integer type in your model, generator will add special column as a hook for sort.
-You should add POST `sort` action to you routes:
-
-    resources :article_categories do
-      post 'sort', on: :collection
-    end
-
-## Visible
-
-If you have field `visible` of boolean type in your model, generator will add small eye column for toggling visiblity
+    attributes:
+      article:
+        title: Заголовок
+        slug: URL
+        body: Текст
+      article_category:
+        title: Заголовок
+        position: Позиция
+        visible: Отображать на сайте
+```
