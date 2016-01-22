@@ -1,0 +1,20 @@
+%dlt
+  display: inline-block
+  width: 20px
+  height: 20px
+  background: image-url('redde-admin/close.svg') center no-repeat
+  text-decoration: none
+
+.dlt
+  @extend %dlt
+  &:before
+    content: '\A0'
+  &:hover
+    background-image: image-url('redde-admin/close-hover.svg')
+
+.a_dlt
+  &:after
+    @extend %dlt
+    content: '\A0'
+  &:hover:after
+    background-image: image-url('redde-admin/close-hover.svg')

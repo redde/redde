@@ -2,7 +2,7 @@
   margin: 5px 0 5px -3px
   overflow: hidden
   list-style: none
-  
+
 .photos__item
   width: 119px
   height: 119px
@@ -26,21 +26,33 @@
   position: relative
 
 .photos__title
-  font-style: normal
-  display: block
   position: absolute
-  background: rgba(black, 0.7)
-  color: #fff
-  padding: 0 3px
-  border-radius: 3px
-  left: 0
-  bottom: 0
-  word-break: break-all
+  background: rgba(#eef3f7, 0.85)
+  color: #000
+  font-size: 11px
+  padding: 5px 6px
+  left: -1px
+  bottom: -1px
+  right: -1px
+  padding-right: 20px
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+  .photos__item:hover &
+    white-space: normal
+    padding-right: 6px
+    word-break: break-all
+
+@import "redde-admin/defaults/dlt"
 
 .photos__del
+  @extend .dlt
+  width: 24px
+  height: 24px
   overflow: hidden
   position: absolute
-  top: 0
+  bottom: 0
   right: 0
 
 .photos__img

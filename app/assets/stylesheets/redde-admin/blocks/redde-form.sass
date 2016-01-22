@@ -1,11 +1,44 @@
 .redde-form
   border-collapse: collapse
   width: 100%
+  font-size: 13px
+
+  > tbody > tr > td
+    padding-top: 10px
+    vertical-align: baseline
+
+.redde-form__thead > th
+  font-size: 13px
+  font-weight: bold
+  text-transform: uppercase
+  color: #176e99
+  padding-top: 18px
+  padding-bottom: 18px
+
+.redde-form__cell._lbl
+  width: 1%
+  white-space: nowrap
+  padding-right: 15px
+
+.redde-form__inp
+  width: 100%
 
 .redde-form__label
-  font-size: 14px
-  font-weight: bold
+  font-size: 13px
+  font-weight: normal // переопределяем reset.css потом убрать
+  font-family: 'Open Sans'
   white-space: nowrap
   &._required:after
     content: "*"
     color: #f83f3f
+
+.redde-form__actions
+  margin-top: 20px
+
+.redde-form__sbm
+  margin-left: 15px
+  &:first-child
+    margin-left: 0
+
+.redde-form__action-lnk
+  margin-left: 15px
