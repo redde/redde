@@ -1,5 +1,6 @@
 class Redde::Photo < ActiveRecord::Base
   mount_uploader :src, PhotoUploader
+  self.table_name = 'redde_photos'
 
   belongs_to :imageable, polymorphic: true
   default_scope { order(:position) }
