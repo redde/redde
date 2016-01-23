@@ -5,7 +5,7 @@
       - if editable ||= false
         = link_to "ред.", [:admin, parent]
 
-    %ul.photos{ "data-sortable" => { items: :li, handle: nil, axis: nil, url: url_for([:sort, :admin, :redde_photos])}.to_json }
+    %ul.photos.js-photos{ "data-sortable" => { items: :li, handle: nil, axis: nil, url: url_for([:sort, :admin, :redde_photos])}.to_json }
       = render partial: 'admin/redde_photos/photo', collection: parent.photos
 
     -#
@@ -20,7 +20,7 @@
           .b-button__text Загрузить файлы
           %input.b-button__input.js-fileapi{:name => "files", :type => "file",  :multiple => true, data: {"upload-url" => url_for([:admin, parent, :photos])}}
 
-    = form_for [:admin, parent.photos.build], html: {id: 'fileapi', class: 'fileapi'} do |f|
+    = form_for [:admin, parent.photos.build], html: { class: 'js-photos-uploader' } do |f|
       = f.hidden_field :imageable_type
       = f.hidden_field :imageable_id
       %span.sbm.fileapi__btn.icon-upload
