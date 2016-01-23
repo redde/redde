@@ -1,38 +1,48 @@
-.main
-	box-shadow: 0 0 3px #ccc
-	border-radius: 6px
-	border: 1px solid #D7D7D7
-	min-height: 500px
-	background-color: #fff
-	padding: 0	
-	border-bottom: 1px solid #DADEE5
-	margin: 0
+@import redde-admin/mixins
 
-.wrapper  
-	box-sizing: border-box
-	padding: 0 30px 30px 215px
-	max-width: 1260px
-	min-width: 800px
-	margin: 0 auto
-	&:after
-		content: ''
-		display: table
-		clear: both
+.wrapper
+  box-sizing: border-box
+  padding: 0 30px 30px 215px
+  max-width: 1260px
+  min-width: 800px
+  margin: 0 auto
+  &:after
+    content: ''
+    display: table
+    clear: both
 
 .sidebar
-	margin-left: -215px
+  margin-left: -215px
 
 .main
-	margin-left: -185px
-	.sidebar + &
-		float: left
-		width: 100%
-		margin-left: 0
+  box-shadow: 0 0 3px #ccc
+  border-radius: 6px
+  border: 1px solid #D7D7D7
+  min-height: 500px
+  background-color: #fff
+  padding: 0
+  border-bottom: 1px solid #DADEE5
+  margin: 0
+  margin-left: -185px
 
-.content
-	padding: 30px
-	.page._sidebar &
-		margin-right: 305px
+  .sidebar + &
+    float: left
+    width: 100%
+    margin-left: 0
+
+.main__page
+  +clearfix
+
+.main__sidebar
+  float: right
+  padding: 30px
+  width: 245px
+  border-left: 1px solid #efefef
+
+.main__content
+  padding: 30px
+  .main__sidebar + &
+    margin-right: 305px
 
 // .sidebar .page-sidebar
-// 	float: right
+//   float: right

@@ -1,6 +1,6 @@
 - unless parent.new_record?
   = content_for(:page_sidebar) do
-    %h5
+    .page-sidebar__title
       Фотографии
       - if editable ||= false
         = link_to "ред.", [:admin, parent]
@@ -20,9 +20,9 @@
           .b-button__text Загрузить файлы
           %input.b-button__input.js-fileapi{:name => "files", :type => "file",  :multiple => true, data: {"upload-url" => url_for([:admin, parent, :photos])}}
 
-    = form_for [:admin, parent.photos.build], html: { class: 'js-photos-uploader' } do |f|
+    = form_for [:admin, parent.photos.build], html: { class: 'photos-uploader js-photos-uploader' } do |f|
       = f.hidden_field :imageable_type
       = f.hidden_field :imageable_id
-      %span.sbm.fileapi__btn.icon-upload
+      %span.sbm.photos-uploader__btn.icon-upload
         Загрузить
-        = f.file_field :src, class: 'fileapi__inp'
+        = f.file_field :src, class: 'photos-uploader__inp'

@@ -19,10 +19,10 @@
           .flash-msg._notice= notice
         - if alert
           .flash-msg._alert= alert
-        .page{ class: "#{yield(:page_sidebar).empty? ? '_full' : '_sidebar'}" }
+        .main__page
           #filter
             = yield(:filter)
-          .page-sidebar
-            = yield(:page_sidebar)
-          .content
+          - if yield(:page_sidebar).present?
+            .main__sidebar.page-sidebar= yield(:page_sidebar)
+          .main__content
             = yield
