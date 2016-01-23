@@ -1,7 +1,7 @@
 !!!
 %html{ lang: 'en' }
   %head
-    %meta{ charset: 'UTF-8'}/
+    %meta{ charset: 'UTF-8'}
     %title= @page_title || 'ReddeCMS'
     = favicon_link_tag 'admin/favicon.png'
     = stylesheet_link_tag 'admin'
@@ -9,16 +9,16 @@
     = yield :js
     = csrf_meta_tag
   %body
-    = render 'header'
+    = render 'admin/redde/header'
     .wrapper
-      = render 'sidebar'
+      = render 'admin/redde/sidebar'
       .main
         .page-header
           = yield(:page_header)
         - if notice
-          .notice= notice
+          .flash-msg._notice= notice
         - if alert
-          .alert= alert
+          .flash-msg._alert= alert
         .page{ class: "#{yield(:page_sidebar).empty? ? '_full' : '_sidebar'}" }
           #filter
             = yield(:filter)

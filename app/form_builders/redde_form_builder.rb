@@ -38,9 +38,10 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
   def redde_text_field(name, *args)
     options = args.extract_options!
     options[:class] = 'inp redde-form__inp'
-    content_tag :tr, class: options[:wrapper_class] do
-      content_tag(:td, smart_label(name), class: 'redde-form__cell _lbl') + content_tag(:td, text_field(name, options))
-    end
+    # content_tag :tr, class: options[:wrapper_class] do
+    #   content_tag(:td, smart_label(name), class: 'redde-form__cell _lbl') + content_tag(:td, text_field(name, options))
+    # end
+    wrap(name, text_field(name, options), options)
   end
 
   def redde_text_area(name, *args)
@@ -54,8 +55,8 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
 
   def redde_submit(text, opts)
     css_class = ['sbm']
-    css_class.push opts[:class] if opts[:class].present?
-    css_class.push('_save') if text == 'Сохранить'
+    css_class << opts[:class] if opts[:class].present?
+    css_class << '_save' if text == 'Сохранить'
     button(text, class: css_class, value: text, name: :commit)
   end
 
@@ -69,7 +70,21 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
 
   def error_messages(attrs = {})
     if object.errors.full_messages.any?
-      render 'validate', { f: self, attrs: attrs }
+      render 'admin/redde/validate', { f: self, attrs: attrs }
+    end
+  end
+
+  def wrap(name = nil, *args, &block)
+    options = args.extract_options!
+    content = block_given? ? capture(&block) : args[0]
+    content_tag( :tr, content_tag( :td, smart_label(name), class: ['redde-form__cell', '_label', options[:cell]].flatten.compact ) + content_tag( :td, content, class: ['redde-form__cell', options[:cell]] ), class: ['redde-form__row', ('_error' if object.errors[name].any?), options[:wrap]].flatten.compact )
+  end
+
+  def fieldset(name, *args, &block)
+    options = args.extract_options!
+    content_tag(:tbody, class: options[:class]) do
+      concat content_tag(:tr, content_tag(:th, name, colspan: 2, class: 'redde-form__thead'))
+      concat capture(&block)
     end
   end
 
@@ -81,6 +96,6 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def objectify_options(options)
-    super.except(:wrapper_class)
+    super.except(:wrap, :cell)
   end
 end

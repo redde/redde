@@ -1,6 +1,6 @@
 - content_for(:page_header) do
-  %h1= tplural model_name
-  %p= link_to "Добавить #{taccusative("#{record}")}", action: :new
+  .page-header__title= tplural model_name
+  = link_to "Добавить #{taccusative("#{record}")}", { action: :new }, class: 'btn page-header__btn'
 
 - res_collection = instance_variable_get("@#{collection}")
 - if res_collection.any?

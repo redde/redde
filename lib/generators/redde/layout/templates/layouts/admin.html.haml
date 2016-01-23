@@ -17,9 +17,9 @@
         .page-header
           = yield(:page_header)
         - if notice
-          .notice= notice
+          .flash-msg._notice= notice
         - if alert
-          .alert= alert
+          .flash-msg._alert= alert
         .page{ class: "#{yield(:page_sidebar).empty? ? '_full' : '_sidebar'}" }
           #filter
             = yield(:filter)

@@ -6,11 +6,9 @@
       Редактировать #{taccusative(:article_category)}
   %p= link_to 'Назад', [:admin, :article_categories]
 
-= form_for [:admin, @article_category], builder: ReddeFormBuilder do |f|
-  = f.error_messages
-  %table
-    = f.redde_field :visible
+= redde_form_for [:admin, @article_category] do |f|
+  = f.redde_field :title
+  = f.redde_field :visible
+  = f.fieldset 'Характеристики', class: 'margin-top' do
     = f.redde_field :title
-  %div= render 'redditor/admin/page', { f: f } if @article_category.methods.include?(:page)
-  = render 'admin/seos/block', { f: f } if @article_category.methods.include?(:seo)
-  = f.redde_submits
+    = f.redde_text_area :title

@@ -1,11 +1,11 @@
 - item = instance_variable_get("@#{record}")
 - content_for :page_header do
-  %h1
+  .page-header__title
     - if item.new_record?
       Добавить #{taccusative(record)}
     - else
       Редактировать #{taccusative(record)}
-  %p= link_to 'Назад', action: :index
+  = link_to 'Назад', {action: :index}, class: 'btn page-header__btn'
 
 = photoable(item) if item.class.reflect_on_association(:photos)
 

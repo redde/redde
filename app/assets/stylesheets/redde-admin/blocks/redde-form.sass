@@ -5,11 +5,7 @@
   width: 100%
   font-size: 13px
 
-  > tbody > tr > td
-    padding-top: 10px
-    vertical-align: baseline
-
-.redde-form__thead > th
+.redde-form__thead
   font-size: 13px
   font-weight: bold
   text-transform: uppercase
@@ -25,10 +21,21 @@
 .redde-form__inp
   width: 100%
 
+  .redde-form__row._error &
+    border-color: #fb4657
+    box-shadow: 0 0 0 1px #fb4657
+
+// .redde-form__row
+
+.redde-form__cell
+  padding-top: 10px
+  vertical-align: baseline
+  &._label
+    width: 1px
+    padding-right: 10px
+
 .redde-form__label
   font-size: 13px
-  font-weight: normal // переопределяем reset.css потом убрать
-  font-family: 'Open Sans'
   white-space: nowrap
   &._required:after
     content: "*"

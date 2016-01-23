@@ -1,4 +1,4 @@
-module Redde::ReddeFormHelper
+module Redde::FormHelper
   # Override the default ActiveRecordHelper behaviour of wrapping the input.
   # This gets taken care of semantically by adding an error class to the wrapper tag
   # containing the input.

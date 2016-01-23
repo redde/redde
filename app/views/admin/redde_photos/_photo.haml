@@ -2,10 +2,10 @@
   = link_to photo.src_url, class: 'photos__link' do
     = image_tag photo.src.admin, class: 'photos__img'
     %span.photos__title= photo.src.file.filename
-  = link_to("", 
+  = link_to("",
     url_for([:admin, photo]),
     method: :delete,
-    confirm: "Точно удалить?",
+    "data-confirm" => "Точно удалить?",
     remote: true,
     title: "Удалить",
     class: "del photos__del")
