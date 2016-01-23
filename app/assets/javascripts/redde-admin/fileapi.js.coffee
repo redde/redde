@@ -9,6 +9,7 @@ $ ->
     autoUpload: true
     dataType: 'html'
     multiple: true
+    accept: "image/*"
     onFileComplete: (e, uiEvt)->
       if uiEvt.status is 200 && uiEvt.error is false
         $('.js-photos').append( uiEvt.result )
