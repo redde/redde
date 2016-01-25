@@ -19,52 +19,6 @@ module Redde::AdminHelper
     render('admin/redde_photos/photos', parent: parent)
   end
 
-  def show_tree(c)
-    link = link_to c.name, [:edit, :admin, c]
-    edit = link_to 'Удал', [:admin, c], data: { confirm: 'Точно удалить?' },
-                                        method: :delete, class: 'del'
-    html = content_tag(:div, link + content_tag(:p, edit))
-    if c.children.any?
-      html << content_tag(:ol) do
-        raw c.children.map { |ch| show_tree(ch) }.join('')
-      end
-    end
-    content_tag :li, raw(html), id: "list_#{c.id}"
-  end
-
-  def sort_tree(url, maxLevels = 2)
-    %{
-      <script type="text/javascript">
-        $(document).ready(function(){
-
-          $('ol.sortable').nestedSortable({
-            disableNesting: 'no-nest',
-            forcePlaceholderSize: true,
-            handle: 'div',
-            helper: 'clone',
-            items: 'li',
-            maxLevels: #{maxLevels},
-            opacity: .6,
-            placeholder: 'placeholder',
-            revert: 250,
-            rootID: 'root',
-            tabSize: 25,
-            tolerance: 'pointer',
-            toleranceElement: '> div',
-            update: function(){
-              var serialized = $(this).nestedSortable('serialize');
-              $.ajax({
-                method: 'POST',
-                url: '#{url}',
-                data: serialized
-              });
-            }
-          });
-        });
-      </script>
-    }.gsub(/[\n ]+/, ' ').strip.html_safe
-  end
-
   def tsingular(model)
     model.model_name.human
   end
