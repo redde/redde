@@ -6,5 +6,11 @@ module Redde
       g.assets false
       g.helper false
     end
+    config.to_prepare do
+      Rails.application.config.assets.precompile += %w(
+        admin/favicon.png
+        admin/move_handler.png
+      )
+    end
   end
 end
