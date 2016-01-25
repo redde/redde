@@ -7,7 +7,7 @@ class CreateReddePhotos < ActiveRecord::Migration
       t.string :src
       t.string :token
 
-      t.timestamps
+      t.timestamps, null: false
     end
     add_index :redde_photos, :imageable_id
     add_index :redde_photos, :imageable_type

@@ -1,5 +1,12 @@
 # coding: utf-8
 module Redde::IndexHelper
+  IGNORED_COLUMNS = %w(ancestry position created_at updated_at id)
+  def title_for(item)
+    return item.title if column_names.include?('title')
+    return item.name if column_names.include('name')
+    model_name.columns.select { |i| i.type == :string }.first
+  end
+
   def collection
     controller_name
   end
@@ -17,6 +24,10 @@ module Redde::IndexHelper
       .column_names
       .reject { |c| excluded_column_names.include?(c) }
       .sort { |a, b| sort_priority(a) <=> sort_priority(b) }
+  end
+
+  def form_column_names
+    column_names.select { |i| !IGNORED_COLUMNS.include?(i) }
   end
 
   def sort_priority(column_name)

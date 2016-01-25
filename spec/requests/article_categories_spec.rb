@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Index' do
+feature 'Article Categories' do
   let(:manager) { create(:manager) }
   let(:article_category) { create(:article_category) }
   before(:each) do

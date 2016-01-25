@@ -11,6 +11,11 @@ ru:
         many: Категории
         one: Категория
         other: Категории
+      category:
+        acc: категорию
+        many: Категории
+        one: Категория
+        other: Категории
 
     attributes:
       article:
@@ -19,6 +24,10 @@ ru:
         text: 'Статья'
         body: Текст
       article_category:
+        title: 'Заголовок'
+        position: Позиция
+        visible: Отображать на сайте
+      category:
         title: 'Заголовок'
         position: Позиция
         visible: Отображать на сайте

@@ -8,9 +8,8 @@ class Admin::BaseController < ActionController::Base
   end
 
   def index
-    scope = model_name
-    scope = scope.order('position') if column_names.include?('position')
-    instance_variable_set("@#{collection}", scope.all.page(params[:page]))
+    instance_variable_set("@#{collection}", scope)
+    return render 'tree' if column_names.include?('ancestry')
   end
 
   def new
@@ -35,18 +34,29 @@ class Admin::BaseController < ActionController::Base
   def destroy
     instance_variable_set("@#{record}", model_name.find(params[:id]))
     instance_variable_get("@#{record}").destroy
-    redirect_to send("admin_#{collection}_path"), notice: "#{model_name.model_name.human} удален."
+    redirect_to send("admin_#{collection}_path"), notice: "#{model_name.model_name.human} удалена."
   end
 
   def sort
-    params[:pos].each_with_index do |id, idx|
-      p = model_name.find(id)
-      p.update(position: idx)
+    if column_names.include?('ancestry')
+      model_name.sort(params[:list])
+    else
+      params[:pos].each_with_index do |id, idx|
+        p = model_name.find(id)
+        p.update(position: idx)
+      end
     end
     render nothing: true
   end
 
   private
+
+  def scope
+    return model_name.roots.order(:position) if column_names.include?('ancestry')
+    scope = model_name
+    scope = scope.order('position') if column_names.include?('position')
+    scope.all.page(params[:page])
+  end
 
   def redirect_or_edit(obj, saved, notice = nil, custom_url = nil)
     return render 'edit' unless saved
@@ -55,7 +65,7 @@ class Admin::BaseController < ActionController::Base
   end
 
   def notice_for(obj, notice = nil)
-    notice ||= 'сохранен'
+    notice ||= 'сохранена'
     "#{obj.class.model_name.human} #{notice}."
   end
 

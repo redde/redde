@@ -81,6 +81,10 @@ end
 ```
 If you have `visible` field of boolean type in your model, generator will add small eye column for toggling visiblity
 
+### Tree sort
+
+If your model have `ancestry` and `position` fields, it will be rendered as tree automatically.
+
 ### UrlGenerator
 
 `Redde::UrlGenerator` - is a small lib to convert title and id to combine url, used in `to_param` method.

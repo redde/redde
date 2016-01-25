@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :article_categories do
       post :sort, on: :collection
     end
+    resources :categories do
+      post :sort, on: :collection
+    end
     resources :managers
   end
 end

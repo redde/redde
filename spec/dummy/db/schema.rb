@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124105934) do
+ActiveRecord::Schema.define(version: 20160125163849) do
 
   create_table "article_categories", force: :cascade do |t|
     t.string   "title"
@@ -19,14 +19,24 @@ ActiveRecord::Schema.define(version: 20160124105934) do
     t.boolean  "visible"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "ancestry"
   end
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
+    t.text     "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "title"
+    t.string   "ancestry"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "categories", ["ancestry"], name: "index_categories_on_ancestry"
 
   create_table "managers", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -45,20 +55,6 @@ ActiveRecord::Schema.define(version: 20160124105934) do
 
   add_index "managers", ["email"], name: "index_managers_on_email", unique: true
   add_index "managers", ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
-
-  create_table "photos", force: :cascade do |t|
-    t.integer  "imageable_id"
-    t.string   "imageable_type"
-    t.integer  "position"
-    t.string   "src"
-    t.string   "token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "photos", ["imageable_id"], name: "index_photos_on_imageable_id"
-  add_index "photos", ["imageable_type"], name: "index_photos_on_imageable_type"
-  add_index "photos", ["token"], name: "index_photos_on_token"
 
   create_table "redde_photos", force: :cascade do |t|
     t.integer  "imageable_id"

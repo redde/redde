@@ -1,6 +1,6 @@
 - case controller_name
   - when 'products' then @active = :shop
-  - when 'articles' then @active = :materials
+  - when 'articles', 'article_categories', 'categories' then @active = :materials
   - when 'users', 'managers' then @active = :system
 
 .main-menu

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Index' do
+feature 'Articles' do
   let(:manager) { create(:manager) }
   let(:article) { create(:article) }
   before(:each) do
