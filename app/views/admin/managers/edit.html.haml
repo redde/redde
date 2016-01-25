@@ -6,15 +6,6 @@
       Редактировать #{taccusative(:manager)}
   %p= link_to 'Назад', [:admin, :managers]
 
-= form_for [:admin, @manager] do |f|
-  = render 'validate', { f: f }
-  %table
-    %tr
-      %th= f.label :email
-      %td= f.text_field :email
-    %tr
-      %th= f.label :password
-      %td= f.text_field :password
-  .actions
-    = f.submit 'Сохранить'
-    = f.submit 'Применить'
+= redde_form_for [:admin, @manager] do |f|
+  = f.redde_text_field :email
+  = f.redde_text_field :password

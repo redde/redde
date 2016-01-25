@@ -10,18 +10,18 @@ variants:
 
 $ ->
   $("[data-sortable]").each ->
-    self = $(this)
+    $this = $(this)
 
-    opts = self.data('sortable')
+    opts = $this.data('sortable')
 
     if $.isPlainObject( opts ) && opts.url
       url = opts.url
       delete opts.url
-    else if (typeof opts is 'string') && opts isnt ""
+    else if (typeof opts == 'string') && opts != ""
       url = opts
       opts = {}
 
-    unless url? || url is ""
+    unless url? || url == ""
       url = location.pathname + "/sort"
 
     defs =
@@ -35,12 +35,12 @@ $ ->
       update: ->
         $.ajax
           type: "post"
-          data: self.sortable("serialize") # + '&authenticity_token=#{u(form_authenticity_token)}',
+          data: $this.sortable("serialize") # + '&authenticity_token=#{u(form_authenticity_token)}',
           dataType: "script"
           url: url
 
     opts = $.extend( {}, defs, opts )
-    self.sortable opts
+    $this.sortable opts
 
     return
 

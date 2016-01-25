@@ -7,7 +7,6 @@
   %p= link_to 'Назад', [:admin, :article_categories]
 
 = redde_form_for [:admin, @article_category] do |f|
-  = f.redde_field :title
   = f.redde_field :visible
   = f.fieldset 'Характеристики', class: 'margin-top' do
     = f.redde_field :title

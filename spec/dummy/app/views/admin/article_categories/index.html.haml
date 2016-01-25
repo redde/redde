@@ -1,0 +1,7 @@
+= render 'admin/redde/page_header'
+
+- unless @article_categories.empty?
+  - cache [ArticleCategory.maximum(:updated_at).to_i] do
+    %ol.sort-tree{ 'data-sort-tree' => '' }= render @article_categories
+
+  =# sort_tree sort_admin_categories_path, 2

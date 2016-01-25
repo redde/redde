@@ -1,6 +1,4 @@
-- content_for(:page_header) do
-  .page-header__title= tplural model_name
-  = link_to "Добавить #{taccusative("#{record}")}", { action: :new }, class: 'btn page-header__btn'
+= render 'admin/redde/page_header'
 
 - res_collection = instance_variable_get("@#{collection}")
 - if res_collection.any?

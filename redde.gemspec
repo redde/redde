@@ -37,6 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'carrierwave'
   spec.add_runtime_dependency 'mini_magick'
   spec.add_runtime_dependency 'kaminari'
+  spec.add_runtime_dependency 'ancestry'
   spec.add_dependency 'rails', '>= 3.1'
   spec.add_dependency 'sass-rails'
 
