@@ -1,0 +1,14 @@
+<%# encoding: utf-8 %>
+ru:
+  activerecord:
+    models:
+      <%= resource_name %>:
+        acc: статью
+        many: Статьи
+        one: Статья
+        other: Статьи
+
+    attributes:
+      <%= resource_name %>:
+        <% model_name.constantize.column_names.select { |i| !%w{ id created_at updated_at ancestry }.include?(i) }.each do |column| %><%= column %>: <%= default_name_for(column).force_encoding('utf-8') %>
+        <% end %>

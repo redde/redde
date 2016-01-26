@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rails_helper'
 
 describe Redde::Generators::ScaffoldGenerator do
@@ -42,11 +43,20 @@ describe Redde::Generators::ScaffoldGenerator do
     it 'gets plural_resource_name' do
       expect(generator.send(:plural_resource_name)).to eq 'article_categories'
     end
+
+    it 'gets default name for title' do
+      expect(generator.send(:default_name_for, 'title')).to eq 'Заголовок'
+    end
   end # end context 'METHODS'
 
   context 'INTEGRATION' do
     it 'Generates admin views' do
       assert_file 'app/views/admin/articles/edit.html.haml'
+    end
+
+    it 'Generates admin views' do
+      assert_file 'config/locales/article/ru.yml'
+      puts File.read('tmp/config/locales/article/ru.yml')
     end
   end # end describe 'VIEWS'
 end
