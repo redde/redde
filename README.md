@@ -81,6 +81,10 @@ end
 ```
 If you have `visible` field of boolean type in your model, generator will add small eye column for toggling visiblity
 
+### Notice
+
+To customize notice, override method `default_notice` in controller
+
 ### Tree sort
 
 If your model have `ancestry` and `position` fields, it will be rendered as tree automatically.

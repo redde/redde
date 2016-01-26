@@ -65,8 +65,12 @@ class Admin::BaseController < ActionController::Base
   end
 
   def notice_for(obj, notice = nil)
-    notice ||= 'сохранена'
+    notice ||= default_notice
     "#{obj.class.model_name.human} #{notice}."
+  end
+
+  def default_notice
+    'сохранена'
   end
 
   def url_for_obj(obj, custom_url = nil)
