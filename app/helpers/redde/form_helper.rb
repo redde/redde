@@ -21,6 +21,17 @@ module Redde::FormHelper
 
   end
 
+  def redde_fields_for(record_name, record_object = nil, options = {}, &block)
+    options, record_object = record_object, nil if record_object.is_a?(Hash) && record_object.extractable_options?
+    options[:builder] ||= ReddeFormBuilder
+
+    with_clean_form_field_error_proc do
+      fields_for(record_name, record_object, options, &block)
+    end
+  end
+
+  private
+
   def make_options(options)
     return options.merge(html: { class: 'redde-form' }) unless options.key?(:html)
     unless options[:html].key?(:class)
@@ -34,17 +45,6 @@ module Redde::FormHelper
     end
     options
   end
-
-  def redde_fields_for(record_name, record_object = nil, options = {}, &block)
-    options, record_object = record_object, nil if record_object.is_a?(Hash) && record_object.extractable_options?
-    options[:builder] ||= ReddeFormBuilder
-
-    with_clean_form_field_error_proc do
-      fields_for(record_name, record_object, options, &block)
-    end
-  end
-
-  private
 
   def with_clean_form_field_error_proc
     default_field_error_proc = ::ActionView::Base.field_error_proc

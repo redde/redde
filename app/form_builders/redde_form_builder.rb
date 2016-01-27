@@ -1,5 +1,6 @@
 class ReddeFormBuilder < ActionView::Helpers::FormBuilder
   delegate :render, :content_tag, :tag, :link_to, :concat, :capture, to: :@template
+  # delegate :debug, :render, :content_tag, :tag, :link_to, :concat, :capture, to: :@template
 
   def redde_field(name, *args)
     label(name)
@@ -12,12 +13,10 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  # TODO: разобоаться с options
-  def redde_select(name, *args)
-    # options = args.extract_options!
-    content_tag :tr, class: options[:wrapper_class] do
-      content_tag(:td, smart_label(name), class: 'redde-form__cell _lbl') + content_tag(:td, select(name, *args))
-    end
+  def redde_select(name, choices, opts = {}, *args)
+    options = args.extract_options!
+    options[:class] = assign_class(['sel', 'redde-form__sel'], options[:class])
+    wrap(name, select(name, choices, opts, options.except(:wrap, :cell)), options)
   end
 
   def redde_date_time(name, *args)
@@ -37,10 +36,7 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
 
   def redde_text_field(name, *args)
     options = args.extract_options!
-    options[:class] = 'inp redde-form__inp'
-    # content_tag :tr, class: options[:wrapper_class] do
-    #   content_tag(:td, smart_label(name), class: 'redde-form__cell _lbl') + content_tag(:td, text_field(name, options))
-    # end
+    options[:class] = assign_class(['inp', 'redde-form__inp'], options[:class])
     wrap(name, text_field(name, options), options)
   end
 
@@ -89,6 +85,15 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   private
+
+  def assign_class(base, added)
+    base = [base] if base.is_a? String
+    if added.present?
+      base << added if added.is_a? String
+      base += added if added.is_a? Array
+    end
+    base
+  end
 
   def smart_label(name)
     required = object.class.validators_on(name).any? { |v| v.is_a? ActiveModel::Validations::PresenceValidator }

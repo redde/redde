@@ -12,8 +12,8 @@
 = redde_form_for [:admin, item] do |f|
   - form_column_names.each do |column|
     = f.redde_field column.to_sym
-  -# if column_names.include?('position')
-    Добавить тут селект
+  - if column_names.include?('ancestry')
+    = f.redde_select :parent_id, options_from_collection_for_select(f.object.class.all, :id, :title, f.object.parent_id), { include_blank: '- Выбрать -' }
   -# %div= render 'redditor/admin/page', { f: f } if @article.methods.include?(:page)
 
   -# проверить и написать правильное условие
