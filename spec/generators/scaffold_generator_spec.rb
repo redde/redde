@@ -1,4 +1,5 @@
-require 'spec_helper'
+# coding: utf-8
+require 'rails_helper'
 
 describe Redde::Generators::ScaffoldGenerator do
   include GeneratorSpec::TestCase
@@ -43,16 +44,18 @@ describe Redde::Generators::ScaffoldGenerator do
       expect(generator.send(:plural_resource_name)).to eq 'article_categories'
     end
 
-    it 'gets index header' do
-      expect(generator.send(:index_header)).to eq 'Article categories'
+    it 'gets default name for title' do
+      expect(generator.send(:default_name_for, 'title')).to eq 'Заголовок'
     end
   end # end context 'METHODS'
 
   context 'INTEGRATION' do
     it 'Generates admin views' do
-      assert_file 'app/views/admin/articles/index.html.haml'
       assert_file 'app/views/admin/articles/edit.html.haml'
     end
 
+    it 'Generates admin views' do
+      assert_file 'config/locales/article/ru.yml'
+    end
   end # end describe 'VIEWS'
 end

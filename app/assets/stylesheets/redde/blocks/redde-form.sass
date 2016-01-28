@@ -1,0 +1,55 @@
+.redde-form
+
+.redde-form__tbl
+  border-collapse: collapse
+  width: 100%
+  font-size: 13px
+
+.redde-form__thead
+  font-size: 13px
+  font-weight: bold
+  text-transform: uppercase
+  color: #176e99
+  padding-top: 18px
+  padding-bottom: 18px
+
+.redde-form__cell._lbl
+  width: 1%
+  white-space: nowrap
+  padding-right: 15px
+
+.redde-form__inp
+  width: 100%
+
+.redde-form__inp,
+.redde-form__sel
+  .redde-form__row._error &
+    border-color: #fb4657
+    box-shadow: 0 0 0 1px #fb4657
+
+// .redde-form__row
+
+.redde-form__cell
+  padding-top: 10px
+  vertical-align: baseline
+  &._label
+    width: 1px
+    padding-right: 10px
+
+.redde-form__label
+  font-size: 13px
+  white-space: nowrap
+  &._required:after
+    content: "*"
+    color: #f83f3f
+
+.redde-form__actions
+  margin-top: 20px
+
+.redde-form__sbm
+  margin-left: 15px
+  &:first-child
+    margin-left: 0
+
+.redde-form__action-lnk
+  margin-left: 15px

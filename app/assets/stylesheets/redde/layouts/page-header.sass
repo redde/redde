@@ -1,0 +1,34 @@
+//= depend_on_asset redde/plus.svg
+
+.page-header
+  position: relative
+  background: #F1F5F9
+  border-bottom: 1px solid #DADEE5
+  padding: 18px 30px
+  margin: 0
+  border-top-right-radius: 5px
+  border-top-left-radius: 5px
+  &:after
+    content: ''
+    display: table
+    clear: both
+
+.page-header__title
+  font-size: 16px
+  float: left
+
+.page-header__btn
+  color: #fff
+  position: absolute
+  top: 0
+  bottom: 0
+  right: 10px
+  margin: auto
+  height: 14px
+  &:after
+    content: "\A0"
+    display: inline-block
+    width: 8px
+    height: 1em
+    background: image-url('redde/plus.svg') no-repeat 50% 3px
+    margin-left: 13px

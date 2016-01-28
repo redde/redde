@@ -1,0 +1,21 @@
+- item = instance_variable_get("@#{record}")
+- content_for :page_header do
+  .page-header__title
+    - if item.new_record?
+      Добавить #{taccusative(record)}
+    - else
+      Редактировать #{taccusative(record)}
+  = link_to 'Назад', { action: :index }, class: 'btn page-header__btn'
+
+= photoable(item) if item.class.reflect_on_association(:photos)
+
+= redde_form_for [:admin, item] do |f|
+  - form_column_names.each do |column|
+    = f.redde_field column.to_sym
+  - if column_names.include?('ancestry')
+    = f.redde_select :parent_id, options_from_collection_for_select(f.object.class.all, :id, :title, f.object.parent_id), { include_blank: '- Выбрать -' }
+  -# %div= render 'redditor/admin/page', { f: f } if @article.methods.include?(:page)
+
+  -# проверить и написать правильное условие
+  -# f.object.class.reflect_on_association(:seo)
+  =# render 'admin/seos/block', { f: f } if f.object.methods.include?(:seo)

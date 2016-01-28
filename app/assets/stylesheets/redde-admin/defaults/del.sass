@@ -1,0 +1,23 @@
+//= depend_on_asset redde/close.svg
+//= depend_on_asset redde/close-hover.svg
+
+%del
+  display: inline-block
+  width: 20px
+  height: 20px
+  background: image-url('redde/close.svg') center no-repeat
+  text-decoration: none
+
+.del
+  @extend %del
+  &:before
+    content: '\A0'
+  &:hover
+    background-image: image-url('redde/close-hover.svg')
+
+.a_del
+  &:after
+    @extend %del
+    content: '\A0'
+  &:hover:after
+    background-image: image-url('redde/close-hover.svg')

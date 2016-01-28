@@ -18,6 +18,8 @@ tmp
 *.DS_Store
 .rvmrc
 .powrc
+.ruby-version
+.ruby-gemset
 
 /spec/dummy/public/uploads
 /spec/dummy/log

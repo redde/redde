@@ -1,3 +1,3 @@
 module Redde
-  VERSION = '0.1.18'
+  VERSION = '0.3.0'.freeze
 end

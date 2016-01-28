@@ -1,0 +1,63 @@
+//= depend_on_asset redde/main-menu/home.svg
+//= depend_on_asset redde/main-menu/home_active.svg
+//= depend_on_asset redde/main-menu/folder.svg
+//= depend_on_asset redde/main-menu/folder_active.svg
+//= depend_on_asset redde/main-menu/cog.svg
+//= depend_on_asset redde/main-menu/cog_active.svg
+//= depend_on_asset redde/main-menu/list.svg
+//= depend_on_asset redde/main-menu/list_active.svg
+
+.main-menu
+  float: left
+
+.main-menu__link
+  color: #bfd8e3
+  text-decoration: none
+  font-size: 14px
+  line-height: 17px
+  float: left
+  padding: 17px 21px
+
+  &._active, &:hover
+    background: #2d7fa7
+    color: #fff
+
+  &.b_home:before,
+  &.b_folder:before,
+  &.b_cog:before,
+  &.b_list:before
+    content: "\A0"
+    display: inline-block
+    width: 1em
+    height: 1em
+    margin-right: 9px
+    background-position: bottom center
+    background-repeat: no-repeat
+
+  &.b_home
+    &:before
+      background-image: image-url('redde/main-menu/home.svg')
+    &._active, &:hover
+      &:before
+        background-image: image-url('redde/main-menu/home_active.svg')
+
+  &.b_folder
+    &:before
+      background-image: image-url('redde/main-menu/folder.svg')
+    &._active, &:hover
+      &:before
+        background-image: image-url('redde/main-menu/folder_active.svg')
+
+  &.b_cog
+    &:before
+      background-image: image-url('redde/main-menu/cog.svg')
+    &._active, &:hover
+      &:before
+        background-image: image-url('redde/main-menu/cog_active.svg')
+
+  &.b_list
+    &:before
+      background-image: image-url('redde/main-menu/list.svg')
+    &._active, &:hover
+      &:before
+        background-image: image-url('redde/main-menu/list_active.svg')
