@@ -2,33 +2,40 @@
 
 - res_collection = instance_variable_get("@#{collection}")
 - if res_collection.any?
-  %table.list{list_table_options}
+  %table.list-v2{list_table_options}
     %colgroup
+      %col.list-v2__col
       - column_names.each do |column|
-        %col{class: "#{'w1' if ['position', 'visible'].include? column}"}
-      %col.w1
+        %col.list-v2__col
+      %col.list-v2__col._del
+      %col.list-v2__col
     %thead
       %tr
-        - column_names.each do |column|
-          %th= model_name.human_attribute_name(column) unless ['position', 'visible'].include? column
-        %th
+        %th.list-v2__head
+        - column_names.each_with_index do |column, index|
+          %th.list-v2__head{ class: 'list-v2__head_first' }= model_name.human_attribute_name(column) unless ['position', 'visible'].include? column
+        %th.list-v2__head._del
+        %th.list-v2__head
     - res_collection.each do |item|
-      %tr{sort_table_options(item)}
+      %tr{sort_table_options(item), 'data-href' => url_for([:edit, :admin, item])}
+        %td.list-v2__cell
         - column_names.each do |column|
           - case column
           - when 'position'
-            %td.handle= image_tag 'admin/move_handler.png'
+            %td.list-v2__cell._handle{ class: 'list-v2__cell_first' }
           - when 'visible'
-            %td.show= link_to '', send("admin_#{record}_path", item, record => { visible: !item.visible }), class: item.visible ? nil : 'not-show', data: { method: 'put' }
+            %td.list-v2__cell._eye{ class: 'list-v2__cell_first' }
+              = link_to '', send("admin_#{record}_path", item, record => { visible: !item.visible} ), class: ['list-v2__eye', ('_disactive' if !item.visible)], data: { method: 'put' }
           - else
-            %td= link_to item.send(column), [:edit, :admin, item]
-        %td= link_to 'Удалить', [:admin, item], method: :delete, data: { confirm: 'Точно Удалить?' }, class: :del
+            %td.list-v2__cell{ class: 'list-v2__cell_first' }= item.send(column)
+        %td.list-v2__cell= link_to '', [:admin, item], method: :delete, data: { confirm: 'Точно Удалить?' }, class: 'list-v2__del'
+        %td.list-v2__cell
+
+  = paginate res_collection, theme: 'redde'
 
 - else
   %h3
-    Ни одной
-    #{tplural(model_name)}
-    не найдено
+    Ни одной #{tplural(model_name)} не найдено
 
 -# unless @<%= controller_name %>.empty?
   %table.list<%= ".sortable{ 'data-sortable' => true }" if column_names.include?('position') %>
