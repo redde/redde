@@ -1,5 +1,5 @@
-//= depend_on_asset redde-admin/redactor/icons.png
-//= depend_on_asset redde-admin/redactor/wym.css
+//= depend_on_asset redde/redactor/icons.png
+//= depend_on_asset redde/redactor/wym.css
 
 .redactor_box {
 	position: relative;
@@ -111,7 +111,7 @@ li.redactor_toolbar_right {
 .redactor_toolbar li a span {
 	display: block;
 	text-indent: -9999px;
-	background: image-url("redde-admin/redactor/icons.png") no-repeat top left;
+	background: image-url("redde/redactor/icons.png") no-repeat top left;
 }
 
 .redactor_toolbar li a:hover {

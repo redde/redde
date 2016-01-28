@@ -52,14 +52,13 @@ rake db:migrate
 `admin.js`
 
 ```
-//= require redde-admin
-//= require redde-admin/fileapi
+//= require redde
 ```
 
 `admin.css`
 
 ```
- *= require redde-admin
+ *= require redde
 ```
 
 ### Scaffold

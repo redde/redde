@@ -1,4 +1,7 @@
-.header 
+//= depend_on_asset redde/logo.png
+//= depend_on_asset redde/user.svg
+
+.header
   color: #fff
   box-shadow: #666 0 0 3px
   background-color: #176d99
@@ -14,7 +17,7 @@
   margin: 0 auto
   overflow: hidden
   position: relative
-  
+
 .header__logo
   position: absolute
   width: 123px
@@ -24,13 +27,13 @@
   bottom: 0
   margin: auto
   overflow: hidden
-  background: image-url('admin/logo.png') no-repeat 0 0 
+  background: image-url('redde/logo.png') no-repeat 0 0
   text-indent: -9999px
   display: block
 
 .header__logo-text
   display: none
-      
+
 .header__links
   float: right
   margin: 18px 20px 18px 0
@@ -49,7 +52,7 @@
     width: 1em
     height: 1em
     margin-right: 10px
-    background: image-url('redde-admin/user.svg') no-repeat center bottom
+    background: image-url('redde/user.svg') no-repeat center bottom
 
   &._exit
     color: #bfd8e3

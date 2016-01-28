@@ -1,0 +1,32 @@
+@import redde/mixins
+
+.sbm
+  display: inline-block
+  background: #19709b
+  color: #fff
+  font-size: 13px
+  font-family: $family
+  padding: 9px 20px
+  border: 0 none
+  border-radius: 3px
+  cursor: pointer
+  outline: none
+
+  &[disabled]
+    background: #9ea2a4
+    cursor: default
+
+  &:hover
+    background: mix(#19709b, #388cb5)
+    background: linear-gradient(#19709b 70%, #388cb5 100%)
+
+  &:active
+    background: mix(#186991, #10435c)
+    background: linear-gradient(to top, #186991 80%, #10435c 100%)
+
+  &._save:before
+    content: "\A0"
+    display: inline-block
+    width: 16px
+    margin-right: 10px
+    background: image-url('redde/enter.svg') no-repeat 0 5px
