@@ -9,19 +9,15 @@ module Redde
       attr_reader :app_name
 
       def make_views
-        %w(admin login).each do |layout|
-          template "layouts/#{layout}#{ext}", "app/views/layouts/#{layout}#{ext}"
-        end
-        directory 'base', 'app/views/admin/base'
+        directory '../../../../../app/views/admin/redde', 'app/views/admin/redde'
       end
 
       def make_js
-        directory 'assets/javascripts/admin', 'app/assets/javascripts/admin'
+        template 'assets/javascripts/admin.js', 'app/assets/javascripts/admin.js'
       end
 
       def make_css
-        directory 'assets/stylesheets/admin', 'app/assets/stylesheets/admin'
-        directory 'assets/redactor', 'app/assets'
+        template 'assets/stylesheets/admin.css', 'app/assets/stylesheets/admin.css'
       end
 
       def fix_routes

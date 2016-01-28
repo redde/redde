@@ -27,7 +27,7 @@
             %td.list-v2__cell._eye{ class: 'list-v2__cell_first' }
               = link_to '', send("admin_#{record}_path", item, record => { visible: !item.visible} ), class: ['list-v2__eye', ('_disactive' if !item.visible)], data: { method: 'put' }
           - else
-            %td.list-v2__cell{ class: 'list-v2__cell_first' }= item.send(column)
+            %td.list-v2__cell{ class: 'list-v2__cell_first' }= link_to item.send(column), url_for([:edit, :admin, item])
         %td.list-v2__cell= link_to '', [:admin, item], method: :delete, data: { confirm: 'Точно Удалить?' }, class: 'list-v2__del'
         %td.list-v2__cell
 

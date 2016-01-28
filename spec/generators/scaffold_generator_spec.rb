@@ -56,7 +56,6 @@ describe Redde::Generators::ScaffoldGenerator do
 
     it 'Generates admin views' do
       assert_file 'config/locales/article/ru.yml'
-      puts File.read('tmp/config/locales/article/ru.yml')
     end
   end # end describe 'VIEWS'
 end
