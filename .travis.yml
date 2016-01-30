@@ -1,9 +1,10 @@
-script: rspec
+script: bundle exec rspec
 language: ruby
 notifications:
   email: false
 rvm:
-  - 2.0.0
-  - 2.1
+  - 2.2
+before_install:
+  - gem install bundler
 before_script:
-  - 'cd spec/dummy; rake db:setup RAILS_ENV=test'
+  - 'bundle exec rake db:setup RAILS_ENV=test'

@@ -1,0 +1,46 @@
+//= depend_on_asset redde/folder.png
+//= depend_on_asset redde/defaults/del.css
+
+.sort-tree
+  // сделать через класс не получилось всвязи особенности скрипта, при создании нового вложенного списка класс не добавляется => искользуем каскады
+  &, ol
+    list-style-type: none
+    list-style: none
+
+  ol
+    margin-left: 25px
+
+.sort-tree__wrap
+  background: image-url("redde/folder.png") no-repeat 0 2px
+  padding-left: 25px
+  cursor: move
+  position: relative
+  &:hover
+    background-color: #ffc
+
+.sort-tree__link
+  line-height: 20px
+
+.sort-tree__controls
+  position: absolute
+  right: 0
+  margin: 0
+  line-height: 20px
+  z-index: 1
+  top: 0
+
+.sort-tree__btn
+  display: inline-block
+  vertical-align: middle
+  line-height: 20px
+  text-decoration: none
+  color: #999
+
+.sort-tree__placeholder
+  background-color: #CCFF99
+  outline: 1px dashed green
+
+.sort-tree__error
+  // должен быть после .sort-tree__placeholder
+  background: #fbe3e4
+  outline: 1px dashed red

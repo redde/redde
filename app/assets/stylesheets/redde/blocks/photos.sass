@@ -1,0 +1,56 @@
+.photos
+  margin: 5px 0 5px -3px
+  overflow: hidden
+  list-style: none
+
+.photos__item
+  width: 119px
+  height: 119px
+  border: 1px solid #ccc
+  float: left
+  margin: 0 0 3px 3px
+  position: relative
+
+  &.ui-sortable-helper
+    &, & > *
+      cursor: crosshair
+
+.photos__link
+  text-decoration: none
+  display: block
+  width: 100%
+  height: 100%
+  background: #ccc
+  background-repeat: no-repeat
+  background-position: center
+  position: relative
+
+.photos__title
+  position: absolute
+  background: rgba(#eef3f7, 0.85)
+  color: #000
+  font-size: 11px
+  padding: 5px 6px
+  left: -1px
+  bottom: -1px
+  right: -1px
+  padding-right: 20px
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+  .photos__item:hover &
+    white-space: normal
+    padding-right: 6px
+    word-break: break-all
+
+.photos__del
+  width: 24px
+  height: 24px
+  overflow: hidden
+  position: absolute
+  bottom: 0
+  right: 0
+
+.photos__img
+  display: block

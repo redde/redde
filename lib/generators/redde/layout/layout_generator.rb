@@ -9,43 +9,20 @@ module Redde
       attr_reader :app_name
 
       def make_views
-        %w(admin login).each do |layout|
-          template "layouts/#{layout}#{ext}", "app/views/layouts/#{layout}#{ext}"
-        end
-        directory 'base', 'app/views/admin/base'
+        directory '../../../../../app/views/admin/redde', 'app/views/admin/redde'
       end
 
       def make_js
-        directory 'assets/javascripts/admin', 'app/assets/javascripts/admin'
+        template 'assets/javascripts/admin.js', 'app/assets/javascripts/admin.js'
       end
 
       def make_css
-        directory 'assets/stylesheets/admin', 'app/assets/stylesheets/admin'
-        directory 'assets/redactor', 'app/assets'
-      end
-
-      def make_helpers
-        template 'helpers/admin_helper.rb', 'app/helpers/admin_helper.rb'
-      end
-
-      def make_images
-        directory 'assets/images/admin', 'app/assets/images/admin'
-      end
-
-      def make_controllers
-        template 'controllers/base_controller.rb', 'app/controllers/admin/base_controller.rb'
-        template 'controllers/managers_controller.rb', 'app/controllers/admin/managers_controller.rb'
-        directory 'controllers/managers', 'app/controllers/managers'
+        template 'assets/stylesheets/admin.css', 'app/assets/stylesheets/admin.css'
       end
 
       def fix_routes
         route("devise_for :managers, controllers: { registrations: 'managers/registrations' }")
       end
-
-      def make_form_builders
-        directory 'form_builders', 'app/form_builders'
-      end
-
 
       private
 

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Redde::UrlGenerator do
   let(:url) { Redde::UrlGenerator.new(1, 'тестовый заголовок $%##@$@#$') }

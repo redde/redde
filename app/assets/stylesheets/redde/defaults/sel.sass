@@ -1,0 +1,29 @@
+//= depend_on_asset redde/sel.svg
+
+@import redde/mixins
+
+.sel
+  box-sizing: border-box
+  display: inline-block
+  color: #404344
+  font-size: 13px
+  line-height: 21px
+  font-family: $family
+  padding: 6px 10px
+  padding-right: (10px + 11px + 10px)
+  border: 1px solid #cdd1d7
+  border-radius: 3px
+  outline: none
+  -webkit-appearance: none
+  background: #fff image-url('redde/sel.svg') no-repeat right 10px top 14px
+
+  // &::placeholder
+  //   color: #989c9f
+
+  &:focus
+    border-color: #5bacd4
+    box-shadow: 0 0 0 1px #5bacd4
+
+  // &._err
+  //   border-color: #fb4657
+  //   box-shadow: 0 0 0 1px #fb4657

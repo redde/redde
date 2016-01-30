@@ -11,23 +11,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140607122532) do
+ActiveRecord::Schema.define(version: 20160125163849) do
 
-  create_table "article_categories", force: true do |t|
+  create_table "article_categories", force: :cascade do |t|
     t.string   "title"
-    t.boolean  "visible"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.boolean  "visible"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "articles", force: true do |t|
+  create_table "articles", force: :cascade do |t|
     t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "photos", force: true do |t|
+  create_table "categories", force: :cascade do |t|
+    t.string   "title"
+    t.string   "ancestry"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "categories", ["ancestry"], name: "index_categories_on_ancestry"
+
+  create_table "managers", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "managers", ["email"], name: "index_managers_on_email", unique: true
+  add_index "managers", ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
+
+  create_table "redde_photos", force: :cascade do |t|
     t.integer  "imageable_id"
     t.string   "imageable_type"
     t.integer  "position"
@@ -37,62 +66,8 @@ ActiveRecord::Schema.define(version: 20140607122532) do
     t.datetime "updated_at"
   end
 
-  add_index "photos", ["imageable_id"], name: "index_photos_on_imageable_id"
-  add_index "photos", ["imageable_type"], name: "index_photos_on_imageable_type"
-  add_index "photos", ["token"], name: "index_photos_on_token"
-
-  create_table "redditor_images", force: true do |t|
-    t.integer  "imageable_id"
-    t.string   "imageable_type"
-    t.integer  "position"
-    t.string   "src"
-    t.string   "description"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "redditor_images", ["imageable_id"], name: "index_redditor_images_on_imageable_id"
-  add_index "redditor_images", ["imageable_type"], name: "index_redditor_images_on_imageable_type"
-
-  create_table "redditor_pages", force: true do |t|
-    t.integer  "pageable_id"
-    t.string   "pageable_type"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  add_index "redditor_pages", ["pageable_id"], name: "index_redditor_pages_on_pageable_id"
-  add_index "redditor_pages", ["pageable_type"], name: "index_redditor_pages_on_pageable_type"
-
-  create_table "redditor_slider_blocks", force: true do |t|
-    t.integer  "page_id"
-    t.integer  "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "redditor_slider_blocks", ["page_id"], name: "index_redditor_slider_blocks_on_page_id"
-
-  create_table "redditor_text_blocks", force: true do |t|
-    t.integer  "page_id"
-    t.text     "body"
-    t.integer  "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "redditor_text_blocks", ["page_id"], name: "index_redditor_text_blocks_on_page_id"
-
-  create_table "redditor_video_blocks", force: true do |t|
-    t.integer  "page_id"
-    t.integer  "position"
-    t.integer  "width"
-    t.integer  "height"
-    t.string   "youtube"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "redditor_video_blocks", ["page_id"], name: "index_redditor_video_blocks_on_page_id"
+  add_index "redde_photos", ["imageable_id"], name: "index_redde_photos_on_imageable_id"
+  add_index "redde_photos", ["imageable_type"], name: "index_redde_photos_on_imageable_type"
+  add_index "redde_photos", ["token"], name: "index_redde_photos_on_token"
 
 end

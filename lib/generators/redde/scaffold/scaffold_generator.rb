@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'rails/generators'
 require 'rails/generators/generated_attribute'
 
@@ -19,6 +20,10 @@ module Redde
 
       def copy_views
         generate_views
+      end
+
+      def generate_translations
+        template 'ru.yml', "config/locales/#{resource_name}/ru.yml"
       end
 
       protected
@@ -65,13 +70,45 @@ module Redde
       end
 
       def columns
-        model_name.constantize.columns.reject { |c| exclude_column?(c.name) }
+        model_name
+          .constantize
+          .columns
+          .reject { |c| exclude_column?(c.name) }
           .sort { |a, b| sort_priority(a.name) <=> sort_priority(b.name) }
           .map { |c| convert_column(c) }
-      rescue NoMethodError
-        model_name.constantize.fields.map { |c| c[1] }
-          .reject { |c| exclude_column?(c.name) }
-          .map { |c| convert_column(c) }
+      end
+
+      def default_name_for(column)
+        case column.to_s
+        when 'title' then 'Заголовок'
+        when 'name' then 'Название'
+        when 'slug' then 'URL'
+        when 'position' then 'Позиция'
+        when 'visible' then 'Отображать на сайте'
+        when 'short_desc' then 'Аннотация'
+        when 'comment' then 'Комментарий'
+        when 'email' then 'E-mail'
+        when 'image', 'src' then 'Изображение'
+        when 'phone' then 'Телефон'
+        when 'text', 'body', 'desc' then 'Описание'
+        when 'parent_id' then 'Родительская категория'
+        when 'company_id' then 'Компания'
+        when 'city_id' then 'Город'
+        when 'url' then 'Ссылка'
+        when 'value' then 'Значение'
+        when 'articul' then 'Артикул'
+        when 'guid' then '1С'
+        when 'tag_list' then 'Тэги'
+        when 'category_id' then 'Категория'
+        when 'message' then 'Сообщение'
+        when 'product_id' then 'Товар'
+        when 'price' then 'Цена'
+        when 'stock', 'in_stock' then 'Наличие'
+        when 'color', 'color_id' then 'Цвет'
+        when 'size', 'size_id' then 'Размер'
+        when 'parameter_id' then 'Параметр'
+        else column.capitalize.to_s
+        end
       end
 
       def excluded_column_names
@@ -93,15 +130,15 @@ module Redde
       def extract_modules(name)
         modules = name.include?('/') ? name.split('/') : name.split('::')
         name    = modules.pop
-        path    = modules.map { |m| m.underscore }
+        path    = modules.map(&:underscore)
         file_path = (path + [name.underscore]).join('/')
-        nesting = modules.map { |m| m.camelize }.join('::')
+        nesting = modules.map(&:camelize).join('::')
         [name, path, file_path, nesting, modules.size]
       end
 
       def generate_views
         views = {
-          "index.html.#{ext}" => contr_path('index'),
+          # "index.html.#{ext}" => contr_path('index'),
           "edit.html.#{ext}" => contr_path('edit')
         }
         selected_views = views

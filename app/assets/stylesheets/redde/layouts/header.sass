@@ -1,0 +1,63 @@
+//= depend_on_asset redde/logo.png
+//= depend_on_asset redde/user.svg
+
+.header
+  color: #fff
+  box-shadow: #666 0 0 3px
+  background-color: #176d99
+  background-image: linear-gradient(to top, #156d97, #19719b)
+  margin-bottom: 20px
+
+.header__init
+  box-sizing: border-box
+  max-width: 1260px
+  min-width: 580px
+  padding-left: (185px + 31px)
+  padding-right: 31px
+  margin: 0 auto
+  overflow: hidden
+  position: relative
+
+.header__logo
+  position: absolute
+  width: 123px
+  height: 31px
+  left: 0
+  top: 0
+  bottom: 0
+  margin: auto
+  overflow: hidden
+  background: image-url('redde/logo.png') no-repeat 0 0
+  text-indent: -9999px
+  display: block
+
+.header__logo-text
+  display: none
+
+.header__links
+  float: right
+  margin: 18px 20px 18px 0
+
+.header__link
+  margin-left: 2.25em
+  color: #fff
+  text-decoration: none
+
+  &:first-child
+    margin-left: 0
+
+  &._user:before
+    content: "\A0"
+    display: inline-block
+    width: 1em
+    height: 1em
+    margin-right: 10px
+    background: image-url('redde/user.svg') no-repeat center bottom
+
+  &._exit
+    color: #bfd8e3
+
+  &._name
+    text-decoration: underline
+    &:hover
+      text-decoration: none
