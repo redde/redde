@@ -1,6 +1,4 @@
-- content_for(:page_header) do
-  %h1= tplural Manager
-  %p= link_to "Добавить #{taccusative('manager')}", [:new, :admin, :manager]
+= page_header
 
 - unless @managers.empty?
   %table.list

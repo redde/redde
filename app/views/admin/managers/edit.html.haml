@@ -1,10 +1,4 @@
-- content_for :page_header do
-  %h1
-    - if @manager.new_record?
-      Добавить #{taccusative(:manager)}
-    - else
-      Редактировать #{taccusative(:manager)}
-  %p= link_to 'Назад', [:admin, :managers]
+= page_header
 
 = redde_form_for [:admin, @manager] do |f|
   = f.redde_text_field :email

@@ -1,3 +1,2 @@
-- content_for(:page_header) do
-  .page-header__title= tplural model_name
-  = link_to "Добавить #{taccusative("#{record}")}", { action: :new }, class: 'btn page-header__btn'
+.page-header__title= tplural model_name
+= link_to "Добавить #{taccusative("#{record}")}", { action: :new }, class: 'btn page-header__btn'

@@ -18,7 +18,6 @@ module Redde::FormHelper
         concat f.redde_submits
       end
     end
-
   end
 
   def redde_fields_for(record_name, record_object = nil, options = {}, &block)

@@ -1,0 +1,7 @@
+.page-header__title
+  - if item.new_record?
+    Добавить
+  - else
+    Редактировать
+  = taccusative(record)
+= link_to 'Назад', { action: :index }, class: 'btn page-header__btn'
