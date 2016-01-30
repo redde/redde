@@ -21,6 +21,23 @@ module Redde::AdminHelper
     end
   end
 
+  def redde_tree collection, opts = {}, &block
+    content_tag :ol, class: 'sort-tree', 'data-sort-tree' => opts.to_json do
+      redde_tree_list collection, &block
+    end
+  end
+
+  def redde_tree_list collection, &block
+    collection.each do |item|
+      controls = content_tag(:div, link_to('Удал', [:admin, item], class: 'a_del sort-tree__btn', data: { confirm: 'Точно удалить?' }, method: 'delete'), class: 'sort-tree__controls')
+      html = content_tag :div, capture(item, &block).concat(controls), class: 'sort-tree__wrap', 'data-sort-tree-tolerance' => ""
+      html << content_tag(:ol) do
+        redde_tree_list(item.children.order(:position), &block)
+      end if item.has_children?
+      concat content_tag(:li, html, class: 'sort-tree__item', 'data-sort-tree-item' => "", id: "list_#{item.id}")
+    end
+  end
+
   def command_link(name, action, confirm = nil)
     options = { method: :put }
     options[:data] = { confirm: confirm } if confirm.present?
