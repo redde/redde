@@ -3,7 +3,7 @@ module Redde::IndexHelper
   IGNORED_COLUMNS = %w(ancestry position created_at updated_at id)
   def title_for(item)
     return item.title if column_names.include?('title')
-    return item.name if column_names.include('name')
+    return item.name if column_names.include?('name')
     model_name.columns.select { |i| i.type == :string }.first
   end
 
