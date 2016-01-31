@@ -1,7 +1,5 @@
 class Admin::ManagersController < Admin::BaseController
-  def index
-    @managers = scope.all
-  end
+  helper_method :column_names
 
   def new
     @manager = scope.new
@@ -28,11 +26,11 @@ class Admin::ManagersController < Admin::BaseController
     redirect_to [:admin, :managers], alert: 'Администратор удален'
   end
 
-  private
-
-  def scope
-    Manager
+  def column_names
+    %w(email)
   end
+
+  private
 
   def manager_params
     params[:manager].permit!
