@@ -25,7 +25,7 @@
             %td.list-v2__cell._handle{ class: 'list-v2__cell_first' }
           - when 'visible'
             %td.list-v2__cell._eye{ class: 'list-v2__cell_first' }
-              = link_to '', url_for(id: item, record => { visible: !item.visible} ), class: ['list-v2__eye', ('_disactive' if !item.visible)], data: { method: 'put' }
+              = link_to '', url_for(id: item, action: :update, record => { visible: !item.visible} ), class: ['list-v2__eye', ('_disactive' if !item.visible)], data: { method: 'put' }
           - when 'title', 'name'
             %td.list-v2__cell{ class: 'list-v2__cell_first' }= link_to item.send(column), url_for(id: item, action: :edit)
           - else
