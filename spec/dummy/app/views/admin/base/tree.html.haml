@@ -3,8 +3,11 @@
 - res_collection = instance_variable_get("@#{collection}")
 - if res_collection.any?
   - cache [model_name.maximum(:updated_at).to_i] do
-    = redde_tree res_collection
-
+    = redde_tree res_collection do |item|
+      = link_to title_for(item), [:edit, :admin, item], class: 'sort-tree__link'
+      - if item.is_childless?
+        = surround '(', ')' do
+          = link_to "На сайт", '/'
 - else
   %h3
     Ни одной

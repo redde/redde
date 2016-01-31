@@ -29,8 +29,9 @@ module Redde::AdminHelper
 
   def redde_tree_list collection, &block
     collection.each do |item|
-      controls = content_tag(:div, link_to('Удал', [:admin, item], class: 'a_del sort-tree__btn', data: { confirm: 'Точно удалить?' }, method: 'delete'), class: 'sort-tree__controls')
-      html = content_tag :div, capture(item, &block).concat(controls), class: 'sort-tree__wrap', 'data-sort-tree-tolerance' => ""
+      controls = content_tag(:div, link_to('Удал', url_for(action: :show, id: item), class: 'a_del sort-tree__btn', data: { confirm: 'Точно удалить?' }, method: 'delete'), class: 'sort-tree__controls')
+      link = link_to title_for(item), url_for(action: :edit, id: item), class: 'sort-tree__link'
+      html = content_tag :div, (block_given? ? capture(item, &block) : link).concat(controls), class: 'sort-tree__wrap', 'data-sort-tree-tolerance' => ""
       html << content_tag(:ol) do
         redde_tree_list(item.children.order(:position), &block)
       end if item.has_children?
