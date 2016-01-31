@@ -9,7 +9,8 @@ module Redde
       attr_reader :app_name
 
       def make_views
-        directory '../../../../../app/views/admin/redde', 'app/views/admin/redde'
+        template '../../../../../app/views/admin/redde/_sidebar.html.haml', 'app/views/admin/redde/_sidebar.html.haml'
+        template '../../../../../app/views/admin/redde/_main_menu.html.haml', 'app/views/admin/redde/_main_menu.html.haml'
       end
 
       def make_js
