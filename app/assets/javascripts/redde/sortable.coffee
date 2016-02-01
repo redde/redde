@@ -28,9 +28,9 @@ $ ->
       dropOnEmpty: false
       cursor: "crosshair"
       opacity: 0.75
-      handle: ".handle"
+      handle: "[data-sortable-handle]"
       axis: "y"
-      items: "tr"
+      items: "[data-sortable-item]"
       scroll: true
       update: ->
         $.ajax
