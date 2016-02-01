@@ -1,0 +1,5 @@
+%tr{sort_table_options(item), 'data-href' => url_for(id: item, action: :edit)}
+  %td.list__cell
+  = yield
+  %td.list__cell.list__cell_del= link_to '', url_for(id: item, action: :destroy), method: :delete, data: { confirm: 'Точно Удалить?' }, class: 'list__del'
+  %td.list__cell

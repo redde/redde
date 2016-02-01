@@ -8,6 +8,7 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
     when :text then redde_text_area(name, *args)
     when :boolean then redde_check_box(name, *args)
     when :time then redde_date_time(name, *args)
+    when :datetime then redde_date_time(name, *args)
     else
       redde_text_field(name, *args)
     end
@@ -21,9 +22,7 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
 
   def redde_date_time(name, *args)
     options = args.extract_options!
-    content_tag :tr, class: options[:wrapper_class] do
-      content_tag(:td, smart_label(name), class: 'redde-form__cell _lbl') + content_tag(:td, datetime_select(name, options))
-    end
+    wrap(name, datetime_select(name, options), options)
   end
 
   def redde_check_box(name, *args)
@@ -42,11 +41,8 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
 
   def redde_text_area(name, *args)
     options = args.extract_options!
-    content_tag :tr, class: options[:wrapper_class] do
-      content_tag :td, colspan: 2 do
-        smart_label(name) + tag(:br) + text_area(name, options)
-      end
-    end
+    options[:class] = assign_class(['txtr', 'redde-form__txtr'], options[:class])
+    wrap(name, text_area(name, options), options)
   end
 
   def redde_submit(text, opts)

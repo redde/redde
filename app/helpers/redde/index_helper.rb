@@ -7,6 +7,39 @@ module Redde::IndexHelper
     model_name.columns.select { |i| i.type == :string }.first
   end
 
+  def list_table res_collection, &block
+    render layout: 'admin/redde/list', locals: { res_collection: res_collection } do
+      res_collection.each do |item|
+        concat list_table_row( item, &block )
+      end
+    end
+  end
+
+  def list_table_row item, &block
+    render layout: 'admin/redde/row', locals: { item: item } do
+      column_names.each do |column|
+        concat list_table_cell(item, column, &block)
+      end
+    end
+  end
+
+  def list_table_cell item, column, &block
+    case column
+    when 'position'
+      content_tag(:td, "", class: 'list__cell _handle', 'data-sortable-handle' => "")
+    when 'visible'
+      content_tag(:td, link_to('', url_for(id: item, action: :update, record => { visible: !item.visible} ), class: ['list__eye', ('_disactive' if !item.visible)], data: { method: 'put' }), class: 'list__cell _eye')
+    when 'title', 'name'
+      content_tag(:td, link_to(item.send(column), url_for(id: item, action: :edit)), class: 'list__cell')
+    else
+      if block_given?
+        capture(item, column, &block)
+      else
+        content_tag :td, item.send(column), class: 'list__cell'
+      end
+    end
+  end
+
   def collection
     controller_name
   end
@@ -48,14 +81,17 @@ module Redde::IndexHelper
     {}.tap do |options|
       if column_names.include? 'position'
         options['class'] = 'sortable'
-        options['data-sortable'] = true
+        options['data-sortable'] = ""
       end
     end
   end
 
   def sort_table_options(item)
     {}.tap do |options|
-      options[:id] = "pos_#{item.id}" if column_names.include?('position')
+      if column_names.include?('position')
+        options[:id] = "pos_#{item.id}"
+        options['data-sortable-item'] = ""
+      end
     end
   end
 end
