@@ -1,6 +1,5 @@
 # coding: utf-8
 module Redde::AdminHelper
-
   def page_header(item = nil, &block)
     if block_given?
       content_for(:page_header, content_tag(:div, capture(&block), class: 'page-header'))
