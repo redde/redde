@@ -2,7 +2,7 @@
   - form_column_names.each do |column|
     = f.redde_field column.to_sym
   - if column_names.include?('ancestry')
-    = f.redde_select :parent_id, options_from_collection_for_select(f.object.class.all, :id, :title, f.object.parent_id), { include_blank: '- Выбрать -' }
+    = f.redde_select :parent_id, ancestry_tree(model_name.roots.order(:position), title_symbol_for(instance_variable_get("@#{record}"))), include_blank: 'Корневая'
 
   -# %div= render 'redditor/admin/page', { f: f } if @article.methods.include?(:page)
 
