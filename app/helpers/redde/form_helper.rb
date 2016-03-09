@@ -54,5 +54,4 @@ module Redde::FormHelper
       ::ActionView::Base.field_error_proc = default_field_error_proc
     end
   end
-
 end
