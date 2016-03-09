@@ -1,0 +1,38 @@
+@import redde/mixins
+
+.ra-layout,
+.ra-layout__body
+  width: 100%
+  height: 100%
+
+.ra-layout__body
+  min-width: 1000px
+  overflow-y: scroll
+  background-color: #F3F1EC
+  text-align: left
+  font: 12px $family
+
+.ra-layout__header
+  margin-bottom: 20px
+
+.ra-layout__wrapper
+  +a_clearfix
+  box-sizing: border-box
+  padding: 0 30px 30px 215px
+  max-width: 1260px
+  min-width: 800px
+  margin: 0 auto
+
+.ra-layout__sidebar
+  width: 215px
+  float: left
+  margin-top: 12px
+  margin-left: -215px
+
+.ra-layout__main
+  margin-left: -185px
+
+  .ra-layout__sidebar + &
+    float: left
+    width: 100%
+    margin-left: 0

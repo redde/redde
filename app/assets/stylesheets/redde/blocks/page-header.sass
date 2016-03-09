@@ -1,17 +1,14 @@
 //= depend_on_asset redde/plus.svg
+@import redde/mixins
 
 .page-header
   position: relative
   background: #F1F5F9
   border-bottom: 1px solid #DADEE5
   padding: 18px 30px
-  margin: 0
   border-top-right-radius: 5px
   border-top-left-radius: 5px
-  &:after
-    content: ''
-    display: table
-    clear: both
+  +a_clearfix
 
 .page-header__title
   font-size: 16px
