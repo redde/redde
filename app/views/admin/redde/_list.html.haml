@@ -18,7 +18,7 @@
         %th.list__head
     = yield
 
-  = paginate res_collection, theme: 'redde'
+  = paginate res_collection, theme: 'redde' if res_collection.method_defined?(:total_pages)
 
 - else
   %h3
