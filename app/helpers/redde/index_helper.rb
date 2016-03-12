@@ -135,10 +135,13 @@ module Redde::IndexHelper
   end
 
   def render_item_column(item, column)
-    case item.send(column).class
-    when Time then l(item.send(column), format: '%d %b %Y, %H:%M')
+    value = item.send(column)
+    return 'Не задано' unless value.present?
+    case value.class.name
+    when 'Time' then l(item.send(column), format: '%d %b %Y, %H:%M')
+    when 'Date' then l(item.send(column), format: '%d %b %Y')
     else
-      item.send(column)
+      value
     end
   end
 end
