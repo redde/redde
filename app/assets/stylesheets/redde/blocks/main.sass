@@ -1,0 +1,22 @@
+@import redde/mixins
+
+.main
+  +clearfix
+  box-shadow: 0 0 3px #ccc
+  border-radius: 6px
+  border: 1px solid #D7D7D7
+  min-height: 500px
+  background-color: #fff
+  padding: 0
+  border-bottom: 1px solid #DADEE5
+
+.main__sidebar
+  float: right
+  padding: 30px
+  width: 245px
+  border-left: 1px solid $pale-gray
+
+.main__content
+  padding: 30px
+  .main__sidebar + &
+    margin-right: 305px

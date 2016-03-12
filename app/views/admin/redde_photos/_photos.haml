@@ -1,10 +1,5 @@
 - unless parent.new_record?
-  = content_for(:page_sidebar) do
-    .page-sidebar__title
-      Фотографии
-      - if editable ||= false
-        = link_to "ред.", [:admin, parent]
-
+  = page_sidebar raw("Фотографии ").concat(if editable ||= false then link_to("ред.", [:admin, parent]) end) do
     %ul.photos.js-photos{ "data-sortable" => { items: :li, handle: nil, axis: nil, url: url_for([:sort, :admin, :redde_photos])}.to_json }
       = render partial: 'admin/redde_photos/photo', collection: parent.photos
 

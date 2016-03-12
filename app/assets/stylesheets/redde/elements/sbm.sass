@@ -2,23 +2,24 @@
 
 .sbm
   display: inline-block
-  background: #19709b
+  background: $link
   color: #fff
-  font-size: 13px
+  font-size: $sbm-size
   font-family: $family
-  padding: 9px 20px
+  padding: round(9/13*$sbm-size) round(20/13*$sbm-size)
   border: 0 none
-  border-radius: 3px
+  border-radius: round(3/13*$sbm-size)
   cursor: pointer
   outline: none
+  text-decoration: none
 
   &[disabled]
     background: #9ea2a4
     cursor: default
 
   &:hover
-    background: mix(#19709b, #388cb5)
-    background: linear-gradient(#19709b 70%, #388cb5 100%)
+    background: mix($link, #388cb5)
+    background: linear-gradient($link 70%, #388cb5 100%)
 
   &:active
     background: mix(#186991, #10435c)
@@ -27,6 +28,6 @@
   &._save:before
     content: "\A0"
     display: inline-block
-    width: 16px
-    margin-right: 10px
+    width: round(16/13*$sbm-size)
+    margin-right: round(10/13*$sbm-size)
     background: image-url('redde/enter.svg') no-repeat 0 5px

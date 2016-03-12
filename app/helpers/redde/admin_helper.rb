@@ -1,5 +1,13 @@
 # coding: utf-8
 module Redde::AdminHelper
+
+  def page_sidebar title = nil, &block
+    content_for :page_sidebar do
+      concat content_tag(:div, title, class: 'page-sidebar__title') if title
+      concat capture(&block)
+    end
+  end
+
   def page_header(item = nil, &block)
     if block_given?
       content_for(:page_header, content_tag(:div, capture(&block), class: 'page-header'))

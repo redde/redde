@@ -1,5 +1,5 @@
 !!!
-%html{ lang: 'en' }
+%html.ra-layout{ lang: 'en' }
   %head
     %meta{ charset: 'UTF-8'}
     %title= @page_title || 'ReddeCMS'
@@ -8,11 +8,11 @@
     = javascript_include_tag 'admin'
     = yield :js
     = csrf_meta_tag
-  %body
+  %body.ra-layout__body
     = render 'admin/redde/header'
-    .wrapper
+    .ra-layout__wrapper
       = render 'admin/redde/sidebar'
-      .main
+      .ra-layout__main.main
         = yield(:page_header)
         - if notice
           .flash-msg._notice= notice
