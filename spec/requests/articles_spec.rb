@@ -11,6 +11,7 @@ feature 'Articles' do
     article
     visit admin_articles_path
     expect(page).to have_content article.title
+    expect(page).not_to have_content article.comment
   end
 
   scenario 'Renders edit page' do

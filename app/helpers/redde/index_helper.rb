@@ -11,7 +11,7 @@ module Redde::IndexHelper
     model_name.columns.select { |i| i.type == :string }.first
   end
 
-  def list_table res_collection, &block
+  def list_table(res_collection, &block)
     render layout: 'admin/redde/list', locals: { res_collection: res_collection } do
       res_collection.each do |item|
         concat list_table_row( item, &block )
@@ -19,7 +19,7 @@ module Redde::IndexHelper
     end
   end
 
-  def list_table_row item, &block
+  def list_table_row(item, &block)
     render layout: 'admin/redde/row', locals: { item: item } do
       index_columns.each do |column|
         concat list_table_cell(item, column, &block)
@@ -27,7 +27,7 @@ module Redde::IndexHelper
     end
   end
 
-  def list_table_cell item, column, &block
+  def list_table_cell(item, column, &block)
     case column
     when 'position'
       content_tag(:td, "", class: 'list__cell _handle', 'data-sortable-handle' => "")
@@ -64,13 +64,13 @@ module Redde::IndexHelper
   end
 
   def index_columns
-    return model_name.INDEX_COLUMNS if defined?(model_name.INDEX_COLUMNS)
+    return model_name::INDEX_COLUMNS if defined?(model_name::INDEX_COLUMNS)
     column_names
   end
 
   def form_column_names
-    return model_name.FORM_COLUMNS if defined?(model_name.FORM_COLUMNS)
-    return model_name.INDEX_COLUMNS if defined?(model_name.INDEX_COLUMNS)
+    return model_name::FORM_COLUMNS if defined?(model_name::FORM_COLUMNS)
+    return model_name::INDEX_COLUMNS if defined?(model_name::INDEX_COLUMNS)
     column_names.select { |i| !IGNORED_COLUMNS.include?(i) }
   end
 
@@ -132,5 +132,13 @@ module Redde::IndexHelper
       result += ancestry_options(sub_items, symbol) { |i| "#{'---' * i.depth} #{i.send(symbol)}" }
     end
     result
+  end
+
+  def render_item_column(item, column)
+    case item.send(column).class
+    when Time then l(item.send(column), format: '%d %b %Y, %H:%M')
+    else
+      item.send(column)
+    end
   end
 end

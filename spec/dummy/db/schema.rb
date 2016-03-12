@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160125163849) do
     t.string   "title"
     t.datetime "published_at"
     t.text     "body"
+    t.string   "comment"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
