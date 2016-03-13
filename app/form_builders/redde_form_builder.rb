@@ -1,5 +1,5 @@
 class ReddeFormBuilder < ActionView::Helpers::FormBuilder
-  delegate :render, :content_tag, :tag, :link_to, :concat, :capture, to: :@template
+  delegate :render, :content_tag, :tag, :link_to, :image_tag, :concat, :capture, to: :@template
   # delegate :debug, :render, :content_tag, :tag, :link_to, :concat, :capture, to: :@template
 
   def redde_field(name, *args)
@@ -10,7 +10,11 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
     when :time then redde_date_time(name, *args)
     when :datetime then redde_date_time(name, *args)
     else
-      redde_text_field(name, *args)
+      if object.send(name).class.superclass.name == 'CarrierWave::Uploader::Base'
+        redde_image_field(name, *args)
+      else
+        redde_text_field(name, *args)
+      end
     end
   end
 
@@ -39,6 +43,17 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
     wrap(name, text_field(name, options), options)
   end
 
+  def redde_image_field(name, *args)
+    concat empty_wrap(image_tag(object.send(name), class: 'redde-form__img-preview') + check_box(:remove_preview) + label(:remove_preview)) if object.send(name).present?
+    redde_file_field(name, *args)
+  end
+
+  def redde_file_field(name, *args)
+    options = args.extract_options!
+    # options[:class] = assign_class(['inp', 'redde-form__inp'], options[:class])
+    wrap(name, file_field(name, options), options)
+  end
+
   def redde_text_area(name, *args)
     options = args.extract_options!
     options[:class] = assign_class(['txtr', 'redde-form__txtr'], options[:class])
@@ -64,6 +79,12 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
     if object.errors.full_messages.any?
       render 'admin/redde/validate', { f: self, attrs: attrs }
     end
+  end
+
+  def empty_wrap(*args, &block)
+    options = args.extract_options!
+    content = block_given? ? capture(&block) : args[0]
+    content_tag( :tr, tag( :td, class: ['redde-form__cell', options[:cell]].flatten.compact ) + content_tag( :td, content, class: ['redde-form__cell', options[:cell]] ), class: ['redde-form__row', options[:wrap]].flatten.compact )
   end
 
   def wrap(name = nil, *args, &block)
