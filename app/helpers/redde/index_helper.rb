@@ -70,7 +70,6 @@ module Redde::IndexHelper
 
   def form_column_names
     return model_name::FORM_COLUMNS if defined?(model_name::FORM_COLUMNS)
-    return model_name::INDEX_COLUMNS if defined?(model_name::INDEX_COLUMNS)
     column_names.select { |i| !IGNORED_COLUMNS.include?(i) }
   end
 
