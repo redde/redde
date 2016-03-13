@@ -3,8 +3,4 @@
 - res_collection = instance_variable_get("@#{collection}")
 
 = list_table res_collection do |item, column|
-  %td.list__cell
-    - if item.send(column).is_a?(Time)
-      = l item.send(column), format: '%d %b %Y, %H:%M'
-    - else
-      = item.send(column)
+  %td.list__cell= render_item_column(item, column)

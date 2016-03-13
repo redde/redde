@@ -2,14 +2,14 @@
   %table.list{list_table_options}
     %colgroup
       %col.list__col
-      - column_names.each do |column|
+      - index_columns.each do |column|
         %col.list__col
       %col.list__col._del
       %col.list__col
     %thead
       %tr
         %th.list__head
-        - column_names.each_with_index do |column, index|
+        - index_columns.each_with_index do |column, index|
           - if ['position', 'visible'].include? column
             %th.list__head.list__head_empty
           - else

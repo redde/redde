@@ -1,13 +1,17 @@
 # coding: utf-8
 module Redde::IndexHelper
-  IGNORED_COLUMNS = %w(ancestry position created_at updated_at id)
+  IGNORED_COLUMNS = %w(position created_at updated_at id)
   def title_for(item)
-    return item.title if column_names.include?('title')
-    return item.name if column_names.include?('name')
+    item.send(title_symbol_for(item))
+  end
+
+  def title_symbol_for(item)
+    return 'title' if column_names.include?('title')
+    return 'name' if column_names.include?('name')
     model_name.columns.select { |i| i.type == :string }.first
   end
 
-  def list_table res_collection, &block
+  def list_table(res_collection, &block)
     render layout: 'admin/redde/list', locals: { res_collection: res_collection } do
       res_collection.each do |item|
         concat list_table_row( item, &block )
@@ -15,15 +19,15 @@ module Redde::IndexHelper
     end
   end
 
-  def list_table_row item, &block
+  def list_table_row(item, &block)
     render layout: 'admin/redde/row', locals: { item: item } do
-      column_names.each do |column|
+      index_columns.each do |column|
         concat list_table_cell(item, column, &block)
       end
     end
   end
 
-  def list_table_cell item, column, &block
+  def list_table_cell(item, column, &block)
     case column
     when 'position'
       content_tag(:td, "", class: 'list__cell _handle', 'data-sortable-handle' => "")
@@ -59,7 +63,14 @@ module Redde::IndexHelper
       .sort { |a, b| sort_priority(a) <=> sort_priority(b) }
   end
 
+  def index_columns
+    return model_name::INDEX_COLUMNS if defined?(model_name::INDEX_COLUMNS)
+    column_names
+  end
+
   def form_column_names
+    return model_name::FORM_COLUMNS if defined?(model_name::FORM_COLUMNS)
+    return model_name::INDEX_COLUMNS if defined?(model_name::INDEX_COLUMNS)
     column_names.select { |i| !IGNORED_COLUMNS.include?(i) }
   end
 
@@ -108,12 +119,29 @@ module Redde::IndexHelper
     content_tag :li, raw(html), id: "list_#{c.id}"
   end
 
-  def ancestry_options(items, symbol = :name)
+  def ancestry_tree(obj_class, symbol)
+    ancestry_options(obj_class.unscoped.arrange(order: :position), symbol) { |i| "#{'--' * i.depth} #{i.send(symbol)}" }
+  end
+
+  def ancestry_options(items, symbol = :name, &block)
+    return ancestry_options(items, symbol) { |i| "#{'-' * i.depth} #{i.send(symbol)}" } unless block_given?
+
     result = []
     items.map do |item, sub_items|
       result << [yield(item), item.id]
-      result += ancestry_options(sub_items) { |i| "#{'---' * i.depth} #{i.send(symbol)}" }
+      result += ancestry_options(sub_items, symbol) { |i| "#{'---' * i.depth} #{i.send(symbol)}" }
     end
     result
+  end
+
+  def render_item_column(item, column)
+    value = item.send(column)
+    return 'Не задано' unless value.present?
+    case value.class.name
+    when 'Time' then l(item.send(column), format: '%d %b %Y, %H:%M')
+    when 'Date' then l(item.send(column), format: '%d %b %Y')
+    else
+      value
+    end
   end
 end

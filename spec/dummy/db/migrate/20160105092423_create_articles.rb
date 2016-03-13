@@ -4,6 +4,7 @@ class CreateArticles < ActiveRecord::Migration
       t.string :title
       t.datetime :published_at
       t.text :body
+      t.string :comment
       t.timestamps null: false
     end
   end

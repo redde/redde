@@ -11,6 +11,8 @@ feature 'Articles' do
     article
     visit admin_articles_path
     expect(page).to have_content article.title
+    expect(page).not_to have_content article.comment
+    expect(page).to have_content I18n.l(article.published_at, format: "%d %b %Y, %H:%M")
   end
 
   scenario 'Renders edit page' do
