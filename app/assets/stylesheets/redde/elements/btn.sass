@@ -11,3 +11,24 @@
   padding: 8px 13px
   border: 0 none
   cursor: pointer
+
+.btn_a_plus
+  @extend .btn
+  &:after
+    content: "\A0"
+    display: inline-block
+    width: 8px
+    height: 1em
+    background: image-url('redde/plus.svg') no-repeat 50% 3px
+    margin-left: 13px
+
+.btn_b_prev
+  @extend .btn
+  &:before
+    content: "\A0"
+    display: inline-block
+    width: 8px
+    height: 1em
+    background: image-url('redde/prev.svg') no-repeat center bottom
+    background-size: auto 9px
+    margin-right: 5px
