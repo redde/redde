@@ -44,7 +44,7 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def redde_image_field(name, *args)
-    concat empty_wrap(image_tag(object.send(name), class: 'redde-form__img-preview') + check_box(:remove_preview) + label(:remove_preview)) if object.send(name).present?
+    concat empty_wrap(image_tag(object.send(name), class: 'redde-form__img-preview') + check_box("remove_#{name}") + label("remove_#{name}")) if object.send(name).present?
     redde_file_field(name, *args)
   end
 
