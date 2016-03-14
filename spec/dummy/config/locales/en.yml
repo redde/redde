@@ -16,6 +16,11 @@ ru:
         many: Категории
         one: Категория
         other: Категории
+      calculator:
+        acc: калькулятор
+        many: Калькуляторы
+        one: Калькулятор
+        other: Калькуляторов
 
     attributes:
       article:
@@ -31,3 +36,6 @@ ru:
         title: 'Заголовок'
         position: Позиция
         visible: Отображать на сайте
+      calculator:
+        name: Название
+        hop: Хоп

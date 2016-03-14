@@ -64,13 +64,16 @@ module Redde::IndexHelper
   end
 
   def index_columns
-    return model_name::INDEX_COLUMNS if defined?(model_name::INDEX_COLUMNS)
-    column_names
+    return column_names unless defined?(model_name::INDEX_COLUMNS)
+    return model_name::INDEX_COLUMNS if model_name::INDEX_COLUMNS.is_a?(Array)
+    model_name::INDEX_COLUMNS.keys
   end
 
   def form_column_names
+    return column_names.select { |i| !IGNORED_COLUMNS.include?(i) } unless defined?(model_name::FORM_COLUMNS)
     return model_name::FORM_COLUMNS if defined?(model_name::FORM_COLUMNS)
-    column_names.select { |i| !IGNORED_COLUMNS.include?(i) }
+    res = model_name::INDEX_COLUMNS
+    res.keys if model_name::INDEX_COLUMNS.is_a?(Hash)
   end
 
   def sort_priority(column_name)
@@ -134,13 +137,18 @@ module Redde::IndexHelper
   end
 
   def render_item_column(item, column)
-    value = item.send(column)
+    value = index_value_for(item, column)
     return 'Не задано' unless value.present?
     case value.class.name
-    when 'Time' then l(item.send(column), format: '%d %b %Y, %H:%M')
-    when 'Date' then l(item.send(column), format: '%d %b %Y')
+    when 'Time' then l(value, format: '%d %b %Y, %H:%M')
+    when 'Date' then l(value, format: '%d %b %Y')
     else
       value
     end
+  end
+
+  def index_value_for(item, column)
+    return eval(model_name::INDEX_COLUMNS[column.to_sym]) if defined?(model_name::INDEX_COLUMNS) && model_name::INDEX_COLUMNS.is_a?(Hash) && model_name::INDEX_COLUMNS[column.to_sym].present?
+    item.send(column)
   end
 end
