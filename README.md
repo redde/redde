@@ -185,11 +185,9 @@ If you need to add, for example, link to nested model, you can define hash insid
 class Calculator < ActiveRecord::Base
   INDEX_COLUMNS = {
     name: '',
-    hop: "link_to \"Live (#{2 * 2})\", root_url"
+    hop: ->(item) { ActionController::Base.helpers.link_to("На сайт (#{2 * 2})", Rails.application.routes.url_helpers.root_path(id: item.id)) }
   }
   FORM_COLUMNS = %w(name)
 end
 
 ```
-
-

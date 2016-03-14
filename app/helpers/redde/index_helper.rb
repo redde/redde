@@ -148,7 +148,7 @@ module Redde::IndexHelper
   end
 
   def index_value_for(item, column)
-    return eval(model_name::INDEX_COLUMNS[column.to_sym]) if defined?(model_name::INDEX_COLUMNS) && model_name::INDEX_COLUMNS.is_a?(Hash) && model_name::INDEX_COLUMNS[column.to_sym].present?
+    return model_name::INDEX_COLUMNS[column.to_sym].call(item) if defined?(model_name::INDEX_COLUMNS) && model_name::INDEX_COLUMNS.is_a?(Hash) && model_name::INDEX_COLUMNS[column.to_sym].present?
     item.send(column)
   end
 end
