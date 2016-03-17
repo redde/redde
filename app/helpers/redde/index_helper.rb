@@ -137,7 +137,7 @@ module Redde::IndexHelper
   end
 
   def render_item_column(item, column)
-    value = index_value_for(item, column).html_safe
+    value = index_value_for(item, column).try(:html_safe)
     return 'Не задано' unless value.present?
     case value.class.name
     when 'Time' then l(value, format: '%d %b %Y, %H:%M')
