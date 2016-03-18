@@ -97,7 +97,7 @@ module Redde
         when 'url' then 'Ссылка'
         when 'value' then 'Значение'
         when 'articul' then 'Артикул'
-        when 'guid' then '1С'
+        when 'guid' then 'GUID'
         when 'tag_list' then 'Тэги'
         when 'category_id' then 'Категория'
         when 'message' then 'Сообщение'
