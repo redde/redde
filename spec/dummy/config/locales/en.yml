@@ -7,10 +7,10 @@ ru:
         one: Статья
         other: Статьи
       article_category:
-        acc: категорию
-        many: Категории
-        one: Категория
-        other: Категории
+        acc: категорию статьи
+        many: Категории статей
+        one: Категория статьи
+        other: Категории статей
       category:
         acc: категорию
         many: Категории
@@ -28,6 +28,8 @@ ru:
         slug: 'URL'
         text: 'Статья'
         body: Текст
+        published_at: Дата публикации
+        preview: Изображение
       article_category:
         title: 'Заголовок'
         position: Позиция
@@ -36,6 +38,7 @@ ru:
         title: 'Заголовок'
         position: Позиция
         visible: Отображать на сайте
+        parent_id: Родительская категория
       calculator:
         name: Название
         hop: Хоп

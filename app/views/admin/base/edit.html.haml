@@ -1,8 +1,9 @@
 = redde_page do |f|
   - form_column_names.each do |column|
-    = f.redde_field column.to_sym
-  - if column_names.include?('ancestry')
-    = f.redde_select :parent_id, ancestry_tree(model_name.roots.order(:position), title_symbol_for(instance_variable_get("@#{record}"))), include_blank: 'Корневая'
+    - if column == 'ancestry'
+      = f.redde_select :parent_id, ancestry_tree(model_name.roots.order(:position), title_symbol_for(instance_variable_get("@#{record}"))), include_blank: 'Корневая'
+    - else
+      = f.redde_field column.to_sym
 
   -# %div= render 'redditor/admin/page', { f: f } if @article.methods.include?(:page)
 

@@ -1,6 +1,5 @@
 = page_header
 
-- res_collection = instance_variable_get("@#{collection}")
-
-= list_table res_collection do |item, column|
-  %td.list__cell= render_item_column(item, column)
+= list_table instance_variable_get("@#{collection}") do |t|
+  - (index_columns - ['position', 'visible']).each do |column|
+    = t.cell column

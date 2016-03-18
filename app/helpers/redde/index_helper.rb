@@ -11,36 +11,111 @@ module Redde::IndexHelper
     model_name.columns.select { |i| i.type == :string }.first
   end
 
-  def list_table(res_collection, &block)
-    render layout: 'admin/redde/list', locals: { res_collection: res_collection } do
-      res_collection.each do |item|
-        concat list_table_row( item, &block )
+  class IndexBuilder
+    include ActionView::Helpers::TagHelper
+    include ActionView::Context
+
+    attr_accessor :list, :params
+
+    def initialize(list, params)
+      @list = list
+      @params = params
+    end
+
+    def empty( options = {} )
+      content_tag(:th, "", class: ['list__head', options[:class]])
+    end
+
+    def thead insert
+      content_tag :thead do
+        content_tag(:tr, empty + visible + insert + empty(class: 'list__head_del') + empty)
+      end
+    end
+
+    def visible
+      empty(class: '_eye') if list.column_names.include?('visible')
+    end
+
+    class IndexHeadCellBuilder
+      include ActionView::Helpers::TagHelper
+      include ActionView::Context
+
+      attr_accessor :list
+
+      def initialize(list)
+        @list = list
+      end
+
+      def cell field = nil, options = {}, &block
+        content_tag :th, list.human_attribute_name(field), class: ['list__head', options[:class]]
+      end
+    end
+
+    class IndexCellBuilder
+      include ActionView::Helpers
+      include ActionView::Context
+      include ActionView::Helpers::UrlHelper
+      include Rails.application.routes.url_helpers
+      include Haml::Helpers
+
+      attr_accessor :item, :builder
+
+      def initialize(item, builder)
+        @item = item
+        @builder = builder
+        init_haml_helpers
+      end
+
+      def self.content value
+        case value.class.name
+        when 'Time' then I18n.l(value, format: '%d %b %Y, %H:%M')
+        when 'Date' then I18n.l(value, format: '%d %b %Y')
+        else
+          value
+        end
+      end
+
+      def cell(field, options = {}, &block)
+        # через content_tag ... do не работает
+        content_tag :td, if block_given? then capture(&block) else IndexCellBuilder.content(item.send(field)) end, class: ['list__cell', options[:class]]
+      end
+
+      def empty(options = {})
+        content_tag(:td, "", class: ['list__cell', options[:class]])
+      end
+
+      def handle
+        return content_tag(:td, "", class: ['list__cell', '_handle'], 'data-sortable-handle' => "") if item.class.column_names.include?('position')
+        empty
+      end
+
+      def visible
+        content_tag :td, class: 'list__cell _eye' do
+          link_to('', url_for(id: item, controller: builder.params[:controller], action: :update, item.class.model_name.param_key => { visible: !item.visible} ), class: ['list__eye', ('_disactive' if !item.visible)], data: { method: 'put' })
+        end if item.class.column_names.include?('visible')
+      end
+
+      def del
+        content_tag :td, class: 'list__cell list__cell_del' do
+          link_to('', url_for(id: item, action: :destroy, controller: builder.params[:controller]), method: :delete, data: { confirm: 'Точно удалить?' }, class: 'list__del')
+        end
       end
     end
   end
 
-  def list_table_row(item, &block)
-    render layout: 'admin/redde/row', locals: { item: item } do
-      index_columns.each do |column|
-        concat list_table_cell(item, column, &block)
-      end
-    end
-  end
+  def list_table(list, options = {}, &block)
+    raise ArgumentError, "Missing block" unless block_given?
+    builder = IndexBuilder.new(list, params)
 
-  def list_table_cell(item, column, &block)
-    case column
-    when 'position'
-      content_tag(:td, "", class: 'list__cell _handle', 'data-sortable-handle' => "")
-    when 'visible'
-      content_tag(:td, link_to('', url_for(id: item, action: :update, record => { visible: !item.visible} ), class: ['list__eye', ('_disactive' if !item.visible)], data: { method: 'put' }), class: 'list__cell _eye')
-    when 'title', 'name'
-      content_tag(:td, link_to(item.send(column), url_for(id: item, action: :edit)), class: 'list__cell')
-    else
-      if block_given?
-        capture(item, column, &block)
-      else
-        content_tag :td, item.send(column), class: 'list__cell'
-      end
+    html = list.map do |item|
+      cb = IndexBuilder::IndexCellBuilder.new(item, builder)
+      content_tag(:tr, cb.handle + cb.visible + capture(cb, &block) + cb.del + cb.empty, 'data-href' => url_for(id: item, action: :edit), 'data-sortable-item' => "", id: "pos_#{item.id}")
+    end.join.html_safe
+
+    hb = IndexBuilder::IndexHeadCellBuilder.new(list)
+    content_tag :table, class: ['list', options[:class]], style: options[:style], "data-sortable" => { handle: "[data-sortable-handle]" }.to_json do
+      concat builder.thead( capture(hb, &block) )
+      concat html
     end
   end
 

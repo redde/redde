@@ -4,9 +4,6 @@ class Admin::BaseController < ActionController::Base
   include Redde::AdminHelper
   include Redde::IndexHelper
 
-  def welcome
-  end
-
   def index
     instance_variable_set("@#{collection}", scope)
     return render 'tree' if column_names.include?('ancestry')
