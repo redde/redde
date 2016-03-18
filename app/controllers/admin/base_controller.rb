@@ -76,6 +76,6 @@ class Admin::BaseController < ActionController::Base
   def url_for_obj(obj, custom_url = nil)
     return custom_url if custom_url.present?
     return [:edit, :admin, obj] if params[:commit] == 'Применить'
-    [:admin, obj.class.model_name.plural.to_sym]
+    [:admin, obj.class]
   end
 end
