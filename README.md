@@ -163,3 +163,31 @@ ru:
         position: Позиция
         visible: Отображать на сайте
 ```
+
+## Index view customization
+
+By default, gem will render view with all fields.
+You can customize this in two ways:
+
+### Array
+
+You can `INDEX_COLUMNS` array to your model to customize index fields and ther sort order by defining constant inside model
+
+```
+INDEX_COLUMNS = %w(title created_at)
+```
+
+### Hash
+
+If you need to add, for example, link to nested model, you can define hash inside model:
+
+```
+class Calculator < ActiveRecord::Base
+  INDEX_COLUMNS = {
+    name: '',
+    hop: ->(item) { ActionController::Base.helpers.link_to("На сайт (#{2 * 2})", Rails.application.routes.url_helpers.root_path(id: item.id)) }
+  }
+  FORM_COLUMNS = %w(name)
+end
+
+```
