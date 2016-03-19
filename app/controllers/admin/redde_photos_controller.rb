@@ -8,8 +8,12 @@ class Admin::ReddePhotosController < ActionController::Base
   end
 
   def create
-    parent = photo_params[:imageable_type].constantize.find(photo_params[:imageable_id])
-    @photo = parent.photos.build(photo_params)
+    if photo_params[:imageable_id].present?
+      parent = photo_params[:imageable_type].constantize.find(photo_params[:imageable_id])
+      @photo = parent.photos.build(photo_params)
+    else
+      @photo = Redde::Photo.new(photo_params)
+    end
     if @photo.save
       render(partial: 'photo', object: @photo)
     else

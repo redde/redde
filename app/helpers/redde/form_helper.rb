@@ -10,6 +10,7 @@ module Redde::FormHelper
   def redde_form_for(object, options = {}, &block)
     options = make_options(options)
     options[:builder] ||= ReddeFormBuilder
+    options[:html] = { 'data-redde' => { objectName: (object.kind_of?(Array) ? object.last : object).class.model_name.param_key }.to_json }
 
     with_clean_form_field_error_proc do
       form_for(object, options) do |f|

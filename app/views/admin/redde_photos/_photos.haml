@@ -1,23 +1,22 @@
-- unless parent.new_record?
-  = page_sidebar raw("Фотографии ").concat(if editable ||= false then link_to("ред.", [:admin, parent]) end) do
-    %ul.photos.js-photos{ "data-sortable" => { items: :li, handle: nil, axis: nil, url: url_for([:sort, :admin, :redde_photos])}.to_json }
-      = render partial: 'admin/redde_photos/photo', collection: parent.photos
+= page_sidebar raw("Фотографии ").concat(if editable ||= false then link_to("ред.", [:admin, parent]) end) do
+  %ul.photos.js-photos{ "data-sortable" => { items: :li, handle: nil, axis: nil, url: url_for([:sort, :admin, :redde_photos])}.to_json, form: 'new_article' }
+    = render partial: 'admin/redde_photos/photo', collection: parent.photos
 
-    -#
-      #preview
-      #drag-n-drop{:style => "display: none; margin-top: 5px;"}
-        #drop-zone.b-dropzone{style: 'height: 100px;', data: {"upload-url" => url_for([:admin, parent, :photos])}}
-          .b-dropzone__bg
-          .b-dropzone__txt Перетащите файлы сюда
+  -#
+    #preview
+    #drag-n-drop{:style => "display: none; margin-top: 5px;"}
+      #drop-zone.b-dropzone{style: 'height: 100px;', data: {"upload-url" => url_for([:admin, Redde::Photo])}}
+        .b-dropzone__bg
+        .b-dropzone__txt Перетащите файлы сюда
 
-      #buttons-panel{style: 'margin-bottom: 10px;'}
-        .b-button.js-fileapi-wrapper
-          .b-button__text Загрузить файлы
-          %input.b-button__input.js-fileapi{:name => "files", :type => "file",  :multiple => true, data: {"upload-url" => url_for([:admin, parent, :photos])}}
+    #buttons-panel{style: 'margin-bottom: 10px;'}
+      .b-button.js-fileapi-wrapper
+        .b-button__text Загрузить файлы
+        %input.b-button__input.js-fileapi{:name => "files", :type => "file",  :multiple => true, data: {"upload-url" => url_for([:admin, Redde::Photo])}}
 
-    = form_for [:admin, parent.photos.build], html: { class: 'photos-uploader js-photos-uploader' } do |f|
-      = f.hidden_field :imageable_type
-      = f.hidden_field :imageable_id
-      %span.sbm.photos-uploader__btn.icon-upload
-        Загрузить
-        = f.file_field :src, class: 'photos-uploader__inp'
+  = form_for [:admin, parent.photos.build], html: { class: 'photos-uploader js-photos-uploader' } do |f|
+    = f.hidden_field :imageable_type
+    = f.hidden_field :imageable_id
+    %span.sbm.photos-uploader__btn.icon-upload
+      Загрузить
+      = f.file_field :src, class: 'photos-uploader__inp'

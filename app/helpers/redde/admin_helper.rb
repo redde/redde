@@ -24,7 +24,7 @@ module Redde::AdminHelper
     capture do
       concat page_header
       concat redde_form_for([:admin, item]) { |f| capture(f, &block) }
-      concat photoable(item)
+      concat render('admin/redde_photos/photos', parent: item) if item.class.reflect_on_association(:photos)
     end
   end
 
@@ -59,10 +59,6 @@ module Redde::AdminHelper
     classes = ['sidebar__link']
     classes << '_active' if active_names.include?(controller_name)
     link_to title, path, class: classes
-  end
-
-  def photoable(parent)
-    render('admin/redde_photos/photos', parent: parent) if parent.class.reflect_on_association(:photos)
   end
 
   def tsingular(model)
