@@ -1,0 +1,6 @@
+= list_table @articles do |t|
+  = t.cell class: '_photo' do
+    - if t.item.photos.any?
+      = image_tag "redde/photo.svg"
+  = t.cell :title
+  = t.cell :published_at

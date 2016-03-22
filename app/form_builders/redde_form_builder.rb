@@ -1,5 +1,5 @@
 class ReddeFormBuilder < ActionView::Helpers::FormBuilder
-  delegate :render, :content_tag, :tag, :link_to, :image_tag, :concat, :capture, to: :@template
+  delegate :raw, :render, :content_tag, :tag, :link_to, :image_tag, :concat, :capture, to: :@template
   # delegate :debug, :render, :content_tag, :tag, :link_to, :concat, :capture, to: :@template
 
   def redde_field(name, *args)
@@ -53,8 +53,13 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
 
   def redde_file_field(name, *args)
     options = args.extract_options!
-    options[:class] = assign_class(['redde-form__file'], options[:class])
-    wrap(name, file_field(name, options), options)
+    wrap(name, options) do
+      content_tag(:span, class: ['redde-form__file rfile jsr-file', options[:class]]) do
+        concat content_tag :span, raw('Загрузить') + content_tag(:span, file_field(name, options.merge(class: 'rfile__inp')), class: 'rfile__wrap jsr-file--wrap'), class: 'rfile__btn btn icon-upload'
+        concat content_tag(:span, '', class: 'rfile__name jsr-file--name')
+        concat content_tag(:span, 'удал.', class: 'rfile__del jsr-file--del', hidden: "")
+      end
+    end
   end
 
   def redde_text_area(name, *args)

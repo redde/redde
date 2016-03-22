@@ -6,6 +6,7 @@
 #= require ./sortTree
 #= require ./fileapi
 #= require ./redactor
+#= require ./file
 
 $ ->
   $(document).on 'click', '[data-href]', (e)->

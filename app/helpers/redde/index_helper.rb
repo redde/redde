@@ -47,7 +47,13 @@ module Redde::IndexHelper
       end
 
       def cell field = nil, options = {}, &block
-        content_tag :th, list.human_attribute_name(field), class: ['list__head', options[:class]]
+        if field.is_a?(Symbol) || field.is_a?(String)
+          content_tag :th, list.human_attribute_name(field), class: ['list__head', options[:class]]
+        elsif field.is_a?(Hash)
+          content_tag :th, "", class: ['list__head', field[:class]]
+        elsif field.nil?
+          content_tag :th, "", class: 'list__head'
+        end
       end
     end
 
@@ -77,7 +83,11 @@ module Redde::IndexHelper
 
       def cell(field, options = {}, &block)
         # через content_tag ... do не работает
-        content_tag :td, if block_given? then capture(&block) else IndexCellBuilder.content(item.send(field)) end, class: ['list__cell', options[:class]]
+        if field.is_a?(Hash)
+          content_tag :td, capture(&block), class: ['list__cell', field[:class]]
+        else
+          content_tag :td, if block_given? then capture(&block) else IndexCellBuilder.content(item.send(field)) end, class: ['list__cell', options[:class]]
+        end
       end
 
       def empty(options = {})
