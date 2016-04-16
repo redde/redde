@@ -1,9 +1,11 @@
+@import redde/mixins
+
 .phead-tabs
   display: block
   clear: both
   font-size: 12px
   padding-top: 15px
-  margin-bottom: -16px
+  margin-bottom: -19px
 
 .phead-tabs__link
   padding: 0.5em (5em/6)
@@ -11,8 +13,6 @@
   border: 1px solid transparent
   border-radius: 3px 3px 0 0
   margin-left: -1px
-  &:link
-    text-decoration: underline // по дефолту прописано a:hover, в дальнейшем убрать
   &:first-child
     margin-left: -(5em/6)
   &:hover
@@ -25,3 +25,8 @@
     background: #fff
     border-color: #ddd
     border-bottom-color: #fff
+
+.phead-tabs._index
+  .phead-tabs__link._active
+    background-color: $light-gray-azure
+    border-bottom-color: $light-gray-azure

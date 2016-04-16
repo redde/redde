@@ -3,6 +3,7 @@
 //= depend_on_asset redde/eye_disactive.svg
 //= depend_on_asset redde/close.svg
 //= depend_on_asset redde/close-hover.svg
+@import redde/mixins
 
 .list
   width: auto
@@ -23,7 +24,7 @@
 .list__head
   font-size: 11px
   text-transform: uppercase
-  background: #d7e4ef
+  background: $light-gray-azure
   padding: 13px 30px 13px 0
   border-bottom: 1px solid #dddddd
   // border-bottom: 0 none
@@ -31,7 +32,7 @@
 
   &:first-child,
   &:last-child
-    background: #d7e4ef
+    background: $light-gray-azure
     padding-right: 0
     min-width: 10px
     width: 0.01%
