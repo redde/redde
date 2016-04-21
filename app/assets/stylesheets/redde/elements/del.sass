@@ -8,12 +8,11 @@
   background: image-url('redde/close.svg') center no-repeat
   text-decoration: none
 
+.del
+  @extend %del
   // for button tag
   cursor: pointer
   border: none
-
-.del
-  @extend %del
   &:before
     content: '\A0'
   &:hover
