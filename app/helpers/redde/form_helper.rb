@@ -12,11 +12,16 @@ module Redde::FormHelper
     options[:builder] ||= ReddeFormBuilder
     options[:html] = { 'data-redde' => { objectName: (object.kind_of?(Array) ? object.last : object).class.model_name.param_key }.to_json }
 
+    # через blank? не заработало
+    # options[:redde] = {} if options[:redde].blank?
+    # options[:redde][:submits] = true if options[:redde][:submits].blank?
+    options[:redde] = {} unless options.try(:key?, :redde)
+    options[:redde][:submits] = true unless options[:redde].try(:key?, :submits)
+
     with_clean_form_field_error_proc do
       form_for(object, options) do |f|
         concat f.error_messages
-        concat content_tag(:table, capture(f, &block), class: 'redde-form__tbl')
-        concat f.redde_submits
+        concat content_tag(:table, capture(f, &block).concat(if options[:redde][:submits] then f.redde_submits end), class: 'redde-form__tbl')
       end
     end
   end

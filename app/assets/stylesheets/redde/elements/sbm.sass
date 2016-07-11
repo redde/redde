@@ -1,3 +1,5 @@
+//= depend_on_asset redde/enter.svg
+
 @import redde/mixins
 
 .sbm
@@ -13,10 +15,6 @@
   outline: none
   text-decoration: none
 
-  &[disabled]
-    background: #9ea2a4
-    cursor: default
-
   &:hover
     background: mix($link, #388cb5)
     background: linear-gradient($link 70%, #388cb5 100%)
@@ -31,3 +29,7 @@
     width: round(16/13*$sbm-size)
     margin-right: round(10/13*$sbm-size)
     background: image-url('redde/enter.svg') no-repeat 0 5px
+
+  &[disabled]
+    background: #9ea2a4
+    cursor: default

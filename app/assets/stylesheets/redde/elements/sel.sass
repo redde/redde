@@ -1,4 +1,5 @@
 //= depend_on_asset redde/sel.svg
+//= depend_on_asset redde/sel-989c9f.svg
 
 @import redde/mixins
 
@@ -24,6 +25,12 @@
     border-color: #5bacd4
     box-shadow: 0 0 0 1px #5bacd4
 
-  // &._err
-  //   border-color: $light-red
-  //   box-shadow: 0 0 0 1px $light-red
+  &._err
+    border-color: $light-red
+    box-shadow: 0 0 0 1px $light-red
+
+  &[disabled]
+    border-color: #ddd
+    background-color: #eee
+    color: #989c9f
+    background: #fff image-url('sel-989c9f.svg') no-repeat right 10px top 14px

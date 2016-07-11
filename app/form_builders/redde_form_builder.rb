@@ -76,10 +76,14 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def redde_submits *args, &block
-    content_tag :div, class: 'redde-form__actions' do
-      concat redde_submit('Сохранить', class: 'redde-form__sbm')
-      concat redde_submit('Применить', class: 'redde-form__sbm')
-      concat capture(&block) if block_given?
+    content_tag :tfoot do
+      content_tag :tr do
+        content_tag :td, colspan: 2, class: 'redde-form__actions' do
+          concat redde_submit('Сохранить', class: 'redde-form__sbm')
+          concat redde_submit('Применить', class: 'redde-form__sbm')
+          concat capture(&block) if block_given?
+        end
+      end
     end
   end
 
