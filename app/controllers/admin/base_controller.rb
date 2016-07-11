@@ -1,5 +1,5 @@
 class Admin::BaseController < ActionController::Base
-  layout 'admin'
+  layout 'redde'
   before_action :authenticate_manager!
   include Redde::AdminHelper
   include Redde::IndexHelper
