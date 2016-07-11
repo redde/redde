@@ -107,7 +107,7 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
 
   def fieldset(name, *args, &block)
     options = args.extract_options!
-    content_tag(:tbody, class: options[:class]) do
+    content_tag(:tbody, class: ['redde-form__fieldset', options[:class]].flatten.compact) do
       concat content_tag(:tr, content_tag(:th, name, colspan: 2, class: 'redde-form__thead'))
       concat capture(&block)
     end
