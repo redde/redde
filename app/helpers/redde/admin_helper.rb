@@ -1,6 +1,13 @@
 # coding: utf-8
 module Redde::AdminHelper
 
+  def redde_flash
+    msg = "".html_safe
+    msg.concat content_tag(:div, flash[:notice], class: 'flash-msg _notice') if flash[:notice].present?
+    msg.concat content_tag(:div, flash[:alert], class: 'flash-msg _alert') if flash[:alert].present?
+    msg
+  end
+
   def page_sidebar title = nil, &block
     content_for :page_sidebar do
       concat content_tag(:div, title, class: 'page-sidebar__title') if title

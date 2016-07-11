@@ -14,10 +14,7 @@
       = render 'admin/redde/sidebar'
       .ra-layout__main.main
         = yield(:page_header)
-        - if notice
-          .flash-msg._notice= notice
-        - if alert
-          .flash-msg._alert= alert
+        = redde_flash
         - if yield(:page_sidebar).present?
           .main__sidebar.page-sidebar= yield(:page_sidebar)
         .main__content= yield
