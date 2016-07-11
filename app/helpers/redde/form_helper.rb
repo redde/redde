@@ -12,11 +12,8 @@ module Redde::FormHelper
     options[:builder] ||= ReddeFormBuilder
     options[:html] = { 'data-redde' => { objectName: (object.kind_of?(Array) ? object.last : object).class.model_name.param_key }.to_json }
 
-    # через blank? не заработало
-    # options[:redde] = {} if options[:redde].blank?
-    # options[:redde][:submits] = true if options[:redde][:submits].blank?
-    options[:redde] = {} unless options.try(:key?, :redde)
-    options[:redde][:submits] = true unless options[:redde].try(:key?, :submits)
+    options[:redde] = {} unless options.key?(:redde)
+    options[:redde][:submits] = true unless options[:redde].key?(:submits)
 
     with_clean_form_field_error_proc do
       form_for(object, options) do |f|
