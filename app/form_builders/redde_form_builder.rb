@@ -57,7 +57,7 @@ class ReddeFormBuilder < ActionView::Helpers::FormBuilder
       content_tag(:span, class: ['redde-form__file rfile jsr-file', options[:class]]) do
         concat content_tag :span, raw('Загрузить') + content_tag(:span, file_field(name, options.merge(class: 'rfile__inp')), class: 'rfile__wrap jsr-file--wrap'), class: 'rfile__btn btn icon-upload'
         concat content_tag(:span, '', class: 'rfile__name jsr-file--name')
-        concat content_tag(:span, 'удал.', class: 'rfile__del jsr-file--del', hidden: "")
+        concat content_tag(:span, raw('&nbsp;'), title: 'удалить', class: 'rfile__del jsr-file--del', hidden: "")
       end
     end
   end

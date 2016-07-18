@@ -1,6 +1,14 @@
 # coding: utf-8
 module Redde::AdminHelper
 
+  def redde_file_field_tag name, options = {}
+    content_tag(:span, class: ['redde-form__file rfile jsr-file', options[:class]]) do
+      concat content_tag :span, raw('Загрузить') + content_tag(:span, file_field_tag(name, options.merge(class: 'rfile__inp')), class: 'rfile__wrap jsr-file--wrap'), class: 'rfile__btn btn icon-upload'
+      concat content_tag(:span, '', class: 'rfile__name jsr-file--name')
+      concat content_tag(:span, raw('&nbsp;'), title: 'удалить', class: 'rfile__del jsr-file--del', hidden: "")
+    end
+  end
+
   def redde_flash
     msg = "".html_safe
     msg.concat content_tag(:div, flash[:notice], class: 'flash-msg _notice') if flash[:notice].present?
