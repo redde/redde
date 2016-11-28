@@ -4,6 +4,7 @@ notifications:
   email: false
 rvm:
   - 2.2
+  - 2.3
 before_install:
   - gem install bundler
 before_script:
