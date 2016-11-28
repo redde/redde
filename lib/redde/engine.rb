@@ -11,5 +11,8 @@ module Redde
         redde/favicon.png
       )
     end
+    initializer 'ReddeEngine.add_message_bus' do |app|
+      app.middleware.use MessageBus::Rack::Middleware
+    end
   end
 end

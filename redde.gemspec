@@ -29,6 +29,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'mini_magick'
   spec.add_runtime_dependency 'kaminari'
   spec.add_runtime_dependency 'ancestry'
+  spec.add_runtime_dependency 'message_bus'
+  spec.add_runtime_dependency 'redis'
   spec.add_dependency 'rails', '>= 3.1'
   spec.add_dependency 'sass-rails'
 
@@ -47,4 +49,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'ffaker'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'launchy'
+  spec.add_development_dependency 'puma'
 end

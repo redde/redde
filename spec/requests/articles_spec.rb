@@ -18,7 +18,8 @@ feature 'Articles' do
   scenario 'Renders edit page' do
     article
     visit admin_articles_path
-    click_link article.title
+    expect(page).to have_content article.title
+    visit edit_admin_article_path(article)
     expect(page).to have_content 'Редактировать'
   end
 end

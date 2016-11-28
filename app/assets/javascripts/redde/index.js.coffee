@@ -7,6 +7,7 @@
 #= require ./fileapi
 #= require ./redactor
 #= require ./file
+#= require message-bus
 
 $ ->
   $(document).on 'click', '[data-href]', (e)->

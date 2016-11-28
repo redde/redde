@@ -16,7 +16,8 @@ feature 'Article Categories' do
   scenario 'Renders edit page' do
     article_category
     visit admin_article_categories_path
-    click_link article_category.title
+    expect(page).to have_content article_category.title
+    visit edit_admin_article_category_path(article_category)
     expect(page).to have_content 'Редактировать'
   end
 

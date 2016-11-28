@@ -16,6 +16,7 @@ require 'jquery-ui-rails'
 require 'coffee-rails'
 require 'devise'
 require 'rails'
+require 'message_bus'
 
 Encoding.default_external = Encoding::UTF_8
 Encoding.default_internal = Encoding::UTF_8

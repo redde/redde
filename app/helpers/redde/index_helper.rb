@@ -11,108 +11,6 @@ module Redde::IndexHelper
     model_name.columns.select { |i| i.type == :string }.first
   end
 
-  class IndexBuilder
-    include ActionView::Helpers::TagHelper
-    include ActionView::Context
-
-    attr_accessor :list, :params
-
-    def initialize(list, params)
-      @list = list
-      @params = params
-    end
-
-    def empty( options = {} )
-      content_tag(:th, "", class: ['list__head', options[:class]])
-    end
-
-    def thead insert
-      content_tag :thead do
-        content_tag(:tr, empty + visible + insert + empty(class: 'list__head_del') + empty)
-      end
-    end
-
-    def visible
-      empty(class: '_eye') if list.column_names.include?('visible')
-    end
-
-    class IndexHeadCellBuilder
-      include ActionView::Helpers::TagHelper
-      include ActionView::Context
-
-      attr_accessor :list
-
-      def initialize(list)
-        @list = list
-      end
-
-      def cell field = nil, options = {}, &block
-        if field.is_a?(Symbol) || field.is_a?(String)
-          content_tag :th, list.human_attribute_name(field), class: ['list__head', options[:class]]
-        elsif field.is_a?(Hash)
-          content_tag :th, "", class: ['list__head', field[:class]]
-        elsif field.nil?
-          content_tag :th, "", class: 'list__head'
-        end
-      end
-    end
-
-    class IndexCellBuilder
-      include ActionView::Helpers
-      include ActionView::Context
-      include ActionView::Helpers::UrlHelper
-      include Rails.application.routes.url_helpers
-      include Haml::Helpers
-
-      attr_accessor :item, :builder
-
-      def initialize(item, builder)
-        @item = item
-        @builder = builder
-        init_haml_helpers
-      end
-
-      def self.content value
-        case value.class.name
-        when 'Time' then I18n.l(value, format: '%d %b %Y, %H:%M')
-        when 'Date' then I18n.l(value, format: '%d %b %Y')
-        else
-          value
-        end
-      end
-
-      def cell(field, options = {}, &block)
-        # через content_tag ... do не работает
-        if field.is_a?(Hash)
-          content_tag :td, capture(&block), class: ['list__cell', field[:class]]
-        else
-          content_tag :td, if block_given? then capture(&block) else IndexCellBuilder.content(item.send(field)) end, class: ['list__cell', options[:class]]
-        end
-      end
-
-      def empty(options = {})
-        content_tag(:td, "", class: ['list__cell', options[:class]])
-      end
-
-      def handle
-        return content_tag(:td, "", class: ['list__cell', '_handle'], 'data-sortable-handle' => "") if item.class.column_names.include?('position')
-        empty
-      end
-
-      def visible
-        content_tag :td, class: 'list__cell _eye' do
-          link_to('', url_for(id: item, controller: builder.params[:controller], action: :update, item.class.model_name.param_key => { visible: !item.visible} ), class: ['list__eye', ('_disactive' if !item.visible)], data: { method: 'put' })
-        end if item.class.column_names.include?('visible')
-      end
-
-      def del
-        content_tag :td, class: 'list__cell list__cell_del' do
-          link_to('', url_for(id: item, action: :destroy, controller: builder.params[:controller]), method: :delete, data: { confirm: 'Точно удалить?' }, class: 'list__del')
-        end
-      end
-    end
-  end
-
   def list_table(list, options = {}, &block)
     raise ArgumentError, "Missing block" unless block_given?
     builder = IndexBuilder.new(list, params)
@@ -233,7 +131,111 @@ module Redde::IndexHelper
   end
 
   def index_value_for(item, column)
-    return model_name::INDEX_COLUMNS[column.to_sym].call(item) if defined?(model_name::INDEX_COLUMNS) && model_name::INDEX_COLUMNS.is_a?(Hash) && model_name::INDEX_COLUMNS[column.to_sym].present?
+    "#{item.model_name}::INDEX_COLUMNS".constantize[column.to_sym].call(item)
+  rescue
     item.send(column)
+  end
+
+  class IndexBuilder
+    include ActionView::Helpers::TagHelper
+    include ActionView::Context
+
+    attr_accessor :list, :params
+
+    def initialize(list, params)
+      @list = list
+      @params = params
+    end
+
+    def empty( options = {} )
+      content_tag(:th, "", class: ['list__head', options[:class]])
+    end
+
+    def thead insert
+      content_tag :thead do
+        content_tag(:tr, empty + visible + insert + empty(class: 'list__head_del') + empty)
+      end
+    end
+
+    def visible
+      empty(class: '_eye') if list.column_names.include?('visible')
+    end
+
+    class IndexHeadCellBuilder
+      include ActionView::Helpers::TagHelper
+      include ActionView::Context
+
+      attr_accessor :list
+
+      def initialize(list)
+        @list = list
+      end
+
+      def cell field = nil, options = {}, &block
+        if field.is_a?(Symbol) || field.is_a?(String)
+          content_tag :th, list.human_attribute_name(field), class: ['list__head', options[:class]]
+        elsif field.is_a?(Hash)
+          content_tag :th, "", class: ['list__head', field[:class]]
+        elsif field.nil?
+          content_tag :th, "", class: 'list__head'
+        end
+      end
+    end
+
+    class IndexCellBuilder
+      include ActionView::Helpers
+      include ActionView::Context
+      include ActionView::Helpers::UrlHelper
+      include Redde::IndexHelper
+      include Rails.application.routes.url_helpers
+      include Haml::Helpers
+
+      attr_accessor :item, :builder
+
+      def initialize(item, builder)
+        @item = item
+        @builder = builder
+        init_haml_helpers
+      end
+
+      def self.content(value)
+        case value.class.name
+        when 'Time' then I18n.l(value, format: '%d %b %Y, %H:%M')
+        when 'Date' then I18n.l(value, format: '%d %b %Y')
+        else
+          value
+        end
+      end
+
+      def cell(field, options = {}, &block)
+        # через content_tag ... do не работает
+        if field.is_a?(Hash)
+          content_tag :td, capture(&block), class: ['list__cell', field[:class]]
+        else
+          content_tag :td, if block_given? then capture(&block) else raw(IndexCellBuilder.content(index_value_for(item, field))) end, class: ['list__cell', options[:class]]
+        end
+      end
+
+      def empty(options = {})
+        content_tag(:td, "", class: ['list__cell', options[:class]])
+      end
+
+      def handle
+        return content_tag(:td, "", class: ['list__cell', '_handle'], 'data-sortable-handle' => "") if item.class.column_names.include?('position')
+        empty
+      end
+
+      def visible
+        content_tag :td, class: 'list__cell _eye' do
+          link_to('', url_for(id: item, controller: builder.params[:controller], action: :update, item.class.model_name.param_key => { visible: !item.visible} ), class: ['list__eye', ('_disactive' if !item.visible)], data: { method: 'put' })
+        end if item.class.column_names.include?('visible')
+      end
+
+      def del
+        content_tag :td, class: 'list__cell list__cell_del' do
+          link_to('', url_for(id: item, action: :destroy, controller: builder.params[:controller]), method: :delete, data: { confirm: 'Точно удалить?' }, class: 'list__del')
+        end
+      end
+    end
   end
 end
