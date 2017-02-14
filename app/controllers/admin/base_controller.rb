@@ -1,6 +1,7 @@
 class Admin::BaseController < ActionController::Base
   layout 'redde'
   before_action :authenticate_manager!
+  after_action :track_viewer, only: [:edit, :update]
   include Redde::AdminHelper
   include Redde::IndexHelper
 
@@ -69,6 +70,23 @@ class Admin::BaseController < ActionController::Base
   def default_notice
     'сохранена'
   end
+
+  def use_presence?
+    defined?(Redis)
+  end
+
+  def item
+    instance_variable_get("@#{record}")
+  end
+
+  def track_viewer
+    Redde::Presence::View.new(item, current_manager.id).view if item.present?
+  end
+
+  def viewers
+    @viewers ||= Manager.where(Redde::Presence::View.viewers_of(item)) if item
+  end
+  helper_method :viewers
 
   def url_for_obj(obj, custom_url = nil)
     return custom_url if custom_url.present?
