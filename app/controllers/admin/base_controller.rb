@@ -1,6 +1,7 @@
 class Admin::BaseController < ActionController::Base
   layout 'redde'
   before_action :authenticate_manager!
+  protect_from_forgery with: :exception
   include Redde::AdminHelper
   include Redde::IndexHelper
 
