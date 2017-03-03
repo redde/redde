@@ -1,10 +1,13 @@
 script: bundle exec rspec
 language: ruby
+services:
+  - redis-server
 notifications:
   email: false
 rvm:
   - 2.2
   - 2.3
+  - 2.4
 before_install:
   - gem install bundler
 before_script:
