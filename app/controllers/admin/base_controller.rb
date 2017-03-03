@@ -2,6 +2,7 @@ class Admin::BaseController < ActionController::Base
   layout 'redde'
   before_action :authenticate_manager!
   after_action :track_viewer, only: [:edit, :update]
+  protect_from_forgery with: :exception
   include Redde::AdminHelper
   include Redde::IndexHelper
 
