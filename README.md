@@ -1,6 +1,6 @@
 # Redde
-[![Build Status](https://secure.travis-ci.org/redde/redde.png)](http://travis-ci.org/redde/redde)
-[![Code Climate](https://codeclimate.com/github/redde/redde.png)](https://codeclimate.com/github/redde/redde)
+[![Build Status](https://travis-ci.org/redde/redde.svg?branch=master)](https://travis-ci.org/redde/redde)
+[![Code Climate](https://codeclimate.com/github/redde/redde/badges/gpa.svg)](https://codeclimate.com/github/redde/redde)
 
 Admin generator for redde projects
 
