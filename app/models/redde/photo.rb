@@ -3,7 +3,7 @@ class Redde::Photo < ActiveRecord::Base
   self.table_name = 'redde_photos'
 
   opts = { polymorphic: true }
-  opts.merge!(optional: true) if Rails.version.split('.').join.to_i > 510
+  opts.merge!(optional: true) if Rails.version.split('.')[0..1].join.to_i >= 51
   
   belongs_to :imageable, opts
 
