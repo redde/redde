@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'jquery-rails'
-  spec.add_runtime_dependency 'jquery-ui-rails', '>= 5.0'
+  spec.add_runtime_dependency 'jquery-ui-rails'
   spec.add_runtime_dependency 'fileapi'
   spec.add_runtime_dependency 'russian', '>= 0.6.0'
   spec.add_runtime_dependency 'haml'
@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec-rails', '>= 2.7'
-  spec.add_development_dependency 'factory_girl_rails', '>= 2.7'
+  spec.add_development_dependency 'factory_bot_rails', '>= 2.7'
   spec.add_development_dependency 'guard-rspec'
   spec.add_development_dependency 'sqlite3'
   spec.add_development_dependency 'generator_spec'

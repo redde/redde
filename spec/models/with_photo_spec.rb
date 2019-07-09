@@ -9,6 +9,7 @@ describe Redde::WithPhoto do
 
   it 'assigns photos to article' do
     ::Redde::Photo.delete_all
+    puts photo1.errors.full_messages
     article.save
     expect(Redde::Photo.where(imageable: article).count).to eq 2
   end
@@ -16,6 +17,7 @@ describe Redde::WithPhoto do
   it 'it gets all photos for article' do
     ::Redde::Photo.delete_all
     article.save
+    expect(article.valid?).to eq true
     article.reload
     article.photos.first.update(only_token)
     article.photo_tokens = [123]
