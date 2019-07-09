@@ -2,11 +2,11 @@ class Redde::Photo < ActiveRecord::Base
   mount_uploader :src, PhotoUploader
   self.table_name = 'redde_photos'
 
-  if Rails.version.split('.').join.to_i > 510
-    belongs_to :imageable, polymorphic: true, optional: true
-  else
-    belongs_to :imageable, polymorphic: true
-  end
+  opts = { polymorphic: true }
+  opts.merge!(optional: true) if Rails.version.split('.').join.to_i > 510
+  
+  belongs_to :imageable, opts
+
   default_scope { order(:position) }
   before_save :set_token, unless: :persisted_link?
 
