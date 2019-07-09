@@ -7,7 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'generator_spec'
 require 'ffaker'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'devise'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -34,7 +34,7 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Warden::Test::Helpers
   config.before :suite do
     Warden.test_mode!

@@ -5,7 +5,6 @@ services:
 notifications:
   email: false
 rvm:
-  - 2.2
   - 2.3
   - 2.4
 before_install:

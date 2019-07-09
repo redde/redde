@@ -1,4 +1,4 @@
-class DeviseCreateManagers < ActiveRecord::Migration
+class DeviseCreateManagers < ActiveRecord::Migration[4.2]
   def change
     create_table(:managers) do |t|
       ## Database authenticatable

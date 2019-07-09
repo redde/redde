@@ -3,6 +3,7 @@ require 'rails_helper'
 class DummyClass
   include ActiveModel::Model
   include ActiveModel::Validations
+  include ActiveModel::Validations::Callbacks
   include ActiveRecord::Callbacks
   include Redde::Sluggable
 

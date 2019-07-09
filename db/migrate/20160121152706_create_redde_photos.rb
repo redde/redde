@@ -1,4 +1,4 @@
-class CreateReddePhotos < ActiveRecord::Migration
+class CreateReddePhotos < ActiveRecord::Migration[4.2]
   def change
     create_table :redde_photos do |t|
       t.integer :imageable_id
